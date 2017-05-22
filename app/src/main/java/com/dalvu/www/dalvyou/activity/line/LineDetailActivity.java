@@ -78,14 +78,14 @@ public class LineDetailActivity extends AppCompatActivity {
     TableLayout linedetailTabLayout;
     @BindView(R.id.linedetail_contentviewpager)
     ViewPager linedetailContentviewpager;
-    //是否是输入框的一个状态
-    private boolean isNameInput;
-    //保存线路详情里ViewPager的子条目
-    private ArrayList<ImageView> imageViews = new ArrayList<>();
     //线路详情页viewpager点击跳转的地址
     String uri = "www.baidu.com";
     //请求网络使用的回调
     MyCallBack callBack;
+    //是否是输入框的一个状态
+    private boolean isNameInput;
+    //保存线路详情里ViewPager的子条目
+    private ArrayList<ImageView> imageViews = new ArrayList<>();
     private StateView lineDetailStateView;
 
     @Override
@@ -237,7 +237,7 @@ public class LineDetailActivity extends AppCompatActivity {
         linedetailViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //
+
 
             }
 
