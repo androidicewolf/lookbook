@@ -2,6 +2,7 @@ package com.dalvu.www.dalvyou.activity.line;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +23,7 @@ import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
 import com.dalvu.www.dalvyou.tools.CustomValue;
+import com.dalvu.www.dalvyou.tools.DensityUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -74,14 +75,19 @@ public class LineDetailActivity extends AppCompatActivity {
     TextView lineDestination;
     @BindView(R.id.linedetail_btn_recommend)
     Button linedetailBtnRecommend;
-    @BindView(R.id.linedetail_tabLayout)
-    TableLayout linedetailTabLayout;
     @BindView(R.id.linedetail_contentviewpager)
     ViewPager linedetailContentviewpager;
     //线路详情页viewpager点击跳转的地址
     String uri = "www.baidu.com";
     //请求网络使用的回调
     MyCallBack callBack;
+    @BindView(R.id.linedetail_tabLayout)
+    TabLayout linedetailTabLayout;
+    @BindView(R.id.linedetail_viewper_cursor_guidedot)
+    LinearLayout linedetailViewperCursorGuidedot;
+    @BindView(R.id.linedetail_viewper_cursor_reddot)
+    View linedetailViewperCursorReddot;
+
     //是否是输入框的一个状态
     private boolean isNameInput;
     //保存线路详情里ViewPager的子条目
@@ -161,14 +167,23 @@ public class LineDetailActivity extends AppCompatActivity {
     //初始化数据
     private void initData() {
         requestNetCall();
-//        initViewPager();
+    }
+
+    //根据图片的张数创建灰色小圆点
+    private void creatGuideDot(List list) {
+        for (int i = 0; i < list.size(); i++) {
+            View view = new View(this);
+            view.setBackgroundResource(R.drawable.shape_guide_dot);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dip2px(this, 8), DensityUtils.dip2px(this, 8));
+            params.rightMargin = 15;
+            view.setLayoutParams(params);
+            linedetailViewperCursorGuidedot.addView(view);
+        }
     }
 
     private void requestNetCall() {
         if (callBack == null) {
             callBack = new MyCallBack(lineDetailStateView) {
-                boolean isShow = false;
-
                 @Override
                 public void onStart(int what) {
                     if (lineDetailStateView.state_Load.getVisibility() == View.GONE) {
@@ -183,6 +198,8 @@ public class LineDetailActivity extends AppCompatActivity {
                         case CustomValue.LINEDETAILBASE:
                             Log.e("call", "线路的基本信息=====" + json);
                             LineDetailDatabean lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
+                            //代码创建灰色小圆点
+                            creatGuideDot(lineDetailDatabean.picArr);
                             initViewPager(lineDetailDatabean.picArr);
                             lineDetailStateView.showNormal();
                             break;
@@ -216,34 +233,32 @@ public class LineDetailActivity extends AppCompatActivity {
         }
         TreeMap<String, Integer> treeMap = new TreeMap<>();
         treeMap.put("id", 4005);
+        //发送线路基本信息的网络请求
         NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.Server + "/index.php/Api/index/details", treeMap, callBack);
+
     }
 
-    private void initViewPager(List<String> itemsList){
+    private void initViewPager(List<String> itemsList) {
         Log.e("call", "----------------" + itemsList);
-        for(String uri : itemsList){
+        for (String uri : itemsList) {
             ImageView imageView = new ImageView(this);
             Glide.with(this).resumeRequests();
-            Glide
-                    .with(this)
-                    .load(uri)
-                    .into(imageView);
+            Glide.with(this).load(uri).into(imageView);
             imageViews.add(imageView);
         }
-        linedetailViewpager.setAdapter(new LinePagerAdapter(imageViews));
-        //为整个viewpager设置点击事件
-        linedetailViewpager.setOnClickListener(new MyOnClickListener());
+
+        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews));
         //viewpager的切换监听
         linedetailViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
+                //滑动时调用
+                linedetailViewperCursorReddot.setTranslationX((positionOffsetPixels + position) * 30);
             }
 
             @Override
             public void onPageSelected(int position) {
-                //
+                //选中时调用
 
             }
 
@@ -253,7 +268,13 @@ public class LineDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("1"));
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("2"));
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("3"));
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("4"));
         linedetailContentviewpager.setAdapter(new LineContentPagerAdapter(this));
+        linedetailTabLayout.setupWithViewPager(linedetailContentviewpager);
         linedetailContentviewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -270,14 +291,5 @@ public class LineDetailActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private class MyOnClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(LineDetailActivity.this, LineDetailPictureActivity.class);
-            intent.putExtra("URI", uri);
-            startActivity(intent);
-        }
     }
 }

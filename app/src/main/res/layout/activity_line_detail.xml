@@ -1,245 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/line_ll_do"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
         <Button
             android:id="@+id/line_btn_consult"
-            android:layout_weight="1"
-            android:text="电话咨询"
-            android:textColor="#FFF"
-            android:background="#F40"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#F40"
+            android:text="电话咨询"
+            android:textColor="#FFF" />
         <Button
             android:id="@+id/line_btn_destine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="gone"
+            android:background="#F40"
             android:text="立即预订"
             android:textColor="#FFF"
-            android:background="#F40"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:visibility="gone" />
     </LinearLayout>
     <ScrollView
-        android:layout_above="@id/line_ll_do"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/line_ll_do">
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/linedetail_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"/>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/linedetail_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+
                 <RelativeLayout
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="100dp">
+
+                    <LinearLayout
+                        android:id="@+id/linedetail_viewper_cursor_guidedot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+
+                    <View
+                        android:id="@+id/linedetail_viewper_cursor_reddot"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/shape_blue_dot" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
                     <TextView
                         android:id="@+id/linedetail_name_tv"
-                        android:text="标题"
-                        android:padding="8dp"
-                        android:layout_marginStart="20dp"
-                        android:textSize="20sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:padding="8dp"
+                        android:text="标题"
+                        android:textSize="20sp" />
                     <EditText
                         android:id="@+id/linedetail_name_et"
-                        android:visibility="gone"
-                        android:padding="8dp"
-                        android:background="@drawable/edittext_style"
-                        android:layout_marginStart="20dp"
-                        android:textSize="20sp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/edittext_style"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
                 </RelativeLayout>
                 <View
-                    android:background="#3000"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
                     android:layout_width="0.5dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:background="#3000" />
                 <LinearLayout
                     android:id="@+id/linedetail_ll_changename"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
                     <ImageView
-                        android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_launcher_round"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/ic_launcher_round" />
+
                     <TextView
-                        android:text="编辑"
-                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="编辑" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="8dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:padding="8dp">
                     <TextView
-                        android:text="代码："
-                        android:textSize="16sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="代码："
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/line_number"
-                        android:text="000000"
-                        android:textSize="20sp"
-                        android:textColor="#5000"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="000000"
+                        android:textColor="#5000"
+                        android:textSize="20sp" />
                 </LinearLayout>
                 <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="8dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:padding="8dp">
                     <TextView
-                        android:text="联系人："
-                        android:textSize="16sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="联系人："
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/line_contacts"
-                        android:text="本尼迪克特康伯巴奇"
-                        android:textSize="20sp"
-                        android:textColor="#5000"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="本尼迪克特康伯巴奇"
+                        android:textColor="#5000"
+                        android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                android:padding="8dp">
                 <TextView
-                    android:text="供应商："
-                    android:textSize="16sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="供应商："
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/line_supplier"
-                    android:text="金旅假期"
-                    android:textSize="20sp"
-                    android:textColor="#5000"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="金旅假期"
+                    android:textColor="#5000"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                android:padding="8dp">
                 <TextView
-                    android:text="价格："
-                    android:textSize="16sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="价格："
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/line_price"
-                    android:text="$1000.00"
-                    android:textSize="20sp"
-                    android:textColor="#3F51B5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="$1000.00"
+                    android:textColor="#3F51B5"
+                    android:textSize="20sp" />
                 <TextView
-                    android:text="起"
-                    android:layout_weight="1"
-                    android:layout_marginStart="3dp"
-                    android:textSize="14sp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_weight="1"
+                    android:text="起"
+                    android:textSize="14sp" />
                 <Button
                     android:id="@+id/linedetail_btn_changeprice"
-                    android:text="改价"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="改价" />
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
                 <ImageView
-                    android:src="@mipmap/ic_launcher_round"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_launcher_round" />
                 <TextView
-                    android:text="出团班期"
-                    android:textSize="20sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:text="出团班期"
+                    android:textSize="20sp" />
                 <ImageView
-                    android:src="@mipmap/ic_launcher_round"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_launcher_round" />
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
                 <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:layout_gravity="center_vertical"
-                    android:paddingStart="20dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:paddingStart="20dp">
                     <ImageView
-                        android:src="@mipmap/ic_launcher_round"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_launcher_round" />
+
                     <TextView
-                        android:text="出发城市:"
-                        android:textColor="#5000"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="出发城市:"
+                        android:textColor="#5000" />
                     <TextView
                         android:id="@+id/line_gocity"
-                        android:text="北京"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:text="北京" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -254,25 +283,25 @@
                         android:layout_gravity="center_vertical"
                         android:src="@mipmap/ic_launcher_round" />
                     <TextView
-                        android:text="出发交通:"
-                        android:textColor="#5000"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="出发交通:"
+                        android:textColor="#5000" />
                     <TextView
                         android:id="@+id/line_govehicle"
-                        android:text="飞机"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:text="飞机" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -305,43 +334,44 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
                     <ImageView
-                        android:src="@mipmap/ic_launcher_round"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/ic_launcher_round" />
+
                     <TextView
-                        android:text="返程交通:"
-                        android:textColor="#5000"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="返程交通:"
+                        android:textColor="#5000" />
                     <TextView
                         android:id="@+id/line_gotraffic"
-                        android:text="飞机"
-                        android:layout_marginStart="10dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:text="飞机" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
                 <ImageView
-                    android:src="@mipmap/ic_launcher_round"
-                    android:layout_marginStart="20dp"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:src="@mipmap/ic_launcher_round" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -358,114 +388,23 @@
                     android:text="境外" />
 
             </LinearLayout>
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<TextView-->
-                    <!--android:text="行程安排"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-            <!--</LinearLayout>-->
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<TextView-->
-                    <!--android:text="产品亮点"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-            <!--</LinearLayout>-->
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<TextView-->
-                    <!--android:text="费用说明"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-            <!--</LinearLayout>-->
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="8dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<TextView-->
-                    <!--android:text="注意事项"-->
-                    <!--android:textSize="20sp"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<ImageView-->
-                    <!--android:src="@mipmap/ic_launcher_round"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-            <!--</LinearLayout>-->
-            <TableLayout
+
+            <android.support.design.widget.TabLayout
                 android:id="@+id/linedetail_tabLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <android.support.v4.view.ViewPager
                 android:id="@+id/linedetail_contentviewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="200dp" />
 
         </LinearLayout>
     </ScrollView>
     <Button
         android:id="@+id/linedetail_btn_recommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/line_ll_do"
         android:layout_alignParentEnd="true"
-        android:text="推到首页"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="推到首页" />
 </RelativeLayout>

@@ -34,7 +34,8 @@
         <activity android:name=".activity.line.LineDetailActivity" />
         <activity android:name=".activity.line.LineDetailPictureActivity" />
         <activity android:name=".activity.line.LineChangepriceActivity" />
-        <activity android:name=".activity.line.LineAssortmentActivity"/>
+        <activity android:name=".activity.line.LineAssortmentActivity" />
+        <activity android:name=".activity.line.LineDestineActivity"></activity>
     </application>
 
 </manifest>

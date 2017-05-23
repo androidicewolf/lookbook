@@ -28,7 +28,6 @@ public class NetUtils {
             public void onSucceed(int what, Response<String> response) {
                 if (response.responseCode() == 200) {
                     callBack.onSucceed(what, response.get());
-
                 }else{
                     callBack.onFailed(what, response.responseCode());
                 }
