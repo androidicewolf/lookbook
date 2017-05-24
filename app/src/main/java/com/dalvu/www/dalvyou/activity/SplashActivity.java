@@ -2,15 +2,12 @@ package com.dalvu.www.dalvyou.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.dalvu.www.dalvyou.R;
-import com.dalvu.www.dalvyou.activity.StatusActivity;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.SharedPreferencesTool;
 
@@ -39,7 +36,7 @@ public class SplashActivity extends Activity {
     }
 
     public void goInto(View view){
-        SharedPreferencesTool.saveBoolean(this, CustomValue.isFirst, false);
+        SharedPreferencesTool.saveBoolean(this, CustomValue.ISFIRST, false);
         Intent intent = new Intent(this, StatusActivity.class);
         startActivity(intent);
     }

@@ -3,12 +3,9 @@ package com.dalvu.www.dalvyou.base;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.dalvu.www.dalvyou.netUtils.StateView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -19,8 +16,8 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
     public Activity activity;
-    public View view;
     public Unbinder unbinder;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -31,4 +31,24 @@ public class SharedPreferencesTool {
         }
         return sp.getBoolean(key, defvalue);
     }
+
+    /**
+     * 保存String值信息
+     */
+    public static void saveString(Context context, String key, String value) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        sp.edit().putString(key, value).commit();
+    }
+
+    /**
+     * 获取String值信息
+     */
+    public static String getString(Context context, String key, String defvalue) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        }
+        return sp.getString(key, defvalue);
+    }
 }

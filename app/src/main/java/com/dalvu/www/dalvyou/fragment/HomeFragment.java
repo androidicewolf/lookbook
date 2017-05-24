@@ -1,15 +1,10 @@
 package com.dalvu.www.dalvyou.fragment;
 
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dalvu.www.dalvyou.R;
@@ -24,14 +19,10 @@ import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 首页界面
@@ -74,8 +65,8 @@ public class HomeFragment extends BaseFragment {
         if(callBack == null){
             callBack = new MyCallBack(home_Stateview) {
 
-                private XRecyclerView xRecyclerView;
                 boolean isShow = false;
+                private XRecyclerView xRecyclerView;
 
                 @Override
                 public void onStart(int what) {
@@ -135,8 +126,8 @@ public class HomeFragment extends BaseFragment {
                 }
             };
         }
-        NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.Server + "/index.php/Api/index/indexMod", callBack);
-        NetUtils.callNet(CustomValue.HOMELINE, CustomValue.Server + "/index.php/Api/index/indexLineList", callBack);
+        NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+        NetUtils.callNet(CustomValue.HOMELINE, CustomValue.SERVER + "/index.php/Api/index/indexLineList", callBack);
     }
 
     private void initHeader() {

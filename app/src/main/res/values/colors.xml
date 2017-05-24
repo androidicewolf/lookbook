@@ -5,7 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="main_text_selector_color">#F78</color>
     <color name="main_text_color">#BBB</color>
-    <color name="selector">#0FF</color>
-    <color name="inselector">#BBB</color>
+    <color name="selector">#4D65F3</color>
     <color name="myblue">#7894F2</color>
 </resources>

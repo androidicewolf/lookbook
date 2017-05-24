@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.dalvu.www.dalvyou.activity.MainActivity">
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/main_bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:bnbBackgroundColor="#FFF"></com.ashokvarma.bottomnavigation.BottomNavigationBar>
+    <FrameLayout
+        android:id="@+id/main_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_bottombar" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary">
-    </android.support.v7.widget.Toolbar>
-    <FrameLayout
-        android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/main_bottombar"
-        android:layout_width="match_parent"
-        app:bnbBackgroundColor="#FFF"
-        app:bnbInactiveColor="@android:color/darker_gray"
-        app:bnbMode="mode_shifting"
-        app:bnbBackgroundStyle="background_style_static"
-        android:layout_height="56dp">
-    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
-</LinearLayout>
+        android:background="#0FFF"></android.support.v7.widget.Toolbar>
+</RelativeLayout>

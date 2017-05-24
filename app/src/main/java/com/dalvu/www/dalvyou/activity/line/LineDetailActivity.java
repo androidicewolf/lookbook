@@ -234,7 +234,7 @@ public class LineDetailActivity extends AppCompatActivity {
         TreeMap<String, Integer> treeMap = new TreeMap<>();
         treeMap.put("id", 4005);
         //发送线路基本信息的网络请求
-        NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.Server + "/index.php/Api/index/details", treeMap, callBack);
+        NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + "/index.php/Api/index/details", treeMap, callBack);
 
     }
 

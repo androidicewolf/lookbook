@@ -53,7 +53,7 @@ public class LineDetailPictureActivity extends AppCompatActivity {
 
     private void requestNet() {
 
-        NetUtils.callNet(1, CustomValue.Server + uri, new MyCallBack(lineStateview) {
+        NetUtils.callNet(1, CustomValue.SERVER + uri, new MyCallBack(lineStateview) {
             @Override
             public void onSucceed(int what, String json) {
                 Log.e("call", "^^^^^^^^^^^^^" + json);

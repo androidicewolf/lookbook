@@ -14,7 +14,9 @@ import java.util.Map;
  */
 
 public class NetUtils {
-    /**请求网络，不需要在界面上展示**/
+    /**
+     * 请求网络
+     **/
     public static void callNet(int what, String uri, final MyCallBack callBack){
         final Request<String> request = NoHttp.createStringRequest(uri, RequestMethod.POST);
 
@@ -44,7 +46,8 @@ public class NetUtils {
             }
         });
     }
-    /**请求网络,用户登录**/
+
+    /**没登录时，请求网络,发送参数**/
     public static void callNet(int what, String uri, Map<String, Integer> map, final MyCallBack callBack) {
         final Request<String> request = NoHttp.createStringRequest(uri, RequestMethod.POST);
         for (String key : map.keySet()){
