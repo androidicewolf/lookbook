@@ -4,25 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dalvu.www.dalvyou.activity.StatusActivity">
-    <Button
-        android:id="@+id/status_btn_tourist"
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/status_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/arrowhead_up_h" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/status_btn_agency"
         android:layout_centerHorizontal="true"
-        android:text="我是游客" />
-    <Button
-        android:id="@+id/status_btn_agency"
+        android:layout_marginTop="160dp"
+        android:src="@mipmap/logoh" />
+
+    <TextView
+        android:id="@+id/status_tv_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="我是顾问" />
-    <Button
-        android:id="@+id/status_btn_provider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/status_btn_agency"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="我是供应商" />
+        android:layout_marginBottom="30dp"
+        android:text="选择注册身份"
+        android:textColor="#606060"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/status_tv_adviser"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/status_adviserbtn_style"
+        android:gravity="center"
+        android:text="顾问登录"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/status_tv_visitor"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/status_tv_adviser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/status_visitorbtn_style"
+        android:gravity="center"
+        android:text="普通登录"
+        android:textColor="@color/dalvbule"
+        android:textSize="16sp" />
 
 </RelativeLayout>
