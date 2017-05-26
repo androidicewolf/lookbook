@@ -85,7 +85,7 @@ public class HomeFragment extends BaseFragment {
                         case CustomValue.HOMELINE:
                             break;
                     }
-                    home_Stateview.addNormal(R.layout.item_xrecyclerview);
+                    home_Stateview.addNormal(R.layout.home_fragment_xrecyclerview);
                     if(xRecyclerView == null){
                         Log.e("call", "xRecyclerView是null");
                         xRecyclerView = (XRecyclerView) home_Stateview.normal.findViewById(R.id.xrecyclerview);

@@ -1,16 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp">
-    </LinearLayout>
+        android:layout_height="145dp"
+        android:background="#30F0">
+
+        <RelativeLayout
+            android:id="@+id/home_fragment_head_userrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="12dp">
+
+            <ImageView
+                android:id="@+id/home_fragment_head_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:background="#FFF"
+                android:padding="4dp"
+                android:src="@drawable/icon" />
+
+            <LinearLayout
+                android:id="@+id/home_fragment_head_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/home_fragment_head_icon"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@id/home_fragment_head_icon"
+                android:background="#8000"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp">
+
+                <TextView
+                    android:id="@+id/home_fragment_head_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textColor="#FFF"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/home_fragment_head_adviser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:background="#FF5F63"
+                    android:padding="3dp"
+                    android:text="顾问"
+                    android:textColor="#FFF"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/home_fragment_head_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/home_fragment_head_ll"
+                android:layout_below="@id/home_fragment_head_ll"
+                android:layout_marginTop="4dp"
+                android:background="#8000"
+                android:paddingBottom="3dp"
+                android:paddingEnd="7dp"
+                android:paddingStart="7dp"
+                android:paddingTop="3dp"
+                android:text="积分：88888"
+                android:textColor="#FFF"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/home_fragment_head_adviserll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的旅游顾问"
+                android:textColor="#FFF"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/home_fragment_head_advisericon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="5dp"
+                android:background="#FFF"
+                android:padding="2dp"
+                android:src="@drawable/icon" />
+
+            <TextView
+                android:id="@+id/home_fragment_head_advisername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="名称"
+                android:textColor="#FFF"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_fragment_head_inlogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="32dp"
+                android:background="@drawable/home_login_btn_style"
+                android:gravity="center"
+                android:text="登录大旅"
+                android:textColor="#3A3A3A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="125dp"
+                android:layout_height="19dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/home_cue_tv_style"
+                android:gravity="center"
+                android:text="登陆后显示您的身份"
+                android:textColor="#E0DFDF"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_module"
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0FF"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/home_fragment_head_rlv_style"
+        android:paddingEnd="9dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:background="#4B4B4B" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="9dp"
+            android:text="精品线路"
+            android:textColor="#4B4B4B"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:background="#4B4B4B" />
+    </LinearLayout>
 </LinearLayout>

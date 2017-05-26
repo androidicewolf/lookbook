@@ -95,28 +95,28 @@ public class MainActivity extends AppCompatActivity {
         main_bottombar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT);
         main_bottombar.setMode(BottomNavigationBar.MODE_FIXED);
         main_bottombar
-                .addItem(new BottomNavigationItem(R.mipmap.home_highlight_h, R.string.home)
+                .addItem(new BottomNavigationItem(R.mipmap.home_highlight, R.string.home)
                         .setActiveColor(R.color.selector)
-                        .setInactiveIconResource(R.mipmap.home_h))
-                .addItem(new BottomNavigationItem(R.mipmap.order_highlight_h, R.string.order)
+                        .setInactiveIconResource(R.mipmap.home))
+                .addItem(new BottomNavigationItem(R.mipmap.order_highlight, R.string.order)
                         .setActiveColor(R.color.selector)
-                        .setInactiveIconResource(R.mipmap.order_h));
+                        .setInactiveIconResource(R.mipmap.order));
         switch (type) {
             case 0:
             case 1:
                 main_bottombar
-                        .addItem(new BottomNavigationItem(R.mipmap.my_highligh_h, R.string.personal)
+                        .addItem(new BottomNavigationItem(R.mipmap.my_highligh, R.string.personal)
                                 .setActiveColor(R.color.selector)
-                                .setInactiveIconResource(R.mipmap.my_h));
+                                .setInactiveIconResource(R.mipmap.my));
                 break;
             case 2:
                 main_bottombar
-                        .addItem(new BottomNavigationItem(R.mipmap.financial_highlight_h, R.string.bill)
+                        .addItem(new BottomNavigationItem(R.mipmap.financial_highlight, R.string.bill)
                                 .setActiveColor(R.color.selector)
-                                .setInactiveIconResource(R.mipmap.financial_h))
-                        .addItem(new BottomNavigationItem(R.mipmap.my_highligh_h, R.string.personal)
+                                .setInactiveIconResource(R.mipmap.financial))
+                        .addItem(new BottomNavigationItem(R.mipmap.my_highligh, R.string.personal)
                                 .setActiveColor(R.color.selector)
-                                .setInactiveIconResource(R.mipmap.my_h));
+                                .setInactiveIconResource(R.mipmap.my));
                 break;
         }
 

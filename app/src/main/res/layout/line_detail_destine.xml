@@ -200,7 +200,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/reduce_h" />
+                            android:src="@mipmap/reduce" />
 
                         <TextView
                             android:id="@+id/line_destine_mannumber"
@@ -212,7 +212,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/add_h" />
+                            android:src="@mipmap/add" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -237,7 +237,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/reduce_h" />
+                            android:src="@mipmap/reduce" />
 
                         <TextView
                             android:id="@+id/line_destine_childrennumber"
@@ -249,7 +249,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/add_h" />
+                            android:src="@mipmap/add" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -283,7 +283,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/reduce_h" />
+                        android:src="@mipmap/reduce" />
 
                     <TextView
                         android:id="@+id/line_destine_differencenumber"
@@ -295,7 +295,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/add_h" />
+                        android:src="@mipmap/add" />
                 </LinearLayout>
             </LinearLayout>
 

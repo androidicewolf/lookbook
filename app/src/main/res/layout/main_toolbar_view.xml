@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_gravity="center_vertical"
-        android:src="@mipmap/geographical_position_h" />
+        android:src="@mipmap/geographical_position" />
 
     <TextView
         android:id="@+id/main_search_tv"
@@ -25,5 +25,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:src="@mipmap/search_h" />
+        android:src="@mipmap/search" />
 </LinearLayout>

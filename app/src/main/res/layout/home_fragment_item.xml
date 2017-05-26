@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <android.support.v7.widget.CardView
-        android:id="@+id/home_item_card"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="6dp"
+    android:layout_marginStart="6dp">
+
+    <ImageView
+        android:id="@+id/home_item_image"
+        android:layout_width="156dp"
+        android:layout_height="104dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/home_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_item_image"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="标题标题"
+        android:textColor="#343538"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/home_item_gosite"
         android:layout_width="wrap_content"
-        app:cardBackgroundColor="#5619FF31"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/home_item_image"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="match_parent"
-                android:layout_height="140dp" />
-            <TextView
-                android:id="@+id/home_item_name"
-                android:layout_below="@id/home_item_image"
-                android:text="标题"
-                android:textSize="24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/home_item_gosite"
-                android:layout_below="@id/home_item_name"
-                android:text="出发地"
-                android:textSize="14sp"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/home_item_price"
-                android:layout_alignBottom="@id/home_item_gosite"
-                android:layout_alignParentEnd="true"
-                android:text="价格"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_item_name"
+        android:layout_marginTop="14dp"
+        android:text="出发地"
+        android:textColor="#4D67EE"
+        android:textSize="10sp" />
 
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/home_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/home_item_gosite"
+        android:layout_alignParentEnd="true"
+        android:text="￥价格"
+        android:textColor="#FB5B1B"
+        android:textSize="13sp" />
+</RelativeLayout>
