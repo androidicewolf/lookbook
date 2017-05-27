@@ -8,23 +8,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/line_btn_consult"
+
+        <LinearLayout
+            android:id="@+id/line_consult_ll"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#F40"
-            android:text="电话咨询"
-            android:textColor="#FFF" />
+            android:background="@drawable/line_detail_consult_style"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:src="@mipmap/phone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电话咨询"
+                android:textColor="#3E3E3E"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
         <Button
             android:id="@+id/line_btn_destine"
-            android:layout_width="0dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#F40"
+            android:background="@color/dalvred"
             android:text="立即预订"
             android:textColor="#FFF"
-            android:visibility="gone" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -37,355 +54,377 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="240dp">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/linedetail_viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true" />
-
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="100dp">
+                    android:layout_alignParentBottom="true"
+                    android:background="#80000000"
+                    android:gravity="center"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp">
 
-                    <LinearLayout
-                        android:id="@+id/linedetail_viewper_cursor_guidedot"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
+                        android:layout_height="wrap_content">
 
-                    <View
-                        android:id="@+id/linedetail_viewper_cursor_reddot"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/shape_blue_dot" />
+                        <LinearLayout
+                            android:id="@+id/linedetail_viewper_cursor_guidedot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
+
+                        <View
+                            android:id="@+id/linedetail_viewper_cursor_reddot"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/shape_blue_dot" />
+                    </RelativeLayout>
                 </RelativeLayout>
 
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingTop="13dp">
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1">
+
                     <TextView
                         android:id="@+id/linedetail_name_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:padding="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="15dp"
                         android:text="标题"
-                        android:textSize="20sp" />
+                        android:textColor="#373737"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+
                     <EditText
                         android:id="@+id/linedetail_name_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:background="@drawable/edittext_style"
-                        android:padding="8dp"
-                        android:textSize="20sp"
-                        android:visibility="gone" />
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@drawable/linedetail_changetitle_et_style"
+                        android:hint="输入标题"
+                        android:textColor="#373737"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
                 </RelativeLayout>
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginStart="15dp"
-                    android:background="#3000" />
+
                 <LinearLayout
                     android:id="@+id/linedetail_ll_changename"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_marginEnd="-5dp"
+                    android:background="@drawable/linedetail_changename_btn_style"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp">
+
                     <ImageView
+                        android:id="@+id/linedetail_btn_changename_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@mipmap/edit" />
 
                     <TextView
+                        android:id="@+id/linedetail_btn_changename_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="编辑" />
+                        android:layout_marginTop="4dp"
+                        android:text="编辑"
+                        android:textColor="@color/dalvred"
+                        android:textSize="10sp" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="代码："
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/line_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="000000"
-                        android:textColor="#5000"
-                        android:textSize="20sp" />
-                </LinearLayout>
-                <LinearLayout
+                android:background="@drawable/login_edittext_style"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="17dp">
+
+                <TextView
+                    android:id="@+id/linedetail_number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="联系人："
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/line_contacts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="本尼迪克特康伯巴奇"
-                        android:textColor="#5000"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                    android:text="代码："
+                    android:textColor="#9F9F9F"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/line_contacts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="联系人：本尼迪克特康伯巴奇"
+                    android:textColor="#9F9F9F"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:background="@drawable/login_edittext_style"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingBottom="6dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="17dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="供应商："
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/line_supplier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="金旅假期"
-                    android:textColor="#5000"
-                    android:textSize="20sp" />
+                    android:text="供应商：金旅假期"
+                    android:textColor="#9F9F9F"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="价格："
-                    android:textSize="16sp" />
+                    android:text="￥："
+                    android:textColor="@color/dalvred"
+                    android:textSize="11sp" />
                 <TextView
                     android:id="@+id/line_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$1000.00"
-                    android:textColor="#3F51B5"
-                    android:textSize="20sp" />
-                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
                     android:layout_weight="1"
-                    android:text="起"
-                    android:textSize="14sp" />
-                <Button
-                    android:id="@+id/linedetail_btn_changeprice"
+                    android:text="1000.00"
+                    android:textColor="#3F51B5"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/linedetail_tv_changeprice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="改价" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_style"
+                    android:paddingBottom="7dp"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="7dp"
+                    android:text="改价"
+                    android:textColor="@color/dalvred"
+                    android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@mipmap/group_date_select" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="9dp"
                     android:layout_weight="1"
                     android:text="出团班期"
-                    android:textSize="20sp" />
+                    android:textColor="#3D3A3A"
+                    android:textSize="14sp" />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@mipmap/arrowhead_left" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="14dp">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingStart="20dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_launcher_round" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="出发城市:"
-                        android:textColor="#5000" />
-                    <TextView
-                        android:id="@+id/line_gocity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="10dp"
-                        android:text="北京" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@mipmap/departure_city" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="11dp"
+                        android:text="出发城市:"
+                        android:textColor="#ACACAC"
+                        android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/line_gocity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="北京"
+                        android:textColor="#3F3F3F" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="9dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/departure_traffic" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11dp"
                         android:text="出发交通:"
-                        android:textColor="#5000" />
+                        android:textColor="#ACACAC"
+                        android:textSize="14sp" />
                     <TextView
                         android:id="@+id/line_govehicle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
-                        android:text="飞机" />
+                        android:text="飞机"
+                        android:textColor="#3F3F3F" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="14dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingStart="20dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@mipmap/travel_days" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="11dp"
                         android:text="行程天数:"
-                        android:textColor="#5000" />
+                        android:textColor="#ACACAC"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/line_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
-                        android:text="5天" />
+                        android:text="5天"
+                        android:textColor="#3F3F3F" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="9dp">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@mipmap/ic_launcher_round" />
+                        android:src="@mipmap/return_traffic" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="11dp"
                         android:text="返程交通:"
-                        android:textColor="#5000" />
+                        android:textColor="#ACACAC"
+                        android:textSize="14sp" />
                     <TextView
                         android:id="@+id/line_gotraffic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
-                        android:text="飞机" />
+                        android:text="飞机"
+                        android:textColor="#3F3F3F" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:background="#FFF"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="14dp">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="20dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@mipmap/destination" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="目的地:"
-                    android:textColor="#5000" />
+                    android:layout_marginStart="11dp"
+                    android:text="行程天数:"
+                    android:textColor="#ACACAC"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/line_destination"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:text="境外" />
+                    android:text="加利福尼亚"
+                    android:textColor="#3F3F3F" />
 
             </LinearLayout>
 
@@ -393,18 +432,70 @@
                 android:id="@+id/linedetail_tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <android.support.v4.view.ViewPager
-                android:id="@+id/linedetail_contentviewpager"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
 
+            <FrameLayout
+                android:id="@+id/linedetail_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-    <Button
+
+    <LinearLayout
         android:id="@+id/linedetail_btn_recommend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/line_ll_do"
         android:layout_alignParentEnd="true"
-        android:text="推到首页" />
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/recommend_btn_style"
+        android:orientation="horizontal"
+        android:padding="9dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/recommended_home" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="推到首页"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#0FFF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/return_details" />
+
+            <TextView
+                android:id="@+id/line_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@id/iv_go_back"
+                android:text="线路名称"
+                android:textColor="#373737"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

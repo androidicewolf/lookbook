@@ -8,4 +8,8 @@
     <color name="selector">#4D65F3</color>
     <color name="myblue">#7894F2</color>
     <color name="dalvbule">#536DF8</color>
+    <color name="dalvred">#FE603B</color>
+    <color name="dalvtitleblack">#373737</color>
+    <color name="dalvtextblack">#3B3A3A</color>
+    <color name="dalvtextthinblack">#A4A4A4</color>
 </resources>

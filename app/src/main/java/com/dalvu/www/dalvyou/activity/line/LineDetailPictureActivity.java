@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -21,8 +20,6 @@ import butterknife.ButterKnife;
  * 展示线路图片的界面
  */
 public class LineDetailPictureActivity extends AppCompatActivity {
-    @BindView(R.id.line_toolbar)
-    Toolbar lineToolbar;
     @BindView(R.id.line_stateview)
     StateView lineStateview;
     private String uri = "";

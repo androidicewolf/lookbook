@@ -4,14 +4,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/line_toolbar"
+    <RelativeLayout
+        android:id="@+id/line_picturearr_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize" />
+        android:layout_height="60dp"
+        android:background="@color/dalvbule">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/go_back" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/login_iv_back"
+                android:gravity="center"
+                android:text="目的地相册"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
     <com.dalvu.www.dalvyou.netUtils.StateView
         android:id="@+id/line_stateview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>
