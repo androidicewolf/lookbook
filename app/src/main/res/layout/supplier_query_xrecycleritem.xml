@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="12dp"
+    android:background="#F7F7F7"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="供应商名称："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/supplier_query_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="快帮行"
+            android:textColor="@color/myblue"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="公司全称："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/supplier_query_item_companyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="深圳快帮行科技有限公司"
+            android:textColor="@color/myblue"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="业务联系人："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/supplier_query_item_businesslinkman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            android:textColor="@color/myblue"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="销售目的地："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/supplier_query_item_termini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="美国"
+            android:textColor="@color/myblue"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="联系人电话："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/supplier_query_item_linkmantel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1383838438"
+            android:textColor="@color/myblue"
+            android:textSize="13sp" />
+    </LinearLayout>
+</LinearLayout>

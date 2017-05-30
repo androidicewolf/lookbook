@@ -1,11 +1,11 @@
 package com.dalvu.www.dalvyou.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 
-public class VisitorEnrollActivity extends AppCompatActivity {
+public class VisitorEnrollActivity extends BaseNoTitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

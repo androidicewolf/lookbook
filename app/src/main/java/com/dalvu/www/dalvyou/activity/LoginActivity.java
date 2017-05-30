@@ -1,7 +1,6 @@
 package com.dalvu.www.dalvyou.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,12 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseNoTitleActivity {
 
     @BindView(R.id.login_iv_back)
     ImageView loginIvBack;

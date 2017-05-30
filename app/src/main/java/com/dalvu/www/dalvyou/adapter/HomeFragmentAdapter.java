@@ -4,6 +4,7 @@ package com.dalvu.www.dalvyou.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,19 +38,23 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
 
     @Override
     public void onBindViewHolder(HomeFragmentItemBox holder, int position) {
-
-        holder.home_item_card.setOnClickListener(new HomeItemOnLickListener());
+        HomeItemOnLickListener lickListener = new HomeItemOnLickListener(position);
+        holder.addOnClickListener(lickListener);
     }
 
     @Override
     public int getItemCount() {
-//        return items.size() + 1;
         return 10;
     }
     private class HomeItemOnLickListener implements View.OnClickListener {
+        private int position;
 
+        public HomeItemOnLickListener(int position) {
+            this.position = position;
+        }
         @Override
         public void onClick(View v) {
+            Log.e("call", "---------------------点击条目的索引是：" + position);
             Intent intent = new Intent(context, LineDetailActivity.class);
             intent.putExtra("Url", "网址");
             context.startActivity(intent);

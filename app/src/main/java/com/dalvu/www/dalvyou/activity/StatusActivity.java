@@ -1,12 +1,12 @@
 package com.dalvu.www.dalvyou.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 
 
-public class StatusActivity extends Activity {
+public class StatusActivity extends BaseNoTitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

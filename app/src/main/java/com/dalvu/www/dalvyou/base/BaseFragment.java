@@ -7,17 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**抽取的父类Fragment
  * Created by user on 2017/5/9.
  */
 
 public abstract class BaseFragment extends Fragment {
     public Activity activity;
-    public Unbinder unbinder;
-    private View view;
+    public View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,7 +21,6 @@ public abstract class BaseFragment extends Fragment {
         if(view == null){
             view = inflater.inflate(getLayoutId(), container, false);
         }
-        unbinder = ButterKnife.bind(this, view);
         initView();
         initData();
         return view;
@@ -43,9 +38,4 @@ public abstract class BaseFragment extends Fragment {
 
     /**让子类去实现具体的刷新数据的操作**/
     public abstract void update();
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

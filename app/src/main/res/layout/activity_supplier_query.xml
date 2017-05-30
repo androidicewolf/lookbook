@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.dalvu.www.dalvyou.activity.personaldata.SupplierQueryActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/dalvbule">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/go_back" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/login_iv_back"
+                android:gravity="center"
+                android:text="供应商"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_edging_style"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="输入目的地或供应商名称"
+            android:textColor="@color/dalvtitleblack"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="13dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/supplier_query_input_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/suppliterquery_input_et_style"
+                android:hint="请输入目的地或供应商"
+                android:padding="9dp"
+                android:textColor="@color/dalvtextthinblack"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/supplier_startsearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#FC8F59"
+                android:gravity="center"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:text="开始搜索"
+                android:textColor="#FFF"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/supplier_query_newsupplier_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:paddingBottom="9dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="9dp"
+        android:text="本月最新加盟"
+        android:textColor="@color/dalvred"
+        android:textSize="13sp" />
+
+    <com.dalvu.www.dalvyou.netUtils.StateView
+        android:id="@+id/supplier_query_stateview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF" />
+</LinearLayout>

@@ -1,13 +1,13 @@
 package com.dalvu.www.dalvyou.activity.line;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * 展示线路图片的界面
  */
-public class LineDetailPictureActivity extends AppCompatActivity {
+public class LineDetailPictureActivity extends BaseNoTitleActivity {
     @BindView(R.id.line_stateview)
     StateView lineStateview;
     private String uri = "";

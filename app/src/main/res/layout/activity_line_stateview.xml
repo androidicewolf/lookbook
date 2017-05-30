@@ -31,7 +31,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/login_iv_back"
                 android:gravity="center"
-                android:text="目的地相册"
+                android:text="大旅游"
                 android:textColor="#FFF"
                 android:textSize="18sp" />
         </RelativeLayout>

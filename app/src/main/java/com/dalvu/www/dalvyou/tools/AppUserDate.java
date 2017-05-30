@@ -12,7 +12,7 @@ public class AppUserDate {
         return userType;
     }
 
-    public static void setUserType(int type) {
+    public synchronized static void setUserType(int type) {
         userType = type;
     }
 }

@@ -1,13 +1,18 @@
 package com.dalvu.www.dalvyou.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.activity.SearchActivity;
 import com.dalvu.www.dalvyou.adapter.HomeFragmentAdapter;
 import com.dalvu.www.dalvyou.adapter.HomeHeaderAdapter;
 import com.dalvu.www.dalvyou.base.BaseFragment;
@@ -23,6 +28,10 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+import static com.dalvu.www.dalvyou.R.id.home_fragment_search_ll;
 
 /**
  * 首页界面
@@ -30,8 +39,25 @@ import butterknife.BindView;
  */
 
 public class HomeFragment extends BaseFragment {
-    @BindView(R.id.home_stateview)
-    StateView home_Stateview;
+    @BindView(R.id.home_fragment_head_icon)
+    ImageView homeFragmentHeadIcon;
+    @BindView(R.id.home_fragment_head_name)
+    TextView homeFragmentHeadName;
+    @BindView(R.id.home_fragment_head_adviser)
+    TextView homeFragmentHeadAdviser;
+    @BindView(R.id.home_fragment_head_ll)
+    LinearLayout homeFragmentHeadLl;
+    @BindView(R.id.home_fragment_head_score)
+    TextView homeFragmentHeadScore;
+    @BindView(R.id.home_fragment_head_advisericon)
+    ImageView homeFragmentHeadAdvisericon;
+    @BindView(R.id.home_fragment_head_advisername)
+    TextView homeFragmentHeadAdvisername;
+    @BindView(R.id.home_fragment_head_adviserll)
+    LinearLayout homeFragmentHeadAdviserll;
+    @BindView(R.id.home_fragment_head_inlogin)
+    LinearLayout homeFragmentHeadInlogin;
+    private Unbinder unbinder;
     //保存首页模块分类的集合
     private ArrayList homemodules = new ArrayList();
     //保存首页线路条目的集合
@@ -40,15 +66,29 @@ public class HomeFragment extends BaseFragment {
     private HomeFragmentAdapter homeFragmentAdapter;
     private HomeHeaderAdapter homeHeaderAdapter;
     private MyCallBack callBack;
+    private StateView home_Stateview;
+    private XRecyclerView xRecyclerView;
+    private TreeMap<String, Integer> modules;
+    private RecyclerView home_module;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.home_fragment;
+        return R.layout.fragment_stateview;
     }
 
     @Override
     protected void initView() {
-
+        home_Stateview = (StateView) view.findViewById(R.id.fragment_stateview);
+        home_Stateview.addNormal(R.layout.home_fragment_xrecyclerview);
+        xRecyclerView = (XRecyclerView) home_Stateview.normal.findViewById(R.id.home_fragment_xrecyclerview);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
+        xRecyclerView.setLayoutManager(gridLayoutManager);
+        headerView = LayoutInflater.from(activity).inflate(R.layout.home_fragmen_recyclerviewhead, null, false);
+        ImageView home_selector_city = (ImageView) home_Stateview.normal.findViewById(R.id.home_selector_city);
+        LinearLayout home_fragment_search_ll = (LinearLayout) home_Stateview.normal.findViewById(R.id.home_fragment_search_ll);
+        HomeOnClickListener listener = new HomeOnClickListener();
+        home_selector_city.setOnClickListener(listener);
+        home_fragment_search_ll.setOnClickListener(listener);
     }
 
     @Override
@@ -62,11 +102,10 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void requestServer() {
-        if(callBack == null){
+        if (callBack == null) {
             callBack = new MyCallBack(home_Stateview) {
 
                 boolean isShow = false;
-                private XRecyclerView xRecyclerView;
 
                 @Override
                 public void onStart(int what) {
@@ -77,7 +116,6 @@ public class HomeFragment extends BaseFragment {
 
                 @Override
                 public void onSucceed(int what, String json) {
-                    Log.e("call", json);
                     switch (what) {
                         case CustomValue.HOMECOLUMN:
                             HomeFragmentModuleDataBean homeFragmentModuleDataBean = new Gson().fromJson(json, HomeFragmentModuleDataBean.class);
@@ -85,30 +123,40 @@ public class HomeFragment extends BaseFragment {
                         case CustomValue.HOMELINE:
                             break;
                     }
-                    home_Stateview.addNormal(R.layout.home_fragment_xrecyclerview);
-                    if(xRecyclerView == null){
-                        Log.e("call", "xRecyclerView是null");
-                        xRecyclerView = (XRecyclerView) home_Stateview.normal.findViewById(R.id.xrecyclerview);
-                        GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
-                        xRecyclerView.setLayoutManager(gridLayoutManager);
-                        if (headerView == null) {
-                            Log.e("call", "headerView是null");
-                            initHeader();
-                            xRecyclerView.addHeaderView(headerView);
+                    if (xRecyclerView != null) {
+                        Log.e("call", "xRecyclerView不是null");
+                        if (homeHeaderAdapter == null || homeFragmentAdapter == null) {
+                            if (homeHeaderAdapter == null) {
+                                Log.e("call", "headerView是null");
+                                initHeader();
+                                xRecyclerView.addHeaderView(headerView);
+                            }
+                            if (homeFragmentAdapter == null) {
+                                Log.e("call", "homeFragmentAdapter是null");
+                                homeFragmentAdapter = new HomeFragmentAdapter(activity, homeItems);
+                                xRecyclerView.setAdapter(homeFragmentAdapter);
+                            }
+                        } else {
+                            //刷新适配器
+                            switch (what) {
+                                case CustomValue.HOMECOLUMN:
+                                    Log.e("call", "Head适配器刷新");
+                                    homeHeaderAdapter.notifyDataSetChanged();
+                                    break;
+                                case CustomValue.HOMELINE:
+                                    Log.e("call", "Item适配器刷新");
+                                    homeFragmentAdapter.notifyDataSetChanged();
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                        if(homeFragmentAdapter == null){
-                            homeFragmentAdapter = new HomeFragmentAdapter(activity, homeItems);
-                            xRecyclerView.setAdapter(homeFragmentAdapter);
-                        }
-                    }else{
-                        //刷新适配器
-                        homeHeaderAdapter.notifyDataSetChanged();
-                        homeFragmentAdapter.notifyDataSetChanged();
                     }
-                    if(isShow){
+
+                    if (isShow) {
                         home_Stateview.showNormal();
                         isShow = false;
-                    }else{
+                    } else {
                         isShow = true;
                     }
                 }
@@ -131,21 +179,64 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initHeader() {
-        //保存模块图片地址的集合
-        TreeMap<String, Integer> modules = new TreeMap<>();
-        modules.put("国内游", R.mipmap.domestic_travel);
-        modules.put("出境游", R.mipmap.overseas_travel);
-        modules.put("周边游", R.mipmap.travel_around);
-        modules.put("自由行", R.mipmap.free_exercise);
-        modules.put("保险/签证", R.mipmap.insurance_visa);
-        modules.put("机票", R.mipmap.air_ticket);
-        modules.put("门票", R.mipmap.ticket);
-        modules.put("特价", R.mipmap.special_offer);
-        headerView = LayoutInflater.from(activity).inflate(R.layout.home_fragmen_recyclerviewhead, null, false);
-        RecyclerView home_module = (RecyclerView) headerView.findViewById(R.id.home_module);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 4);
-        home_module.setLayoutManager(gridLayoutManager);
+        if (modules == null) {
+            //保存模块图片地址的集合
+            modules = new TreeMap<>();
+            modules.put("国内游", R.mipmap.domestic_travel);
+            modules.put("出境游", R.mipmap.outbound_tourism);
+            modules.put("周边游", R.mipmap.surrounding_tourism);
+            modules.put("自由行", R.mipmap.free_walker);
+            modules.put("机票", R.mipmap.passenger_ticket);
+            modules.put("特价", R.mipmap.special_offe);
+        }
+        if (headerView != null) {
+            unbinder = ButterKnife.bind(this, headerView);
+        }
+        //显示头像
+//        homeFragmentHeadIcon.set
+        //显示名称
+        homeFragmentHeadName.setText("我是名字");
+        //显示身份
+        homeFragmentHeadAdviser.setText("身份");
+        //显示积分
+        homeFragmentHeadScore.setText("积分：1");
+        //显示我的顾问
+        homeFragmentHeadAdviserll.setVisibility(View.VISIBLE);
+        //我的顾问的头像
+//        homeFragmentHeadAdvisericon.set
+        //我的顾问的名字
+        homeFragmentHeadAdvisername.setText("张三");
+        //显示登陆按钮
+        homeFragmentHeadInlogin.setVisibility(View.GONE);
+        if (home_module == null) {
+            home_module = (RecyclerView) headerView.findViewById(R.id.home_module);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 4);
+            home_module.setLayoutManager(gridLayoutManager);
+        }
         homeHeaderAdapter = new HomeHeaderAdapter(activity, modules);
         home_module.setAdapter(homeHeaderAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+    }
+
+    private class HomeOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.home_selector_city:
+                    //底部弹出城市选择
+                    break;
+                case home_fragment_search_ll:
+                    Intent intent = new Intent(activity, SearchActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

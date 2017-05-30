@@ -5,17 +5,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseFragment;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.fragment.BillFragment;
 import com.dalvu.www.dalvyou.fragment.HomeFragment;
 import com.dalvu.www.dalvyou.fragment.OrderFragment;
@@ -25,11 +22,9 @@ import com.dalvu.www.dalvyou.tools.AppUserDate;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseNoTitleActivity {
     @BindView(R.id.main_bottombar)
     BottomNavigationBar main_bottombar;
-    @BindView(R.id.main_toolbar)
-    Toolbar mainToolbar;
     private SparseArray<BaseFragment> fragments;
 
     @Override
@@ -37,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initToolBar();
         int userType = AppUserDate.getUserType();
         initFragment(userType);
         initBottomBar(userType);
@@ -54,40 +48,16 @@ public class MainActivity extends AppCompatActivity {
         fragments.append(1, new OrderFragment());
         switch (type) {
             case 0:
-                fragments.append(2, new BaseFragment() {
-                    @Override
-                    protected int getLayoutId() {
-                        return R.layout.main_unlogin;
-                    }
-
-                    @Override
-                    protected void initView() {
-
-                    }
-
-                    @Override
-                    protected void initData() {
-
-                    }
-
-                    @Override
-                    public void update() {
-
-                    }
-                });
             case 1:
+                Log.e("call", "type为0，没有登陆");
                 fragments.append(2, new PersonalFragment());
                 break;
             case 2:
+                Log.e("call", "type为2，顾问登陆");
                 fragments.append(2, new BillFragment());
                 fragments.append(3, new PersonalFragment());
                 break;
         }
-    }
-
-    private void initToolBar() {
-        View view = LayoutInflater.from(this).inflate(R.layout.main_toolbar_view, mainToolbar, false);
-        mainToolbar.addView(view);
     }
 
     private void initBottomBar(int type) {
@@ -132,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private class MyOnTabSelectedListener implements BottomNavigationBar.OnTabSelectedListener {
         private int type;
 
-        public MyOnTabSelectedListener(int type) {
+        private MyOnTabSelectedListener(int type) {
             this.type = type;
         }
         @Override
@@ -170,8 +140,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabReselected(int position) {
             Log.e("call", "onTabReselected被执行++++++++++++");
-            if (fragments != null) {
-                fragments.get(position).update();
+            if (position == 2) {
+                if (type == 0) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            } else {
+                if (fragments != null) {
+                    fragments.get(position).update();
+                }
             }
         }
     }

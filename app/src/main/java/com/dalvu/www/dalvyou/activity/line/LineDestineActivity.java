@@ -1,19 +1,19 @@
 package com.dalvu.www.dalvyou.activity.line;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.StateView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LineDestineActivity extends AppCompatActivity {
+public class LineDestineActivity extends BaseNoTitleActivity {
 
-    @BindView(R.id.line_toolbar)
-    Toolbar lineToolbar;
+    @BindView(R.id.iv_go_back)
+    ImageView ivGoBack;
     @BindView(R.id.line_stateview)
     StateView lineStateview;
 

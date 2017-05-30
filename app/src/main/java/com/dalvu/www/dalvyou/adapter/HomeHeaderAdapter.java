@@ -3,7 +3,6 @@ package com.dalvu.www.dalvyou.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ public class HomeHeaderAdapter extends RecyclerView.Adapter<HeaderViewBox> {
     public void onBindViewHolder(HeaderViewBox holder, int position) {
         holder.textView.setText("国内游");
         holder.imageView.setImageResource(modules.get("国内游"));
-        holder.imageView.setOnClickListener(new MyOnClickListener());
+        holder.imageView.setOnClickListener(new MyOnClickListener(position));
     }
 
     @Override
@@ -45,6 +44,11 @@ public class HomeHeaderAdapter extends RecyclerView.Adapter<HeaderViewBox> {
     }
 
     private class MyOnClickListener implements View.OnClickListener{
+        private int position;
+
+        private MyOnClickListener(int position) {
+            this.position = position;
+        }
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, LineAssortmentActivity.class);

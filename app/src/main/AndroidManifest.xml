@@ -37,7 +37,9 @@
         <activity android:name=".activity.line.LineAssortmentActivity" />
         <activity android:name=".activity.line.LineDestineActivity" />
         <activity android:name=".activity.AdviserEnrollActivity" />
-        <activity android:name=".activity.VisitorEnrollActivity"></activity>
+        <activity android:name=".activity.VisitorEnrollActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.personaldata.SupplierQueryActivity"></activity>
     </application>
 
 </manifest>
