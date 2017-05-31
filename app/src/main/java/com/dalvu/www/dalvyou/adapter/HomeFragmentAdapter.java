@@ -44,7 +44,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 9;
     }
     private class HomeItemOnLickListener implements View.OnClickListener {
         private int position;

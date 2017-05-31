@@ -1,5 +1,6 @@
 package com.dalvu.www.dalvyou.activity.line;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -30,6 +31,7 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 展示线路详情的界面
@@ -100,7 +102,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stateview);
+        setContentView(R.layout.activity_notoolbar_stateview);
         lineDetailStateview = (StateView) findViewById(R.id.line_detail_stateview);
         lineDetailStateview.addNormal(R.layout.activity_line_detail);
         ButterKnife.bind(this);
@@ -146,9 +148,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 //                }
 //                break;
 //            case R.id.linedetail_btn_changeprice:
-//                //跳转改价页面
-//                Intent ChangepriceIntent = new Intent(this, LineChangepriceActivity.class);
-//                startActivity(ChangepriceIntent);
+
 //
 //                break;
 //            case R.id.linedetail_btn_recommend:
@@ -269,10 +269,24 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
             }
         });
-
         linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("1"));
         linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("2"));
         linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("3"));
         linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("4"));
+    }
+
+    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.linedetail_tv_changeprice:
+                //跳转改价页面
+                Intent ChangepriceIntent = new Intent(this, LineChangepriceActivity.class);
+                startActivity(ChangepriceIntent);
+                break;
+            case R.id.line_consult_ll:
+                break;
+            case R.id.line_btn_destine:
+                break;
+        }
     }
 }

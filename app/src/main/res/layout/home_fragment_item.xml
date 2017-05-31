@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="6dp"
-    android:layout_marginStart="6dp">
+    android:layout_marginBottom="22dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginStart="12dp"
+    android:background="#FFF">
 
     <ImageView
         android:id="@+id/home_item_image"
-        android:layout_width="156dp"
+        android:layout_width="match_parent"
         android:layout_height="104dp"
         android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
