@@ -57,7 +57,27 @@ public class ChangeNumber {
      * @param clickView  点击的控件
      * @param changeView 改变的文本控件
      */
-    public static void subNumber(View clickView, final TextView changeView) {
+    public static void subNumber(View clickView, final TextView changeView, final int number, final int color) {
+        changeView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (Integer.valueOf(s.toString()) == number) {
+                    changeView.setBackgroundColor(color);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (Integer.valueOf(s.toString()) == number) {
+                    changeView.setBackgroundColor(color);
+                }
+            }
+        });
         clickView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
