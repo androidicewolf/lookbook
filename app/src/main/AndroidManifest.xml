@@ -39,7 +39,9 @@
         <activity android:name=".activity.AdviserEnrollActivity" />
         <activity android:name=".activity.VisitorEnrollActivity" />
         <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.personaldata.SupplierQueryActivity"></activity>
+        <activity android:name=".activity.personaldata.SupplierQueryActivity" />
+        <activity android:name=".activity.personaldata.MyVisitorActivity" />
+        <activity android:name=".activity.personaldata.VisitorListActivity" />
     </application>
 
 </manifest>

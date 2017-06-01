@@ -1,9 +1,15 @@
 package com.dalvu.www.dalvyou.function;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.tools.DensityUtils;
 
 /**
  * 点击按钮，改变控件中文字和背景色的功能实现类
@@ -16,39 +22,48 @@ public class ChangeNumber {
      *
      * @param clickView  点击的控件
      * @param changeView 改变的文本控件
+     * @param number      匹配的数字
      */
-    public static void addNumber(View clickView, final TextView changeView, final int number, final int color) {
+    public static void addNumber(final Context context, View clickView, final TextView changeView, final int number) {
         changeView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (Integer.valueOf(s.toString()) == number) {
-                    changeView.setBackgroundColor(color);
-                }
+                Log.e("call", "------文字改变前");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                Log.e("call", "------文字改变后");
                 if (Integer.valueOf(s.toString()) == number) {
-                    changeView.setBackgroundColor(color);
+
+                    changeView.setTextColor(Color.BLACK);
+                    changeView.setBackgroundResource(R.drawable.all_nocorner_edging_style);
+                    changeView.setPadding(0, DensityUtils.dip2px(context, 5), 0, DensityUtils.dip2px(context, 5));
+                } else {
+                    changeView.setTextColor(Color.WHITE);
+                    changeView.setBackgroundResource(R.color.dalvbule);
+//                        changeView.setPadding(0,DensityUtils.dip2px(context, 5),0,DensityUtils.dip2px(context, 5));
                 }
             }
         });
         clickView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("call", "加号“+”点击事件执行了");
                 String numberStr = changeView.getText().toString();
-                if (numberStr.isEmpty()) {
-                    Integer number = Integer.valueOf(numberStr);
+                if (!numberStr.isEmpty()) {
+                    int number = Integer.valueOf(numberStr);
                     number++;
-                    changeView.setText(number);
+                    changeView.setText(String.valueOf(number));
+                    Log.e("call", "changeView控件的地址" + changeView.toString());
                 }
             }
         });
+        changeView.postInvalidate();
     }
 
     /**
@@ -56,14 +71,13 @@ public class ChangeNumber {
      *
      * @param clickView  点击的控件
      * @param changeView 改变的文本控件
+     * @param number      匹配的数字
      */
-    public static void subNumber(View clickView, final TextView changeView, final int number, final int color) {
+    public static void subNumber(final Context context, View clickView, final TextView changeView, final int number) {
         changeView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (Integer.valueOf(s.toString()) == number) {
-                    changeView.setBackgroundColor(color);
-                }
+                Log.e("call", "------文字改变前");
             }
 
             @Override
@@ -73,19 +87,30 @@ public class ChangeNumber {
 
             @Override
             public void afterTextChanged(Editable s) {
+                Log.e("call", "------文字改变后");
                 if (Integer.valueOf(s.toString()) == number) {
-                    changeView.setBackgroundColor(color);
+                    changeView.setTextColor(Color.BLACK);
+                    changeView.setBackgroundResource(R.drawable.all_nocorner_edging_style);
+                    changeView.setPadding(0, DensityUtils.dip2px(context, 5), 0, DensityUtils.dip2px(context, 5));
+                } else {
+                    changeView.setTextColor(Color.WHITE);
+                    changeView.setBackgroundResource(R.color.dalvbule);
+//                        changeView.setPadding(0, DensityUtils.dip2px(context, 5),0,DensityUtils.dip2px(context, 5));
                 }
             }
         });
         clickView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("call", "减号“-”点击事件执行了");
                 String numberStr = changeView.getText().toString();
-                if (numberStr.isEmpty()) {
-                    Integer number = Integer.valueOf(numberStr);
-                    number--;
-                    changeView.setText(number);
+                if (!numberStr.isEmpty()) {
+                    int number = Integer.valueOf(numberStr);
+                    if (number != 0) {
+                        number--;
+                        changeView.setText(String.valueOf(number));
+                        Log.e("call", "changeView控件的地址" + changeView.toString());
+                    }
                 }
             }
         });

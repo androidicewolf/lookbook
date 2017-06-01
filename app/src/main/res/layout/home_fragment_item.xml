@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="22dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginStart="12dp"
     android:background="#FFF">
 
-    <ImageView
-        android:id="@+id/home_item_image"
-        android:layout_width="match_parent"
-        android:layout_height="104dp"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/home_item_name"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/home_item_image"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:lines="2"
-        android:text="标题标题"
-        android:textColor="#343538"
-        android:textSize="13sp" />
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:paddingBottom="22dp">
 
-    <TextView
-        android:id="@+id/home_item_gosite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/home_item_name"
-        android:layout_marginTop="14dp"
-        android:text="出发地"
-        android:textColor="#4D67EE"
-        android:textSize="10sp" />
+        <ImageView
+            android:id="@+id/home_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/home_item_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/home_item_gosite"
-        android:layout_alignParentEnd="true"
-        android:text="￥价格"
-        android:textColor="#FB5B1B"
-        android:textSize="13sp" />
+        <TextView
+            android:id="@+id/home_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_item_image"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="标题标题"
+            android:textColor="#343538"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/home_item_gosite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/home_item_name"
+            android:layout_marginTop="14dp"
+            android:text="出发地"
+            android:textColor="#4D67EE"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/home_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/home_item_gosite"
+            android:layout_alignParentEnd="true"
+            android:text="￥价格"
+            android:textColor="#FB5B1B"
+            android:textSize="13sp" />
+    </RelativeLayout>
 </RelativeLayout>

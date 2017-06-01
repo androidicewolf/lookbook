@@ -26,17 +26,17 @@ public interface CustomValue {
      **/
     public static final String SERVER = "http://dalvuapi.dalvu.com";
     /**首页模块分类请求网络的what**/
-    public static final int HOMECOLUMN = 11;
+    public static final int HOMECOLUMN = 101;
     /**首页线路列表请求网络的what**/
-    public static final int HOMELINE = 12;
+    public static final int HOMELINE = 102;
     /**线路详情基本信息请求网络的what**/
-    public static final int LINEDETAILBASE = 13;
+    public static final int LINEDETAILBASE = 103;
     /**线路详情“行程安排”请求网络的what**/
-    public static final int LINEDPLAN = 14;
+    public static final int LINEDPLAN = 104;
     /**线路详情“产品亮点”请求网络的what**/
-    public static final int LINEDESCRIPTION = 15;
+    public static final int LINEDESCRIPTION = 105;
     /**线路详情“费用说明”请求网络的what**/
-    public static final int LINECOST = 16;
+    public static final int LINECOST = 106;
     /**线路详情“注意事项”请求网络的what**/
-    public static final int LINENOTICE = 17;
+    public static final int LINENOTICE = 107;
 }

@@ -105,7 +105,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
         setContentView(R.layout.activity_notoolbar_stateview);
         lineDetailStateview = (StateView) findViewById(R.id.line_detail_stateview);
         lineDetailStateview.addNormal(R.layout.activity_line_detail);
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, lineDetailStateview.normal);
         isNameInput = false;
         initData();
         initTextView();
@@ -277,15 +277,18 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.linedetail_tv_changeprice:
                 //跳转改价页面
-                Intent ChangepriceIntent = new Intent(this, LineChangepriceActivity.class);
-                startActivity(ChangepriceIntent);
+                intent = new Intent(this, LineChangepriceActivity.class);
+                startActivity(intent);
                 break;
             case R.id.line_consult_ll:
                 break;
             case R.id.line_btn_destine:
+                intent = new Intent(this, LineDestineActivity.class);
+                startActivity(intent);
                 break;
         }
     }

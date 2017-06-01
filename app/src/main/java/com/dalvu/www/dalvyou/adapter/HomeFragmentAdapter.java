@@ -49,7 +49,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
     private class HomeItemOnLickListener implements View.OnClickListener {
         private int position;
 
-        public HomeItemOnLickListener(int position) {
+        private HomeItemOnLickListener(int position) {
             this.position = position;
         }
         @Override

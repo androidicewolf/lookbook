@@ -1,6 +1,7 @@
 package com.dalvu.www.dalvyou.activity.personaldata;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,6 +51,8 @@ public class SupplierQueryActivity extends BaseNoTitleActivity {
     private void initView() {
         supplierQueryStateview.addNormal(R.layout.supplier_xrecyclerview);
         supplier_query_xrecycler = (XRecyclerView) supplierQueryStateview.findViewById(R.id.supplier_query_xrecycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        supplier_query_xrecycler.setLayoutManager(layoutManager);
     }
 
     private void initData() {
@@ -82,7 +85,6 @@ public class SupplierQueryActivity extends BaseNoTitleActivity {
                         supplierQueryAdapter.notifyDataSetChanged();
                     }
                 }
-
                 @Override
                 public void onFailed(int what, int code) {
                     super.onFailed(what, code);

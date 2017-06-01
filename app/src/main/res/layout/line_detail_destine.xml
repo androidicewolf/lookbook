@@ -39,44 +39,10 @@
             android:textSize="15sp"
             android:textStyle="bold" />
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/line_destine_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/dalvbule">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="7dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginStart="15dp">
-
-            <ImageView
-                android:id="@+id/iv_go_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/go_back" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/login_iv_back"
-                android:gravity="center"
-                android:text="填写和提交"
-                android:textColor="#FFF"
-                android:textSize="18sp" />
-        </RelativeLayout>
-    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/line_destine_rl"
-        android:layout_below="@id/line_destine_toolbar"
         android:background="#F3F3F3">
         <LinearLayout
             android:layout_width="match_parent"
@@ -269,18 +235,18 @@
                             android:id="@+id/line_destine_man_sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
+                            android:padding="6dp"
                             android:src="@mipmap/reduce" />
 
                         <TextView
                             android:id="@+id/line_destine_mannumber"
                             android:layout_width="30dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/all_nocorner_edging_style"
                             android:gravity="center"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="2"
+                            android:text="0"
                             android:textColor="#454545"
                             android:textSize="10sp" />
 
@@ -288,7 +254,7 @@
                             android:id="@+id/line_destine_man_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
+                            android:padding="6dp"
                             android:src="@mipmap/add" />
                     </LinearLayout>
                 </LinearLayout>
@@ -304,7 +270,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="成人(常规)："
+                        android:text="儿童(常规)："
                         android:textColor="@color/dalvtextblack"
                         android:textSize="14sp" />
 
@@ -319,18 +285,18 @@
                             android:id="@+id/line_destine_children_sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
+                            android:padding="6dp"
                             android:src="@mipmap/reduce" />
 
                         <TextView
                             android:id="@+id/line_destine_childrennumber"
                             android:layout_width="30dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/all_nocorner_edging_style"
                             android:gravity="center"
                             android:paddingBottom="5dp"
                             android:paddingTop="5dp"
-                            android:text="2"
+                            android:text="0"
                             android:textColor="#454545"
                             android:textSize="10sp" />
 
@@ -338,7 +304,7 @@
                             android:id="@+id/line_destine_children_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="3dp"
+                            android:padding="6dp"
                             android:src="@mipmap/add" />
                     </LinearLayout>
                 </LinearLayout>
@@ -387,18 +353,18 @@
                         android:id="@+id/line_destine_difference_sub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="3dp"
+                        android:padding="6dp"
                         android:src="@mipmap/reduce" />
 
                     <TextView
                         android:id="@+id/line_destine_differencenumber"
                         android:layout_width="30dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/all_nocorner_edging_style"
                         android:gravity="center"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp"
-                        android:text="2"
+                        android:text="0"
                         android:textColor="#454545"
                         android:textSize="10sp" />
 
@@ -406,7 +372,7 @@
                         android:id="@+id/line_destine_difference_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="3dp"
+                        android:padding="6dp"
                         android:src="@mipmap/add" />
                 </LinearLayout>
             </LinearLayout>
@@ -440,7 +406,7 @@
 
                 <EditText
                     android:id="@+id/line_destine_linkman_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFF"
                     android:hint="填写常用联系人"
@@ -463,10 +429,36 @@
                     android:textSize="14sp" />
                 <EditText
                     android:id="@+id/line_destine_linkman_phone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFF"
                     android:hint="填写手机号"
+                    android:inputType="phone"
+                    android:textColorHint="#B8B8B8"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_edging_style"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单备注："
+                    android:textColor="@color/dalvtextblack"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/line_destine_remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF"
+                    android:hint="备注信息"
                     android:inputType="phone"
                     android:textColorHint="#B8B8B8"
                     android:textSize="14sp" />

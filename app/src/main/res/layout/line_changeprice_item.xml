@@ -158,11 +158,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
+                android:inputType="number"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
                 android:paddingTop="12dp"
-                android:textColor="#C5C5C5"
+                android:textColor="@color/dalvtextblack"
+                android:textColorHint="#D5D5D5"
+                android:textCursorDrawable="@null"
                 android:textSize="12sp" />
 
             <EditText
@@ -171,11 +174,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
+                android:inputType="number"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
                 android:paddingTop="12dp"
-                android:textColor="#C5C5C5"
+                android:textColor="@color/dalvtextblack"
+                android:textColorHint="#D5D5D5"
+                android:textCursorDrawable="@null"
                 android:textSize="12sp" />
 
             <EditText
@@ -184,11 +190,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
+                android:inputType="number"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
                 android:paddingTop="12dp"
-                android:textColor="#C5C5C5"
+                android:textColor="@color/dalvtextblack"
+                android:textColorHint="#D5D5D5"
+                android:textCursorDrawable="@null"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

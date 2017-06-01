@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.activity.personaldata.MyVisitorActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.SupplierQueryActivity;
 import com.dalvu.www.dalvyou.base.BaseFragment;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -83,14 +84,22 @@ public class PersonalFragment extends BaseFragment {
             case R.id.personal_fragment_revisedata:
                 break;
             case R.id.personal_fragment_mystatus:
+                if (true) {
+                    intent = new Intent(activity, MyVisitorActivity.class);
+                    startActivity(intent);
+                } else {
+                    //如果是游客进入我的顾问页面
+                }
                 break;
             case R.id.personal_fragment_feedback:
                 break;
             case R.id.personal_fragment_vendor_inquiries:
+                //供应商查询
                 intent = new Intent(activity, SupplierQueryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.personal_fragment_line_inquiry:
+                //线路询价
                 break;
         }
     }
