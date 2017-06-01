@@ -2,13 +2,13 @@ package com.dalvu.www.dalvyou.activity.personaldata;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MyVisitorActivity extends AppCompatActivity {
+public class MyVisitorActivity extends BaseNoTitleActivity {
 
     @BindView(R.id.my_visitor_brkerage)
     TextView myVisitorBrkerage;
