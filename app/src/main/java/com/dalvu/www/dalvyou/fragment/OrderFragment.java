@@ -4,11 +4,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.LinearLayout;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.adapter.OrderFragmentAdapter;
 import com.dalvu.www.dalvyou.base.BaseFragment;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.ArrayList;
 
 /**订单页面
  * Created by user on 2017/5/9.
@@ -18,6 +22,8 @@ public class OrderFragment extends BaseFragment {
 
     private StateView fragment_stateview;
     private XRecyclerView order_fragment_xrecyclerview;
+    private ArrayList items;
+    private OrderFragmentAdapter orderFragmentAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -41,10 +47,16 @@ public class OrderFragment extends BaseFragment {
             public void onSucceed(int what, String json) {
                 //解析数据
 
-
+                if (orderFragmentAdapter == null) {
+                    orderFragmentAdapter = new OrderFragmentAdapter(activity, items);
+                } else {
+                    orderFragmentAdapter.notifyDataSetChanged();
+                }
+                order_fragment_xrecyclerview.setAdapter(orderFragmentAdapter);
+                fragment_stateview.showNormal();
             }
         };
-        NetUtils.callNet(7, "", callBack);
+        NetUtils.callNet(7, CustomValue.SERVER + "/index.php/Api/index/details", callBack);
     }
 
     @Override

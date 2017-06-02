@@ -42,6 +42,7 @@
         <activity android:name=".activity.personaldata.SupplierQueryActivity" />
         <activity android:name=".activity.personaldata.MyVisitorActivity" />
         <activity android:name=".activity.personaldata.VisitorListActivity" />
+        <activity android:name=".activity.order.LineOrderDetailActivity"></activity>
     </application>
 
 </manifest>

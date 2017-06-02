@@ -12,7 +12,8 @@
     <ImageView
         android:id="@+id/order_fragment_item_iv"
         android:layout_width="150dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:src="@drawable/icon" />
 
     <RelativeLayout
         android:layout_width="match_parent"

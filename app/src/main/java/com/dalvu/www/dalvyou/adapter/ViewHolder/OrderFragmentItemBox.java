@@ -27,4 +27,8 @@ public class OrderFragmentItemBox extends RecyclerView.ViewHolder {
         order_fragment_item_price = (TextView) itemView.findViewById(R.id.order_fragment_item_price);
         order_fragment_item_state = (TextView) itemView.findViewById(R.id.order_fragment_item_state);
     }
+
+    public void addClickListener(View.OnClickListener listener) {
+        itemView.setOnClickListener(listener);
+    }
 }
