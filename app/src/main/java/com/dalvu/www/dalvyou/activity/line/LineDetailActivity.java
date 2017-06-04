@@ -1,6 +1,8 @@
 package com.dalvu.www.dalvyou.activity.line;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,13 +13,17 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LinePagerAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.LineDetailDatabean;
+import com.dalvu.www.dalvyou.customView.ListenedScrollView;
+import com.dalvu.www.dalvyou.customView.OnScrollListener;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -32,6 +38,9 @@ import java.util.TreeMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
+
+import static com.dalvu.www.dalvyou.R.id.line_detail_title;
 
 /**
  * 展示线路详情的界面
@@ -90,14 +99,19 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     LinearLayout linedetailBtnRecommend;
     @BindView(R.id.iv_go_back)
     ImageView ivGoBack;
-    @BindView(R.id.line_detail_title)
+    @BindView(line_detail_title)
     TextView lineDetailTitle;
+    @BindView(R.id.linedetail_listenedscrollview)
+    ListenedScrollView linedetailListenedscrollview;
+    @BindView(R.id.line_detail_title_rl)
+    RelativeLayout lineDetailTitleRl;
 
     //是否是输入框的一个状态
     private boolean isNameInput;
     //保存线路详情里ViewPager的子条目
     private ArrayList<ImageView> imageViews = new ArrayList<>();
     private StateView lineDetailStateview;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +119,66 @@ public class LineDetailActivity extends BaseNoTitleActivity {
         setContentView(R.layout.activity_notoolbar_stateview);
         lineDetailStateview = (StateView) findViewById(R.id.line_detail_stateview);
         lineDetailStateview.addNormal(R.layout.activity_line_detail);
-        ButterKnife.bind(this, lineDetailStateview.normal);
+        unbinder = ButterKnife.bind(this, lineDetailStateview.normal);
         isNameInput = false;
+        initView();
         initData();
         initTextView();
+    }
+
+    private void initView() {
+        ivGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        linedetailListenedscrollview.setOnScrollListener(new OnScrollListener() {
+            int[] screenSize = MyApplication.getMyApplication().getScreenSize();
+            float totalDistance = screenSize[1] / 5;
+
+            @Override
+            public void onBottomArrived() {
+            }
+
+            @Override
+            public void onScrollChanged(int x, int y, int oldX, int oldY) {
+                Log.e("call", "输出y===============" + y);
+                Log.e("call", "输出oldY===============" + oldY);
+                if (y >= totalDistance) {
+                    if (lineDetailTitle.getVisibility() != View.VISIBLE) {
+                        lineDetailTitle.setVisibility(View.VISIBLE);
+                        ivGoBack.setImageResource(R.mipmap.arrowhead_up);
+                        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 255);
+                        valueAnimator.setDuration(1000);
+                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                Integer alpha = (Integer) animation.getAnimatedValue();
+                                lineDetailTitleRl.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+                            }
+                        });
+                        valueAnimator.start();
+                    }
+                } else {
+                    if (lineDetailTitle.getVisibility() == View.VISIBLE) {
+                        lineDetailTitle.setVisibility(View.GONE);
+                        ivGoBack.setImageResource(R.mipmap.return_details);
+                        lineDetailTitleRl.setBackgroundColor(Color.argb(0, 255, 255, 255));
+                        ValueAnimator valueAnimator = ValueAnimator.ofInt(255, 0);
+                        valueAnimator.setDuration(1000);
+                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                Integer alpha = (Integer) animation.getAnimatedValue();
+                                lineDetailTitleRl.setBackgroundColor(Color.argb(alpha, 255, 255, 255));
+                            }
+                        });
+                        valueAnimator.start();
+                    }
+                }
+            }
+        });
     }
 
     private void initTextView() {
@@ -291,5 +361,11 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
     }
 }

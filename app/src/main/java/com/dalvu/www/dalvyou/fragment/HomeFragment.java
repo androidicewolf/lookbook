@@ -1,6 +1,7 @@
 package com.dalvu.www.dalvyou.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.SearchActivity;
 import com.dalvu.www.dalvyou.adapter.HomeFragmentAdapter;
@@ -70,6 +73,11 @@ public class HomeFragment extends BaseFragment {
     private XRecyclerView xRecyclerView;
     private TreeMap<String, Integer> modules;
     private RecyclerView home_module;
+    private RelativeLayout home_fragment_toolbar;
+    //屏幕滑动的总距离
+    private int distanceY;
+    //当前的透明度
+    private int alpha;
 
     @Override
     protected int getLayoutId() {
@@ -84,6 +92,7 @@ public class HomeFragment extends BaseFragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 2);
         xRecyclerView.setLayoutManager(gridLayoutManager);
         headerView = LayoutInflater.from(activity).inflate(R.layout.home_fragmen_recyclerviewhead, null, false);
+        home_fragment_toolbar = (RelativeLayout) home_Stateview.findViewById(R.id.home_fragment_toolbar);
         ImageView home_selector_city = (ImageView) home_Stateview.normal.findViewById(R.id.home_selector_city);
         LinearLayout home_fragment_search_ll = (LinearLayout) home_Stateview.normal.findViewById(R.id.home_fragment_search_ll);
         HomeOnClickListener listener = new HomeOnClickListener();
@@ -93,6 +102,23 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        xRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int[] screenSize = MyApplication.getMyApplication().getScreenSize();
+            float totalDistance = screenSize[1] / 3;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                distanceY += dy;
+                if (distanceY <= 0) {
+                    alpha = 0;
+                } else if (distanceY >= totalDistance) {
+                    alpha = 230;
+                } else {
+                    alpha = (int) (distanceY * 1.0f / totalDistance * 230);
+                }
+                home_fragment_toolbar.setBackgroundColor(Color.argb(alpha, 86, 109, 248));
+            }
+        });
         requestServer();
     }
 

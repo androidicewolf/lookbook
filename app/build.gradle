@@ -39,6 +39,7 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.nineoldandroids:library:2.4.0'
 }
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->

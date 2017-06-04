@@ -43,7 +43,9 @@
             android:textStyle="bold"
             android:visibility="visible" />
     </LinearLayout>
-    <ScrollView
+
+    <com.dalvu.www.dalvyou.customView.ListenedScrollView
+        android:id="@+id/linedetail_listenedscrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/line_ll_do">
@@ -59,7 +61,8 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/linedetail_viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="#FF0" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -436,7 +439,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </ScrollView>
+    </com.dalvu.www.dalvyou.customView.ListenedScrollView>
 
     <LinearLayout
         android:id="@+id/linedetail_btn_recommend"
@@ -466,8 +469,9 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/line_detail_title_rl"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="66dp"
         android:background="#0FFF">
 
         <RelativeLayout
@@ -491,9 +495,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_toEndOf="@id/iv_go_back"
+                android:clickable="true"
                 android:text="线路名称"
                 android:textColor="#373737"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
