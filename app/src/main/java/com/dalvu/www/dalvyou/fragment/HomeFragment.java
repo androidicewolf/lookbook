@@ -245,8 +245,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         unbinder.unbind();
+        super.onDestroy();
     }
 
     private class HomeOnClickListener implements View.OnClickListener {

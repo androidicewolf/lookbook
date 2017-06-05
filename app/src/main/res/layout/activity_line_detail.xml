@@ -493,13 +493,13 @@
                 android:id="@+id/line_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/iv_go_back"
                 android:clickable="true"
                 android:text="线路名称"
                 android:textColor="#373737"
                 android:textSize="18sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

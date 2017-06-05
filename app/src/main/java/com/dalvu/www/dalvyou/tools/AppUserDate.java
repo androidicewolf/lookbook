@@ -6,7 +6,7 @@ package com.dalvu.www.dalvyou.tools;
  */
 
 public class AppUserDate {
-    private static int userType = 0;
+    private static int userType = 2;
 
     public static int getUserType() {
         return userType;

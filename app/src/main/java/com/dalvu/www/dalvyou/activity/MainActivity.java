@@ -1,7 +1,6 @@
 package com.dalvu.www.dalvyou.activity;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -129,8 +128,7 @@ public class MainActivity extends BaseNoTitleActivity {
         public void onTabUnselected(int position) {
             Log.e("call", "onTabUnselected被执行++++++++++++++" + position);
             if (fragments != null) {
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 Fragment fragment = fragments.get(position);
                 transaction.hide(fragment);
                 transaction.commit();
