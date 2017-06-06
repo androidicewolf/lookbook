@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.ViewHolder.BillBusinessrecordItemBox;
+import com.dalvu.www.dalvyou.adapter.ViewHolder.BillRechargerecordItemBox;
 
 import java.util.ArrayList;
 
@@ -36,19 +37,21 @@ public class BillItemXRecyclerItemAdapter extends RecyclerView.Adapter {
         switch (viewType) {
             case 0:
                 //交易记录
-                BillBusinessrecordItemBox itemBox = new BillBusinessrecordItemBox(LayoutInflater.from(context)
+                BillBusinessrecordItemBox businessItemBox = new BillBusinessrecordItemBox(LayoutInflater.from(context)
                         .inflate(R.layout.bill_item_businessitem_xrecycleritem, parent, false));
-                return itemBox;
-            case 1:
-                //充值记录
-                break;
+                return businessItemBox;
             case 2:
+                //充值记录
+                BillRechargerecordItemBox rechargeItemBox = new BillRechargerecordItemBox(LayoutInflater.from(context)
+                        .inflate(R.layout.bill_item_rechargerecord_xrecycleritem, parent, false));
+                return rechargeItemBox;
+            case 4:
                 //提现记录
                 break;
-            case 3:
+            case 6:
                 //发票记录
                 break;
-            case 4:
+            case 8:
                 //合同记录
                 break;
             default:
@@ -68,13 +71,13 @@ public class BillItemXRecyclerItemAdapter extends RecyclerView.Adapter {
                 itemBox.businessrecord_xrecycleritem_accountremainingsum.setText("10");
                 itemBox.businessrecord_xrecycleritem_businessnumber.setText("18845806607676496");
                 break;
-            case 1:
-                break;
             case 2:
                 break;
-            case 3:
-                break;
             case 4:
+                break;
+            case 6:
+                break;
+            case 8:
                 break;
             default:
                 break;

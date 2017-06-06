@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/cash_pay" />
 
         <TextView
             android:layout_width="0dp"
@@ -34,7 +34,7 @@
             android:id="@+id/bill_rechargeaskfor_unline_cash_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/unclickbutton" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +52,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/card_recharge" />
 
         <TextView
             android:layout_width="0dp"
@@ -66,7 +66,7 @@
             android:id="@+id/bill_rechargeaskfor_unline_swingcard_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/unclickbutton" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,7 +84,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/cheque_recharge" />
 
         <TextView
             android:layout_width="0dp"
@@ -98,7 +98,7 @@
             android:id="@+id/bill_rechargeaskfor_unline_cheque_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/unclickbutton" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,7 +116,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/bank_remit" />
 
         <TextView
             android:layout_width="0dp"
@@ -130,7 +130,7 @@
             android:id="@+id/bill_rechargeaskfor_unline_bank_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/unclickbutton" />
     </LinearLayout>
 
     <LinearLayout

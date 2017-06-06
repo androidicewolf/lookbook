@@ -25,6 +25,7 @@ public class BillItemActivity extends BaseNoTitleActivity {
     private String title;
     //页面布局文件的地址
     private int layoutId;
+    private int position;
     private MyCallBack callBack;
     private StateView activity_stateview;
     private XRecyclerView bill_item_activity_xrecyclerview;
@@ -36,6 +37,7 @@ public class BillItemActivity extends BaseNoTitleActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
         layoutId = intent.getIntExtra("layoutId", 0);
+        position = intent.getIntExtra("position", 0);
         Log.e("call", "从上一个界面传过来的布局文件的ID是：" + layoutId);
         setContentView(R.layout.activity_stateview);
         initView();
@@ -70,7 +72,7 @@ public class BillItemActivity extends BaseNoTitleActivity {
                 public void onSucceed(int what, String json) {
                     //解析数据
 
-                    bill_item_activity_xrecyclerview.setAdapter(new BillItemXRecyclerItemAdapter(BillItemActivity.this, items, 0));
+                    bill_item_activity_xrecyclerview.setAdapter(new BillItemXRecyclerItemAdapter(BillItemActivity.this, items, position));
                     activity_stateview.showNormal();
                 }
             };

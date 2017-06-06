@@ -1,5 +1,6 @@
 package com.dalvu.www.dalvyou.fragment;
 
+import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseFragment;
 
 /**
@@ -10,7 +11,7 @@ import com.dalvu.www.dalvyou.base.BaseFragment;
 public class BillRechargeAskforOnlineFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.bill_rechargeaskfor_online_fragment;
     }
 
     @Override

@@ -44,7 +44,10 @@
         <activity android:name=".activity.personaldata.VisitorListActivity" />
         <activity android:name=".activity.order.LineOrderDetailActivity" />
         <activity android:name=".activity.bill.BillItemActivity" />
-        <activity android:name=".activity.bill.RechargeAskforActivity"></activity>
+        <activity android:name=".activity.bill.RechargeAskforActivity" />
+        <activity android:name=".activity.bill.GetCashAskforActivity" />
+        <activity android:name=".activity.bill.ReceiptAskforActivity" />
+        <activity android:name=".activity.bill.ContractAskforActivity"></activity>
     </application>
 
 </manifest>

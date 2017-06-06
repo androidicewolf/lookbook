@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="充值"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-08-22 19:20:44"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="状态："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_passstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="审核通过"
+            android:textColor="#5FC82B"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_passingstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未审核"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="充值金额："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_rechargemoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ -20000.0"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="系统使用费："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_poundage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="实际到账："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_actualmoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ 45890.0"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="汇款方："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_companyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金玉旅行社"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:orientation="horizontal"
+        android:paddingBottom="9dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="9dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交易号："
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/rechargerecord_xrecycleritem_businessnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="1499999999"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

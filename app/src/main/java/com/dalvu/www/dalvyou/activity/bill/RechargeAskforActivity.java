@@ -134,7 +134,6 @@ public class RechargeAskforActivity extends BaseNoTitleActivity {
             };
             NetUtils.callNet(10, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
         }
-
     }
 
     private void initFragment() {

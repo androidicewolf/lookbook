@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseFragment;
+import com.dalvu.www.dalvyou.tools.DensityUtils;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,9 @@ public class BillRechargeAskforUnlineFragment extends BaseFragment {
         Log.e("call", "--------------------------线下充值的fragment被创建");
         for (int i = 0; i < 4; i++) {
             View view = LayoutInflater.from(activity).inflate(R.layout.bill_rechargeaskfor_unline_bankitem, null, false);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, DensityUtils.dip2px(activity, 9));
+            view.setLayoutParams(params);
             //找到控件，设置账户信息和开户行
             billRechargeaskforUnlineBankinfoLl.addView(view);
         }
@@ -83,27 +87,27 @@ public class BillRechargeAskforUnlineFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.bill_rechargeaskfor_unline_cash:
                 reset();
-                billRechargeaskforUnlineCashIv.setImageResource(R.mipmap.ic_launcher_round);
+                billRechargeaskforUnlineCashIv.setImageResource(R.mipmap.click_button);
                 break;
             case R.id.bill_rechargeaskfor_unline_swingcard:
                 reset();
-                billRechargeaskforUnlineSwingcardIv.setImageResource(R.mipmap.ic_launcher_round);
+                billRechargeaskforUnlineSwingcardIv.setImageResource(R.mipmap.click_button);
                 break;
             case R.id.bill_rechargeaskfor_unline_cheque:
                 reset();
-                billRechargeaskforUnlineChequeIv.setImageResource(R.mipmap.ic_launcher_round);
+                billRechargeaskforUnlineChequeIv.setImageResource(R.mipmap.click_button);
                 break;
             case R.id.bill_rechargeaskfor_unline_bank:
                 reset();
-                billRechargeaskforUnlineBankIv.setImageResource(R.mipmap.ic_launcher_round);
+                billRechargeaskforUnlineBankIv.setImageResource(R.mipmap.click_button);
                 break;
         }
     }
 
     public void reset() {
-        billRechargeaskforUnlineCashIv.setImageResource(R.mipmap.ic_launcher);
-        billRechargeaskforUnlineSwingcardIv.setImageResource(R.mipmap.ic_launcher);
-        billRechargeaskforUnlineChequeIv.setImageResource(R.mipmap.ic_launcher);
-        billRechargeaskforUnlineBankIv.setImageResource(R.mipmap.ic_launcher);
+        billRechargeaskforUnlineCashIv.setImageResource(R.mipmap.unclickbutton);
+        billRechargeaskforUnlineSwingcardIv.setImageResource(R.mipmap.unclickbutton);
+        billRechargeaskforUnlineChequeIv.setImageResource(R.mipmap.unclickbutton);
+        billRechargeaskforUnlineBankIv.setImageResource(R.mipmap.unclickbutton);
     }
 }
