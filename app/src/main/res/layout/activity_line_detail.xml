@@ -64,6 +64,7 @@
                     android:layout_height="match_parent"
                     android:background="#FF0" />
                 <RelativeLayout
+                    android:id="@+id/linedetail_viewpager_cursor_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -415,7 +416,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="11dp"
-                    android:text="行程天数:"
+                    android:text="目的地:"
                     android:textColor="#ACACAC"
                     android:textSize="14sp" />
 
@@ -432,7 +433,7 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/linedetail_tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <FrameLayout
                 android:id="@+id/linedetail_fragment"

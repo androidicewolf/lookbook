@@ -237,11 +237,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@mipmap/special_remarks" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
                     android:text="特别说明："
                     android:textColor="@color/dalvred"
                     android:textSize="14sp" />

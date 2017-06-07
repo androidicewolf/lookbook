@@ -1,12 +1,15 @@
 package com.dalvu.www.dalvyou.activity.line;
 
 import android.animation.ValueAnimator;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,10 +23,15 @@ import android.widget.Toast;
 import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LinePagerAdapter;
+import com.dalvu.www.dalvyou.base.BaseFragment;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.LineDetailDatabean;
 import com.dalvu.www.dalvyou.customView.ListenedScrollView;
 import com.dalvu.www.dalvyou.customView.OnScrollListener;
+import com.dalvu.www.dalvyou.fragment.LinedetailCostFragment;
+import com.dalvu.www.dalvyou.fragment.LinedetailDescriptionFragment;
+import com.dalvu.www.dalvyou.fragment.LinedetailNoticeFragment;
+import com.dalvu.www.dalvyou.fragment.LinedetailPlanFragment;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -112,6 +120,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     private ArrayList<ImageView> imageViews = new ArrayList<>();
     private StateView lineDetailStateview;
     private Unbinder unbinder;
+    private TabLayout.OnTabSelectedListener tabSelectedListener;
+    private SparseArray<BaseFragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,6 +249,17 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     //初始化数据
     private void initData() {
+        TabLayout.Tab tab1 = linedetailTabLayout.newTab().setTag("1").setText("行程安排");
+        linedetailTabLayout.addTab(tab1);
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("2").setText("产品亮点"));
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("3").setText("费用说明"));
+        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("4").setText("注意事项"));
+        initFragments();
+        if (tabSelectedListener == null) {
+            initTabSelectedListener();
+        }
+        linedetailTabLayout.addOnTabSelectedListener(tabSelectedListener);
+        tabSelectedListener.onTabSelected(tab1);
         requestNetCall();
     }
 
@@ -276,18 +297,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                             initViewPager(lineDetailDatabean.picArr);
                             lineDetailStateview.showNormal();
                             break;
-                        /**行程安排**/
-                        case CustomValue.LINEDESCRIPTION:
-                            break;
-                        /**产品亮点**/
-                        case CustomValue.LINEDPLAN:
-                            break;
-                        /**费用说明**/
-                        case CustomValue.LINECOST:
-                            break;
-                        /**注意事项**/
-                        case CustomValue.LINENOTICE:
-                            break;
                     }
                 }
 
@@ -304,11 +313,57 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 }
             };
         }
+
         TreeMap<String, Integer> treeMap = new TreeMap<>();
         treeMap.put("id", 4005);
         //发送线路基本信息的网络请求
         NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + "/index.php/Api/index/details", treeMap, callBack);
 
+    }
+
+    //初始化Fragment的容器
+    private void initFragments() {
+        fragments = new SparseArray<>();
+        fragments.put(0, new LinedetailPlanFragment());
+        fragments.put(1, new LinedetailDescriptionFragment());
+        fragments.put(2, new LinedetailCostFragment());
+        fragments.put(3, new LinedetailNoticeFragment());
+    }
+
+    //初始化tablayout的标签选中监听
+    private void initTabSelectedListener() {
+        tabSelectedListener = new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (fragments != null) {
+                    Fragment fragment = fragments.get(position);
+                    if (fragment.isAdded()) {
+                        transaction.show(fragment);
+                    } else {
+                        transaction.remove(fragment).add(R.id.linedetail_fragment, fragment);
+                    }
+                }
+                transaction.commit();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (fragments != null) {
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    Fragment fragment = fragments.get(position);
+                    transaction.hide(fragment);
+                    transaction.commit();
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        };
     }
 
     private void initViewPager(List<String> itemsList) {
@@ -339,10 +394,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
             }
         });
-        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("1"));
-        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("2"));
-        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("3"));
-        linedetailTabLayout.addTab(linedetailTabLayout.newTab().setTag("4"));
     }
 
     @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine})

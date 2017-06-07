@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.ViewHolder.BillBusinessrecordItemBox;
+import com.dalvu.www.dalvyou.adapter.ViewHolder.BillContractrecordItemBox;
+import com.dalvu.www.dalvyou.adapter.ViewHolder.BillGetcashrecordItemBox;
+import com.dalvu.www.dalvyou.adapter.ViewHolder.BillReceiptrecordItemBox;
 import com.dalvu.www.dalvyou.adapter.ViewHolder.BillRechargerecordItemBox;
 
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class BillItemXRecyclerItemAdapter extends RecyclerView.Adapter {
             case 0:
                 //交易记录
                 BillBusinessrecordItemBox businessItemBox = new BillBusinessrecordItemBox(LayoutInflater.from(context)
-                        .inflate(R.layout.bill_item_businessitem_xrecycleritem, parent, false));
+                        .inflate(R.layout.bill_item_businessrecord_xrecycleritem, parent, false));
                 return businessItemBox;
             case 2:
                 //充值记录
@@ -47,13 +50,19 @@ public class BillItemXRecyclerItemAdapter extends RecyclerView.Adapter {
                 return rechargeItemBox;
             case 4:
                 //提现记录
-                break;
+                BillGetcashrecordItemBox getcashItemBox = new BillGetcashrecordItemBox(LayoutInflater.from(context)
+                        .inflate(R.layout.bill_item_getcashrecord_xrecycleritem, parent, false));
+                return getcashItemBox;
             case 6:
                 //发票记录
-                break;
+                BillReceiptrecordItemBox receiptItemBox = new BillReceiptrecordItemBox(LayoutInflater.from(context)
+                        .inflate(R.layout.bill_item_receiptrecord_xrecycleritem, parent, false));
+                return receiptItemBox;
             case 8:
                 //合同记录
-                break;
+                BillContractrecordItemBox contractItemBox = new BillContractrecordItemBox(LayoutInflater.from(context)
+                        .inflate(R.layout.bill_item_contractrecord_xrecycleritem, parent, false));
+                return contractItemBox;
             default:
                 break;
         }
@@ -72,6 +81,7 @@ public class BillItemXRecyclerItemAdapter extends RecyclerView.Adapter {
                 itemBox.businessrecord_xrecycleritem_businessnumber.setText("18845806607676496");
                 break;
             case 2:
+
                 break;
             case 4:
                 break;

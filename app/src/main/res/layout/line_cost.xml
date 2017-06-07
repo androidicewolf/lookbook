@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingEnd="22dp"
+    android:paddingStart="22dp"
+    android:paddingTop="15dp">
     <TextView
-        android:text="费用说明"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/lineplan_datetv_style"
+        android:paddingBottom="4dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:text="费用包含"
+        android:textColor="@color/dalvbule"
+        android:textSize="12sp" />
 
+    <TextView
+        android:id="@+id/linecost_includecost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="1、交通
+2、住宿"
+        android:textColor="#3F3F3F"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/linecost_unclundecosttv_style"
+        android:paddingBottom="4dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:text="费用不包含"
+        android:textColor="@color/dalvred"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/linecost_uncludecost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1、交通
+2、住宿"
+        android:textColor="#3F3F3F"
+        android:textSize="12sp" />
 </LinearLayout>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="9dp"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="合同申请"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-08-22 19:20:44"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="状态："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_passstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="审核通过"
+            android:textColor="#5FC82B"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/contractrecord_xrecycleritem_failcause_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="-6dp"
+        android:background="#EEE"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="失败原因："
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_failcause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="合同文件不规范"
+            android:textColor="#4C4C4C"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="国内合同申请份数："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_internalnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6份"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="境外合同申请份数："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_overseasnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4份"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="单项委托份数："
+            android:textColor="@color/dalvtextblack"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_entrustnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2份"
+            android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:orientation="horizontal"
+        android:paddingBottom="9dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="9dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交易号："
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/contractrecord_xrecycleritem_businessnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="1499999999"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

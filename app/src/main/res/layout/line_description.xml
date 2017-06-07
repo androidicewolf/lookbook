@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/line_description_ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我是产品亮点" />
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingEnd="15dp"
+    android:paddingStart="15dp"
+    android:paddingTop="22dp">
 
 </LinearLayout>

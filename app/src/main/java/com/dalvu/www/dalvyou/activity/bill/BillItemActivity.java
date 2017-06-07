@@ -71,6 +71,19 @@ public class BillItemActivity extends BaseNoTitleActivity {
                 @Override
                 public void onSucceed(int what, String json) {
                     //解析数据
+                    switch (position) {
+                        case 0:
+
+                            break;
+                        case 2:
+                            break;
+                        case 4:
+                            break;
+                        case 6:
+                            break;
+                        case 8:
+                            break;
+                    }
 
                     bill_item_activity_xrecyclerview.setAdapter(new BillItemXRecyclerItemAdapter(BillItemActivity.this, items, position));
                     activity_stateview.showNormal();
