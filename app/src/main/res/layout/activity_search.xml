@@ -3,6 +3,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
     tools:context="com.dalvu.www.dalvyou.activity.SearchActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/bottom_edging_style">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginStart="9dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/arrowhead_up" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/activity_search_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/activity_search_style"
+                    android:hint="搜索出发城市或目的地"
+                    android:paddingBottom="9dp"
+                    android:paddingStart="9dp"
+                    android:paddingTop="9dp"
+                    android:textColor="#353535"
+                    android:textColorHint="#828282"
+                    android:textCursorDrawable="@null"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/activity_search_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:src="@mipmap/close"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/activity_search_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="7dp"
+                android:src="@mipmap/search_adviser" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_search_hotcity_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="36dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="15dp"
+            android:text="热门出发城市"
+            android:textColor="#2C2B2B"
+            android:textSize="12sp" />
+
+        <GridView
+            android:id="@+id/search_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp" />
+    </LinearLayout>
+
+    <com.dalvu.www.dalvyou.netUtils.StateView
+        android:id="@+id/search_stateview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

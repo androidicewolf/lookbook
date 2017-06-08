@@ -1,12 +1,12 @@
 package com.dalvu.www.dalvyou.activity.order;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class LineOrderDetailActivity extends AppCompatActivity {
+public class LineOrderDetailActivity extends BaseNoTitleActivity {
 
     @BindView(R.id.line_orderdetail_item_title)
     TextView lineOrderdetailItemTitle;

@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -47,8 +49,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.dalvu.www.dalvyou.R.id.line_detail_title;
 
 /**
  * 展示线路详情的界面
@@ -107,12 +107,14 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     LinearLayout linedetailBtnRecommend;
     @BindView(R.id.iv_go_back)
     ImageView ivGoBack;
-    @BindView(line_detail_title)
-    TextView lineDetailTitle;
     @BindView(R.id.linedetail_listenedscrollview)
     ListenedScrollView linedetailListenedscrollview;
     @BindView(R.id.line_detail_title_rl)
     RelativeLayout lineDetailTitleRl;
+    @BindView(R.id.linedetail_viewpager_cursor_rl)
+    RelativeLayout linedetailViewpagerCursorRl;
+    @BindView(R.id.line_detail_title)
+    TextView lineDetailTitle;
 
     //是否是输入框的一个状态
     private boolean isNameInput;
@@ -122,6 +124,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     private Unbinder unbinder;
     private TabLayout.OnTabSelectedListener tabSelectedListener;
     private SparseArray<BaseFragment> fragments;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,7 +268,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     //根据图片的张数创建灰色小圆点
     private void creatGuideDot(List list) {
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < 4; i++) {
             View view = new View(this);
             view.setBackgroundResource(R.drawable.shape_guide_dot);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dip2px(this, 8), DensityUtils.dip2px(this, 8));
@@ -368,18 +371,45 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     private void initViewPager(List<String> itemsList) {
         Log.e("call", "----------------" + itemsList);
-        for (String uri : itemsList) {
+        for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(this);
             imageViews.add(imageView);
         }
 
-        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews));
+
+        //适配器中传入的是一个imageview对象的集合，后期再改为在适配器中加载图片
+        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews, handler));
+        //判断是否有一个图片，如果只有一个不显示圆点，不发消息轮播
+        if (imageViews == null || imageViews.size() == 1) {
+            linedetailViewpagerCursorRl.setVisibility(View.GONE);
+        } else {
+            linedetailViewpagerCursorRl.setVisibility(View.VISIBLE);
+            //设置自动轮播
+            if (handler == null) {
+                handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        int itemPosition = linedetailViewpager.getCurrentItem();
+                        if (itemPosition == imageViews.size() - 1) {
+                            itemPosition = 0;
+                        } else {
+                            itemPosition++;
+                        }
+                        linedetailViewpager.setCurrentItem(itemPosition, true);
+                        handler.sendEmptyMessageDelayed(0, 3000);
+                    }
+                };
+                handler.sendEmptyMessageDelayed(0, 3000);
+            }
+        }
+
         //viewpager的切换监听
         linedetailViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 //滑动时调用
-                linedetailViewperCursorReddot.setTranslationX((positionOffsetPixels + position) * 30);
+                linedetailViewperCursorReddot.setTranslationX((positionOffset + position)
+                        * (15 + DensityUtils.dip2px(LineDetailActivity.this, 8)));
             }
 
             @Override
@@ -394,6 +424,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
             }
         });
+
+
     }
 
     @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine})
@@ -412,6 +444,14 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if (handler != null) {
+            handler.removeMessages(0);
+        }
+        super.onStop();
     }
 
     @Override
