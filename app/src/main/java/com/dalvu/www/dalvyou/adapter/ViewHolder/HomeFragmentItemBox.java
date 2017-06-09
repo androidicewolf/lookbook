@@ -15,18 +15,12 @@ public class HomeFragmentItemBox extends RecyclerView.ViewHolder{
     public TextView home_item_name;
     public TextView home_item_gosite;
     public TextView home_item_price;
-    private View itemView;
     public HomeFragmentItemBox(View itemView) {
         super(itemView);
-        this.itemView = itemView;
         home_item_image = (ImageView) itemView.findViewById(R.id.home_item_image);
         home_item_name = (TextView) itemView.findViewById(R.id.home_item_name);
         home_item_gosite = (TextView) itemView.findViewById(R.id.home_item_gosite);
         home_item_price = (TextView) itemView.findViewById(R.id.home_item_price);
 
-    }
-
-    public void addOnClickListener(View.OnClickListener onClickListener) {
-        itemView.setOnClickListener(onClickListener);
     }
 }

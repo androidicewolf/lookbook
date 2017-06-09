@@ -52,6 +52,7 @@ public class HomeHeaderAdapter extends RecyclerView.Adapter<HeaderViewBox> {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, LineAssortmentActivity.class);
+            intent.putExtra("title", "国内游");
             context.startActivity(intent);
         }
     }

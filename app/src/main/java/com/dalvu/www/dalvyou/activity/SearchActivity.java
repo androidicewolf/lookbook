@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.HomeFragmentAdapter;
+import com.dalvu.www.dalvyou.adapter.SearchHotCityAdapter;
 import com.dalvu.www.dalvyou.adapter.SearchRecyclerViewAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
@@ -31,7 +33,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class SearchActivity extends BaseNoTitleActivity {
-
+    //这个界面的热门城市以后需要用成第三方的流式布局
     @BindView(R.id.iv_go_back)
     ImageView ivGoBack;
     @BindView(R.id.activity_search_ed)
@@ -46,6 +48,8 @@ public class SearchActivity extends BaseNoTitleActivity {
     RecyclerView searchRecyclerview;
     @BindView(R.id.activity_search_hotcity_ll)
     LinearLayout activitySearchHotcityLl;
+    @BindView(R.id.search_gridview)
+    GridView searchGridview;
     private Unbinder unbinder;
     private MyCallBack callBack;
     private String[] citys = {"北京", "天津", "河北", "唐山"};
@@ -90,9 +94,29 @@ public class SearchActivity extends BaseNoTitleActivity {
                 }
             }
         });
+        searchGridview.setAdapter(new SearchHotCityAdapter(this, citys));
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         searchRecyclerview.setLayoutManager(layoutManager);
-        searchRecyclerview.setAdapter(new SearchRecyclerViewAdapter(this, citys));
+        if (callBack == null) {
+            callBack = new MyCallBack(searchStateview) {
+                @Override
+                public void onStart(int what) {
+                    activitySearchHotcityLl.setVisibility(View.GONE);
+                    searchStateview.setVisibility(View.VISIBLE);
+                    super.onStart(what);
+                }
+
+                @Override
+                public void onSucceed(int what, String json) {
+                    Log.e("call", "创建的网络回调中onSucceed被执行");
+                    //解析数据
+
+                    xRecyclerView.setAdapter(new HomeFragmentAdapter(SearchActivity.this, lineitems));
+                    searchStateview.showNormal();
+                }
+            };
+        }
+        searchRecyclerview.setAdapter(new SearchRecyclerViewAdapter(this, citys, callBack));
     }
 
     @OnClick({R.id.iv_go_back, R.id.activity_search_close, R.id.activity_search_iv})
@@ -106,25 +130,7 @@ public class SearchActivity extends BaseNoTitleActivity {
                 break;
             case R.id.activity_search_iv:
                 String content = activitySearchEd.getText().toString();
-
-                if (callBack == null) {
-                    callBack = new MyCallBack(searchStateview) {
-                        @Override
-                        public void onStart(int what) {
-                            activitySearchHotcityLl.setVisibility(View.GONE);
-                            super.onStart(what);
-                        }
-
-                        @Override
-                        public void onSucceed(int what, String json) {
-                            //解析数据
-
-                            xRecyclerView.setAdapter(new HomeFragmentAdapter(SearchActivity.this, lineitems));
-                            searchStateview.showNormal();
-                        }
-                    };
-                }
-                //请求网络，
+                //请求网络
                 NetUtils.callNet(14, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
                 break;
         }

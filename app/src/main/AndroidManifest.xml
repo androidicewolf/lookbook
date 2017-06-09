@@ -47,7 +47,8 @@
         <activity android:name=".activity.bill.RechargeAskforActivity" />
         <activity android:name=".activity.bill.GetCashAskforActivity" />
         <activity android:name=".activity.bill.ReceiptAskforActivity" />
-        <activity android:name=".activity.bill.ContractAskforActivity"></activity>
+        <activity android:name=".activity.bill.ContractAskforActivity" />
+        <activity android:name=".activity.line.LineListActivity"></activity>
     </application>
 
 </manifest>

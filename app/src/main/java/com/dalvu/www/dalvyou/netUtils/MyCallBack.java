@@ -1,5 +1,7 @@
 package com.dalvu.www.dalvyou.netUtils;
 
+import android.util.Log;
+
 /**自定义网络请求回调借口
  * Created by user on 2017/5/9.
  */
@@ -16,6 +18,7 @@ public class MyCallBack {
         this.stateView = stateView;
     }
     public void onStart(int what) {
+        Log.e("call", "MyCallBack父类的onStart方法被执行");
         stateView.showLoading();
     }
 

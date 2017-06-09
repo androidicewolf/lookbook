@@ -214,6 +214,8 @@ public class HomeFragment extends BaseFragment {
             modules.put("自由行", R.mipmap.free_walker);
             modules.put("机票", R.mipmap.passenger_ticket);
             modules.put("特价", R.mipmap.special_offe);
+            modules.put("门票", R.mipmap.entrance_ticket);
+            modules.put("签证保险", R.mipmap.insurance_visa);
         }
         if (headerView != null) {
             unbinder = ButterKnife.bind(this, headerView);
