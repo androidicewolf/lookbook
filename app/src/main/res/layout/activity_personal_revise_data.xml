@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="姓名："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_name_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#FFF"
+                android:text="本尼迪克特康伯巴奇"
+                android:textColor="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="昵称："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_nickname_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#FFF"
+                android:hint="请输入您的昵称"
+                android:textColor="#B6B6B6"
+                android:textColorHint="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_revisedata_sex_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="性别："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/personal_revisedata_sex_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrowhead_left" />
+
+            <TextView
+                android:id="@+id/personal_revisedata_sex_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/personal_revisedata_sex_iv"
+                android:text="选择性别"
+                android:textColor="#B6B6B6"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_revisedata_age_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="年龄："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/personal_revisedata_age_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrowhead_left" />
+
+            <TextView
+                android:id="@+id/personal_revisedata_age_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/personal_revisedata_age_iv"
+                android:text="选择年龄"
+                android:textColor="#B6B6B6"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_revisedata_workyear_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="从业时间："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/personal_revisedata_workyear_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrowhead_left" />
+
+            <TextView
+                android:id="@+id/personal_revisedata_workyear_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@id/personal_revisedata_workyear_iv"
+                android:text="选择从业时间"
+                android:textColor="#B6B6B6"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="标签："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_label_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#FFF"
+                android:hint="填写限五个，用逗号隔开"
+                android:textColor="#B6B6B6"
+                android:textColorHint="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="手机号："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_tel_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#FFF"
+                android:inputType="phone"
+                android:text="13199011001"
+                android:textColor="#B6B6B6"
+                android:textColorHint="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="邮箱："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_email_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="#FFF"
+                android:hint="请输入您的邮箱"
+                android:textColor="#B6B6B6"
+                android:textColorHint="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:orientation="horizontal"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我去过的地方："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/personal_revisedata_experience_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:gravity="top"
+                android:hint="描述你去过的地方"
+                android:textColor="#B6B6B6"
+                android:textColorHint="#B6B6B6"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/personal_revisedata_revisepassword_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bottom_edging_style"
+            android:paddingBottom="14dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="修改密码："
+                android:textColor="@color/dalvtextblack"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/arrowhead_left" />
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

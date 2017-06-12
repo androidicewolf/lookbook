@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/dalvbule">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/go_back" />
+
+            <TextView
+                android:id="@+id/tv_dalv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                android:text="大旅游"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/personal_save_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/home_login_btn_style"
+                android:paddingBottom="5dp"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:paddingTop="5dp"
+                android:text="保存"
+                android:textColor="@color/dalvbule"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <com.dalvu.www.dalvyou.netUtils.StateView
+        android:id="@+id/activity_stateview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -378,7 +378,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
 
         //适配器中传入的是一个imageview对象的集合，后期再改为在适配器中加载图片
-        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews, handler));
+
         //判断是否有一个图片，如果只有一个不显示圆点，不发消息轮播
         if (imageViews == null || imageViews.size() == 1) {
             linedetailViewpagerCursorRl.setVisibility(View.GONE);
@@ -402,7 +402,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 handler.sendEmptyMessageDelayed(0, 3000);
             }
         }
-
+        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews, handler));
         //viewpager的切换监听
         linedetailViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

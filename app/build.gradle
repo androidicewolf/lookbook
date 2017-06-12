@@ -38,6 +38,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

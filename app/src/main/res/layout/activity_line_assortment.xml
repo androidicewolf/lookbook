@@ -37,7 +37,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
                 android:background="#FFF"
-                android:text="支持模糊搜索：线路、景点、代码"
+                android:text="搜索：线路、景点、代码"
                 android:textColor="#A0A0A0"
                 android:textSize="13sp" />
 
