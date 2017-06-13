@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.SearchActivity;
@@ -78,6 +79,9 @@ public class HomeFragment extends BaseFragment {
     private int distanceY;
     //当前的透明度
     private int alpha;
+    //城市的集合
+    private ArrayList<String> citys;
+    private String city = "北京市";
 
     @Override
     protected int getLayoutId() {
@@ -119,15 +123,15 @@ public class HomeFragment extends BaseFragment {
                 home_fragment_toolbar.setBackgroundColor(Color.argb(alpha, 86, 109, 248));
             }
         });
-        requestServer();
+        requestServer(city);
     }
 
     @Override
     public void update() {
-        requestServer();
+        requestServer(city);
     }
 
-    private void requestServer() {
+    private void requestServer(String city) {
         if (callBack == null) {
             callBack = new MyCallBack(home_Stateview) {
 
@@ -256,8 +260,26 @@ public class HomeFragment extends BaseFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.home_selector_city:
-                    //选择城市，刷新首页
+                    if (citys == null) {
+                        citys = new ArrayList<>();
+                        citys.add("北京市");
+                        citys.add("天津市");
+                        citys.add("河北省");
+                        citys.add("唐山市");
+                        citys.add("其他");
+                    }
 
+                    //选择城市，刷新首页
+                    OptionsPickerView pvOptions = new OptionsPickerView.Builder(activity, new OptionsPickerView.OnOptionsSelectListener() {
+                        @Override
+                        public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                            city = citys.get(options1);
+                            Log.e("call", city);
+                            update();
+                        }
+                    }).build();
+                    pvOptions.setNPicker(citys, null, null);
+                    pvOptions.show();
                     break;
                 case home_fragment_search_ll:
                     Intent intent = new Intent(activity, SearchActivity.class);

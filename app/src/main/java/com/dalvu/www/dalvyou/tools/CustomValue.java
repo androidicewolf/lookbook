@@ -1,5 +1,7 @@
 package com.dalvu.www.dalvyou.tools;
 
+import java.util.ArrayList;
+
 /**自定义的变量
  * Created by user on 2017/5/9.
  */
@@ -39,4 +41,6 @@ public interface CustomValue {
     public static final int LINECOST = 106;
     /**线路详情“注意事项”请求网络的what**/
     public static final int LINENOTICE = 107;
+    //应用中用到的城市
+    public static final ArrayList<String> CITYS = new ArrayList<>();
 }

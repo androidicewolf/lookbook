@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.OkHttpNetworkExecutor;
 import com.yanzhenjie.nohttp.cache.DBCacheStore;
@@ -34,6 +35,10 @@ public class MyApplication extends Application {
         .setConnectTimeout(15000)
         .setReadTimeout(15000).setCacheStore(new DBCacheStore(this).setEnable(true)));
         requestQueue = NoHttp.newRequestQueue();
+        CustomValue.CITYS.add("北京市");
+        CustomValue.CITYS.add("天津市");
+        CustomValue.CITYS.add("河北省");
+        CustomValue.CITYS.add("唐山市");
     }
 
     public int[] getScreenSize() {

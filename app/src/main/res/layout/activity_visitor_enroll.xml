@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="66dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -78,18 +78,21 @@
         android:id="@+id/enroll_ed_inputpassword"
         style="@style/EnrollEditTextStyle"
         android:hint="输入密码"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/enroll_ed_confirmpassword"
         style="@style/EnrollEditTextStyle"
         android:hint="确认密码"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/enroll_ed_occupation"
         style="@style/EnrollEditTextStyle"
-        android:hint="请填写服务顾问手机" />
+        android:hint="请填写服务顾问手机"
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/enroll_btn_enroll"

@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.activity.AdviserEnrollActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.MyVisitorActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.PersonalReviseDataActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.PersonalSettingActivity;
@@ -106,6 +107,9 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.personal_fragment_line_inquiry:
                 //线路询价
+                //暂时为了看注册，写成了跳转顾问注册页面
+                intent = new Intent(activity, AdviserEnrollActivity.class);
+                startActivity(intent);
                 break;
             case R.id.personal_fragment_setting:
                 //通用设置

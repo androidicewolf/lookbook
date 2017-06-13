@@ -16,7 +16,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#B4B4B4</item>
+        <item name="android:textColorHint">#B4B4B4</item>
+        <item name="android:textColor">@color/dalvtextblack</item>
         <item name="android:background">@drawable/login_edittext_style</item>
     </style>
 
