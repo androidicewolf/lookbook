@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dalvu.www.dalvyou.activity.personaldata.PersonalSettingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/dalvbule">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="7dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:id="@+id/iv_go_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/go_back" />
+
+            <TextView
+                android:id="@+id/tv_dalv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:gravity="center"
+                android:text="大旅游"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/personal_setting_propose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_edging_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="14dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="14dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="意见反馈"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrowhead_left" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/personal_setting_aboutdalv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_edging_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="14dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="14dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="关于大旅"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrowhead_left" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/personal_setting_cleanbuffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_edging_style"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="14dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="14dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清除缓存"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/personal_setting_cleanbuffer_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:textColor="@color/dalvtextblack"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/arrowhead_left" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/personal_setting_quit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:gravity="center"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:text="退出登录"
+        android:textColor="@color/dalvred"
+        android:textSize="14sp" />
+</LinearLayout>

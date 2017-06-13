@@ -256,7 +256,8 @@ public class HomeFragment extends BaseFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.home_selector_city:
-                    //底部弹出城市选择
+                    //选择城市，刷新首页
+
                     break;
                 case home_fragment_search_ll:
                     Intent intent = new Intent(activity, SearchActivity.class);
