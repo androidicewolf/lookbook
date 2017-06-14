@@ -131,12 +131,16 @@
                         android:visibility="visible" />
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#DFDFDF" />
+
                 <LinearLayout
                     android:id="@+id/linedetail_ll_changename"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="-5dp"
-                    android:background="@drawable/linedetail_changename_btn_style"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:paddingEnd="12dp"
@@ -246,6 +250,7 @@
                     android:textSize="12sp" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/linedetail_groupdate_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

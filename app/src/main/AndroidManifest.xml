@@ -52,7 +52,8 @@
         <activity android:name=".activity.personaldata.PersonalReviseDataActivity" />
         <activity android:name=".activity.personaldata.PersonalRevisePasswordActivity" />
         <activity android:name=".activity.personaldata.PersonalSettingActivity" />
-        <activity android:name=".activity.personaldata.PersonalProposeActivity"></activity>
+        <activity android:name=".activity.personaldata.PersonalProposeActivity" />
+        <activity android:name=".activity.line.LineGroupDateActivity"></activity>
     </application>
 
 </manifest>

@@ -115,6 +115,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     RelativeLayout linedetailViewpagerCursorRl;
     @BindView(R.id.line_detail_title)
     TextView lineDetailTitle;
+    @BindView(R.id.linedetail_groupdate_ll)
+    ListenedScrollView linedetailGroupdateLl;
 
     //是否是输入框的一个状态
     private boolean isNameInput;
@@ -428,7 +430,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     }
 
-    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine})
+    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine, R.id.linedetail_groupdata_ll})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -438,6 +440,11 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 startActivity(intent);
                 break;
             case R.id.line_consult_ll:
+                break;
+            case R.id.linedetail_groupdate_ll:
+                //跳转团期页面（打开一个新的界面）
+                intent = new Intent(this, LineGroupDateActivity.class);
+                startActivity(intent);
                 break;
             case R.id.line_btn_destine:
                 intent = new Intent(this, LineDestineActivity.class);
