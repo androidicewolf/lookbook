@@ -41,6 +41,7 @@ import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.DensityUtils;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -116,7 +117,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     @BindView(R.id.line_detail_title)
     TextView lineDetailTitle;
     @BindView(R.id.linedetail_groupdate_ll)
-    ListenedScrollView linedetailGroupdateLl;
+    LinearLayout linedetailGroupdateLl;
 
     //是否是输入框的一个状态
     private boolean isNameInput;
@@ -127,6 +128,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     private TabLayout.OnTabSelectedListener tabSelectedListener;
     private SparseArray<BaseFragment> fragments;
     private Handler handler;
+    private LineDetailDatabean lineDetailDatabean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,7 +298,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                         /**基本信息**/
                         case CustomValue.LINEDETAILBASE:
                             Log.e("call", "线路的基本信息=====" + json);
-                            LineDetailDatabean lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
+                            lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
                             //代码创建灰色小圆点
                             creatGuideDot(lineDetailDatabean.picArr);
                             initViewPager(lineDetailDatabean.picArr);
@@ -320,7 +322,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
         }
 
         TreeMap<String, Integer> treeMap = new TreeMap<>();
-        treeMap.put("id", 4005);
+        treeMap.put("id", 4504);
         //发送线路基本信息的网络请求
         NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + "/index.php/Api/index/details", treeMap, callBack);
 
@@ -430,7 +432,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     }
 
-    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine, R.id.linedetail_groupdata_ll})
+    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine, R.id.linedetail_groupdate_ll})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -444,6 +446,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
             case R.id.linedetail_groupdate_ll:
                 //跳转团期页面（打开一个新的界面）
                 intent = new Intent(this, LineGroupDateActivity.class);
+                intent.putExtra("groupdate", (Serializable) lineDetailDatabean.tourSkuDate);
                 startActivity(intent);
                 break;
             case R.id.line_btn_destine:

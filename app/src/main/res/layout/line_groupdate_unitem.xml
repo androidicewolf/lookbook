@@ -11,24 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="6"
-        android:textColor="@color/dalvtextblack"
+        android:textColor="#B6B6B6"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/groupdate_itme_childrenprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-3dp"
-        android:text="￥3999"
         android:textColor="#FE6643"
         android:textSize="9sp" />
 
     <TextView
-        android:id="@+id/groupdate_itme_manprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-3dp"
-        android:text="￥5999"
         android:textColor="#ED391B"
         android:textSize="9sp" />
 </LinearLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp">
+
+    <TextView
+        android:id="@+id/line_groupdate_tab_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6月"
+        android:textColor="@color/dalvtextblack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/line_groupdate_tab_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥3999起"
+        android:textColor="@color/dalvred"
+        android:textSize="12sp" />
+
+</LinearLayout>

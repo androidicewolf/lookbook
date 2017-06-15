@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,10 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/line_groupdate_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#F4F4F4"
+        android:paddingTop="6dp"
+        app:tabMode="scrollable" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,8 +54,10 @@
             android:text="六" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/line_groupdate_framelayout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/line_groupdate_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:paddingBottom="8dp" />
 </LinearLayout>
