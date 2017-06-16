@@ -53,7 +53,8 @@
         <activity android:name=".activity.personaldata.PersonalRevisePasswordActivity" />
         <activity android:name=".activity.personaldata.PersonalSettingActivity" />
         <activity android:name=".activity.personaldata.PersonalProposeActivity" />
-        <activity android:name=".activity.line.LineGroupDateActivity"></activity>
+        <activity android:name=".activity.line.LineGroupDateActivity" />
+        <activity android:name=".activity.personaldata.MyAdviserActivity"></activity>
     </application>
 
 </manifest>

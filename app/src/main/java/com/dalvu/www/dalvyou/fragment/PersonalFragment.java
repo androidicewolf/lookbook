@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.AdviserEnrollActivity;
-import com.dalvu.www.dalvyou.activity.personaldata.MyVisitorActivity;
+import com.dalvu.www.dalvyou.activity.personaldata.MyAdviserActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.PersonalReviseDataActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.PersonalSettingActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.SupplierQueryActivity;
@@ -92,7 +92,8 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.personal_fragment_mystatus:
                 if (true) {
-                    intent = new Intent(activity, MyVisitorActivity.class);
+                    intent = new Intent(activity, MyAdviserActivity.class);
+//                    intent = new Intent(activity, MyVisitorActivity.class);
                     startActivity(intent);
                 } else {
                     //如果是游客进入我的顾问页面

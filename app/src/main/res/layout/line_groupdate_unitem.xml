@@ -10,7 +10,7 @@
         android:id="@+id/groupdate_item_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="6"
+        android:text=""
         android:textColor="#B6B6B6"
         android:textSize="18sp" />
 

@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -160,8 +159,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
             @Override
             public void onScrollChanged(int x, int y, int oldX, int oldY) {
-                Log.e("call", "输出y===============" + y);
-                Log.e("call", "输出oldY===============" + oldY);
                 if (y >= totalDistance) {
                     if (lineDetailTitle.getVisibility() != View.VISIBLE) {
                         lineDetailTitle.setVisibility(View.VISIBLE);
@@ -297,7 +294,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                     switch (what) {
                         /**基本信息**/
                         case CustomValue.LINEDETAILBASE:
-                            Log.e("call", "线路的基本信息=====" + json);
                             lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
                             //代码创建灰色小圆点
                             creatGuideDot(lineDetailDatabean.picArr);
@@ -374,7 +370,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     }
 
     private void initViewPager(List<String> itemsList) {
-        Log.e("call", "----------------" + itemsList);
         for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(this);
             imageViews.add(imageView);

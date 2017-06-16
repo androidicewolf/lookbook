@@ -5,21 +5,16 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LineGroupDateAdapter;
-import com.dalvu.www.dalvyou.base.BaseFragment;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.LineDetailDatabean;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -32,12 +27,12 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
     TabLayout lineGroupdateTablayout;
     @BindView(R.id.line_groupdate_recyclerview)
     RecyclerView lineGroupdateRecyclerview;
-    private String[] prices = {"3999", "4799", "2998", "1999"};
-    private SparseArray<BaseFragment> fragments;
     private List<LineDetailDatabean.TourSkuDateBean> groudDates;
     private TreeSet<String> monthsSet = new TreeSet<>();
-    private Date date;
-    private String[] dates;
+    //    private Date date;
+    private HashMap<String, LineDetailDatabean.TourSkuDateBean> groupDateMap;
+    private HashMap<String, Integer> minPrice;
+    //    private DateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +51,30 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
     }
 
     private void initData() {
-        getMonthSet();
-
-
+        if (groupDateMap == null) {
+            groupDateMap = new HashMap<>();
+            for (LineDetailDatabean.TourSkuDateBean groupDate : groudDates) {
+                //取出年月份，放入一个TreeSet集合中，可以实现去重和排序
+                String start_time = groupDate.start_time;
+                groupDateMap.put(start_time, groupDate);
+            }
+        }
+        getAdapterSet();
+        String[] dates;
+        int index = 0;
+        String[] months = new String[monthsSet.size()];
         for (String month : monthsSet) {
+            months[index] = month;
             TabLayout.Tab tab = lineGroupdateTablayout.newTab();
             tab.setCustomView(R.layout.line_groupdate_tab);
             View view = tab.getCustomView();
             TextView line_groupdate_tab_month = (TextView) view.findViewById(R.id.line_groupdate_tab_month);
-//            TextView line_groupdate_tab_price = (TextView) view.findViewById(R.id.line_groupdate_tab_price);
+            TextView line_groupdate_tab_price = (TextView) view.findViewById(R.id.line_groupdate_tab_price);
             dates = month.split("-");
             line_groupdate_tab_month.setText(Integer.valueOf(dates[1]) + "月");
-//            line_groupdate_tab_price.setText("￥" + prices[i] + "起");
+            line_groupdate_tab_price.setText("￥" + minPrice.get(month) * 1f / 100 + "起");
             lineGroupdateTablayout.addTab(tab);
+            index++;
         }
         TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
             @Override
@@ -88,30 +94,52 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
         };
         lineGroupdateTablayout.addOnTabSelectedListener(tabSelectedListener);
         GridLayoutManager manager = new GridLayoutManager(this, 7);
-        lineGroupdateRecyclerview.setAdapter(new LineGroupDateAdapter(this));
+        lineGroupdateRecyclerview.setAdapter(new LineGroupDateAdapter(this, months[0], groupDateMap));
         lineGroupdateRecyclerview.setLayoutManager(manager);
     }
 
-    private void getMonthSet() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        String[] dates = null;
-        //初始化传递过来的团期集合，将需要的数据放入对应的集合中
-        for (LineDetailDatabean.TourSkuDateBean groupDate : groudDates) {
-            //取出年月份，放入一个TreeSet集合中，可以实现去重和排序
-            String start_time = groupDate.start_time;
-            try {
-                date = dateFormat.parse(start_time);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-                int day = calendar.get(Calendar.DAY_OF_WEEK);
-            } catch (ParseException e) {
-                e.printStackTrace();
+    private void getAdapterSet() {
+//        if(dateFormat == null){
+//            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        }
+        if (minPrice == null) {
+            minPrice = new HashMap<>();
+//        Date date = null;
+            String[] dateStr;
+            int price;
+            int priceMin = 0;
+            //初始化传递过来的团期集合，将需要的数据放入对应的集合中
+            for (LineDetailDatabean.TourSkuDateBean groupDate : groudDates) {
+                //取出年月份，放入一个TreeSet集合中，可以实现去重和排序
+                String start_time = groupDate.start_time;
+
+//            try {
+//                date = dateFormat.parse(start_time);
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(date);
+//                int day = calendar.get(Calendar.DAY_OF_WEEK);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+                dateStr = start_time.split("-");
+                monthsSet.add(dateStr[0] + "-" + dateStr[1]);
+
+
+                //取出销售价格，放入集合中用于在月份下面显示多少多少元起
+                price = Integer.valueOf(groupDate.price_adult_list);
+                boolean isbe = minPrice.containsKey(dateStr[0] + "-" + dateStr[1]);
+                if (isbe) {
+                    priceMin = minPrice.get(dateStr[0] + "-" + dateStr[1]);
+                    Log.e("call", "-----------------price存在:price=" + priceMin);
+                    if (price < priceMin) {
+                        minPrice.put(dateStr[0] + "-" + dateStr[1], price);
+                    }
+                } else {
+                    Log.e("call", dateStr[0] + "-" + dateStr[1] + "======" + priceMin);
+                    minPrice.put(dateStr[0] + "-" + dateStr[1], price);
+                }
             }
-            dates = start_time.split("-");
-            monthsSet.add(dates[0] + "-" + dates[1] + "01");
+            //循环结束以后得到三个集合，一个是存月份的，一个是存月份对应的下面最低价的，一个是存日期对应的线路价格对象的
         }
     }
-
-
 }
