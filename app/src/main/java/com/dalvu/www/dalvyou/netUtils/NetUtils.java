@@ -48,7 +48,7 @@ public class NetUtils {
     }
 
     /**没登录时，请求网络,发送参数**/
-    public static void callNet(int what, String uri, Map<String, Integer> map, final MyCallBack callBack) {
+    public static void callNet(int what, String uri, Map<String, String> map, final MyCallBack callBack) {
         final Request<String> request = NoHttp.createStringRequest(uri, RequestMethod.POST);
         for (String key : map.keySet()){
             request.add(key, map.get(key));

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,22 +15,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.bumptech.glide.Glide;
 import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.SearchActivity;
 import com.dalvu.www.dalvyou.adapter.HomeFragmentAdapter;
 import com.dalvu.www.dalvyou.adapter.HomeHeaderAdapter;
 import com.dalvu.www.dalvyou.base.BaseFragment;
+import com.dalvu.www.dalvyou.bean.HomeFragmentLineDataBean;
 import com.dalvu.www.dalvyou.bean.HomeFragmentModuleDataBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +54,8 @@ public class HomeFragment extends BaseFragment {
     TextView homeFragmentHeadName;
     @BindView(R.id.home_fragment_head_adviser)
     TextView homeFragmentHeadAdviser;
+    @BindView(R.id.home_fragment_head_rl)
+    RelativeLayout homeFragmentHeadRl;
     @BindView(R.id.home_fragment_head_ll)
     LinearLayout homeFragmentHeadLl;
     @BindView(R.id.home_fragment_head_score)
@@ -62,17 +69,25 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.home_fragment_head_inlogin)
     LinearLayout homeFragmentHeadInlogin;
     private Unbinder unbinder;
-    //保存首页模块分类的集合
-    private ArrayList homemodules = new ArrayList();
+    //从内存中获取的用户类型
+    private int user_type;
+    //从内存中获取的uid
+    private int user_id;
+    //从内存中获取的token
+    private String user_token;
+
+    //根据sort字段存放模块的顺序
+    private SparseArray<HomeFragmentModuleDataBean.ColumnListBean> columnsort;
     //保存首页线路条目的集合
-    private ArrayList homeItems = new ArrayList();
+    private ArrayList<HomeFragmentLineDataBean.ListBean> homeItems = new ArrayList<>();
+
     private View headerView;
     private HomeFragmentAdapter homeFragmentAdapter;
     private HomeHeaderAdapter homeHeaderAdapter;
     private MyCallBack callBack;
     private StateView home_Stateview;
     private XRecyclerView xRecyclerView;
-    private TreeMap<String, Integer> modules;
+    private HashMap<String, Integer> modules;
     private RecyclerView home_module;
     private RelativeLayout home_fragment_toolbar;
     //屏幕滑动的总距离
@@ -82,6 +97,23 @@ public class HomeFragment extends BaseFragment {
     //城市的集合
     private ArrayList<String> citys;
     private String city = "北京市";
+    //未登录模块
+    private String urlColumn = "Api/index/indexMod";
+    //未登录线路列表
+    private String urlLine = "Api/index/indexLineList";
+    //顾问登录模块
+    private String urlAdColumn = "Api/index/agencyIndexMod";
+    //顾问登录线路列表
+    private String urlAdLine = "Api/index/agencyIndexLinelist";
+    //游客登录模块
+    private String urlViColumn = "TouristApi/TouristIndex/agencyIndexMod";
+    //游客登录线路列表
+    private String urlViLine = "TouristApi/TouristIndex/agencyIndexLinelist";
+    //用户头布局信息的bean类
+    private HomeFragmentModuleDataBean homeFragmentModuleDataBean;
+    //用户线路列表信息的bean类
+    private HomeFragmentLineDataBean homeFragmentLineDataBean;
+
 
     @Override
     protected int getLayoutId() {
@@ -90,6 +122,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        user_type = AppUserDate.getUserType();
+        user_id = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
         home_Stateview = (StateView) view.findViewById(R.id.fragment_stateview);
         home_Stateview.addNormal(R.layout.home_fragment_xrecyclerview);
         xRecyclerView = (XRecyclerView) home_Stateview.normal.findViewById(R.id.home_fragment_xrecyclerview);
@@ -128,7 +163,8 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void update() {
-        requestServer(city);
+        NetUtils.callNet(1, "", callBack);
+
     }
 
     private void requestServer(String city) {
@@ -148,46 +184,66 @@ public class HomeFragment extends BaseFragment {
                 public void onSucceed(int what, String json) {
                     switch (what) {
                         case CustomValue.HOMECOLUMN:
-                            HomeFragmentModuleDataBean homeFragmentModuleDataBean = new Gson().fromJson(json, HomeFragmentModuleDataBean.class);
+                            homeFragmentModuleDataBean = new Gson().fromJson(json, HomeFragmentModuleDataBean.class);
                             break;
                         case CustomValue.HOMELINE:
+                            homeFragmentLineDataBean = new Gson().fromJson(json, HomeFragmentLineDataBean.class);
                             break;
                     }
-                    if (xRecyclerView != null) {
-                        Log.e("call", "xRecyclerView不是null");
-                        if (homeHeaderAdapter == null || homeFragmentAdapter == null) {
-                            if (homeHeaderAdapter == null) {
-                                Log.e("call", "headerView是null");
-                                initHeader();
-                                xRecyclerView.addHeaderView(headerView);
-                            }
-                            if (homeFragmentAdapter == null) {
-                                Log.e("call", "homeFragmentAdapter是null");
-                                homeFragmentAdapter = new HomeFragmentAdapter(activity, homeItems);
-                                xRecyclerView.setAdapter(homeFragmentAdapter);
+                    if ((homeFragmentModuleDataBean.status.equals("00000")) || (homeFragmentLineDataBean.status.equals("00000"))) {
+                        if (isShow) {
+                            if (homeFragmentModuleDataBean.status.equals("00000") && (homeFragmentLineDataBean.status.equals("00000"))) {
+//                                isShow = false;
+                                if (xRecyclerView != null) {
+                                    Log.e("call", "xRecyclerView不是null");
+                                    if (homeHeaderAdapter == null || homeFragmentAdapter == null) {
+                                        if (homeHeaderAdapter == null) {
+                                            Log.e("call", "headerView是null");
+                                            initHeader();
+                                            xRecyclerView.addHeaderView(headerView);
+                                        }
+                                        if (homeFragmentAdapter == null) {
+                                            Log.e("call", "homeFragmentAdapter是null");
+//                                            homeItems = homeFragmentLineDataBean.list;
+                                            if (homeFragmentLineDataBean.list != null && homeFragmentLineDataBean.list.size() != 0) {
+                                                homeFragmentAdapter = new HomeFragmentAdapter(activity, homeFragmentLineDataBean.list);
+                                                xRecyclerView.setAdapter(homeFragmentAdapter);
+                                            }
+                                        }
+                                    } else {
+                                        //刷新适配器
+                                        switch (what) {
+                                            case CustomValue.HOMECOLUMN:
+                                                Log.e("call", "Head适配器刷新");
+                                                homeHeaderAdapter.notifyDataSetChanged();
+                                                break;
+                                            case CustomValue.HOMELINE:
+                                                Log.e("call", "Item适配器刷新");
+                                                homeFragmentAdapter.notifyDataSetChanged();
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                                home_Stateview.showNormal();
+                                isShow = false;
+//                                if (isShow) {
+//                                    home_Stateview.showNormal();
+//                                    isShow = false;
+//                                } else {
+//                                    isShow = true;
+//                                }
                             }
                         } else {
-                            //刷新适配器
-                            switch (what) {
-                                case CustomValue.HOMECOLUMN:
-                                    Log.e("call", "Head适配器刷新");
-                                    homeHeaderAdapter.notifyDataSetChanged();
-                                    break;
-                                case CustomValue.HOMELINE:
-                                    Log.e("call", "Item适配器刷新");
-                                    homeFragmentAdapter.notifyDataSetChanged();
-                                    break;
-                                default:
-                                    break;
-                            }
+                            isShow = true;
                         }
-                    }
-
-                    if (isShow) {
-                        home_Stateview.showNormal();
-                        isShow = false;
                     } else {
-                        isShow = true;
+                        if (home_Stateview.state_Error.getVisibility() == View.GONE) {
+                            Log.e("call", "服务器响应码不是00000时，执行这个方方法，显示错误的界面，展示数据");
+                            home_Stateview.showError();
+                            Toast.makeText(activity, "服务器繁忙，请稍后再试", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -204,14 +260,35 @@ public class HomeFragment extends BaseFragment {
                 }
             };
         }
-        NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
-        NetUtils.callNet(CustomValue.HOMELINE, CustomValue.SERVER + "/index.php/Api/index/indexLineList", callBack);
+        if (user_id == 0) {
+            NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.SERVER + urlColumn, callBack);
+            NetUtils.callNet(CustomValue.HOMELINE, CustomValue.SERVER + urlLine, callBack);
+        } else {
+            Map<String, String> map = new HashMap<>();
+            map.put(CustomValue.UID, "" + user_id);
+            map.put(CustomValue.TOKEN, user_token);
+            if (user_type == 4) {
+                NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.SERVER + urlAdColumn, map, callBack);
+                NetUtils.callNet(CustomValue.HOMELINE, CustomValue.SERVER + urlAdLine, map, callBack);
+            } else {
+                NetUtils.callNet(CustomValue.HOMECOLUMN, CustomValue.SERVER + urlViColumn, map, callBack);
+                NetUtils.callNet(CustomValue.HOMELINE, CustomValue.SERVER + urlViLine, map, callBack);
+            }
+        }
     }
 
     private void initHeader() {
+        if (columnsort == null) {
+            columnsort = new SparseArray<>();
+        } else {
+            columnsort.clear();
+        }
+        for (HomeFragmentModuleDataBean.ColumnListBean columnListBean : homeFragmentModuleDataBean.columnList) {
+            columnsort.put(Integer.valueOf(columnListBean.sort) - 1, columnListBean);
+        }
         if (modules == null) {
             //保存模块图片地址的集合
-            modules = new TreeMap<>();
+            modules = new HashMap<>();
             modules.put("国内游", R.mipmap.domestic_travel);
             modules.put("出境游", R.mipmap.outbound_tourism);
             modules.put("周边游", R.mipmap.surrounding_tourism);
@@ -219,39 +296,61 @@ public class HomeFragment extends BaseFragment {
             modules.put("机票", R.mipmap.passenger_ticket);
             modules.put("特价", R.mipmap.special_offe);
             modules.put("门票", R.mipmap.entrance_ticket);
-            modules.put("签证保险", R.mipmap.insurance_visa);
+            modules.put("保险/签证", R.mipmap.insuran_visa);
         }
         if (headerView != null) {
             unbinder = ButterKnife.bind(this, headerView);
         }
-        //显示头像
-//        homeFragmentHeadIcon.set
-        //显示名称
-        homeFragmentHeadName.setText("我是名字");
-        //显示身份
-        homeFragmentHeadAdviser.setText("身份");
-        //显示积分
-        homeFragmentHeadScore.setText("积分：1");
-        //显示我的顾问
-        homeFragmentHeadAdviserll.setVisibility(View.VISIBLE);
-        //我的顾问的头像
-//        homeFragmentHeadAdvisericon.set
-        //我的顾问的名字
-        homeFragmentHeadAdvisername.setText("张三");
-        //显示登陆按钮
-        homeFragmentHeadInlogin.setVisibility(View.GONE);
+        if (user_id == 0) {
+            homeFragmentHeadRl.setVisibility(View.GONE);
+            homeFragmentHeadAdviserll.setVisibility(View.GONE);
+            homeFragmentHeadInlogin.setVisibility(View.VISIBLE);
+        } else {
+            if (user_type == 4) {
+                homeFragmentHeadRl.setVisibility(View.VISIBLE);
+                homeFragmentHeadAdviserll.setVisibility(View.GONE);
+                homeFragmentHeadInlogin.setVisibility(View.GONE);
+                homeFragmentHeadAdviser.setVisibility(View.VISIBLE);
+//                homeFragmentHeadScore.setVisibility(View.VISIBLE);
+                //显示头像
+                Glide.with(activity).load(homeFragmentModuleDataBean.agencyInfo.head_pic).into(homeFragmentHeadIcon);
+                //显示名称
+                homeFragmentHeadName.setText(homeFragmentModuleDataBean.agencyInfo.name);
+//                //显示积分
+//                homeFragmentHeadScore.setText();
+            } else {
+                homeFragmentHeadRl.setVisibility(View.VISIBLE);
+                homeFragmentHeadAdviserll.setVisibility(View.VISIBLE);
+                homeFragmentHeadInlogin.setVisibility(View.GONE);
+                homeFragmentHeadAdviser.setVisibility(View.GONE);
+                //显示头像
+                Glide.with(activity).load(homeFragmentModuleDataBean.touristInfo.head_img).into(homeFragmentHeadIcon);
+                //显示名称
+                homeFragmentHeadName.setText(homeFragmentModuleDataBean.touristInfo.name);
+//                //显示积分
+//                homeFragmentHeadScore.setText("积分：1");
+                //我的顾问的头像
+                Glide.with(activity).load(homeFragmentModuleDataBean.agencyInfo.head_pic).into(homeFragmentHeadAdvisericon);
+
+                //我的顾问的名字
+                homeFragmentHeadAdvisername.setText(homeFragmentModuleDataBean.agencyInfo.name);
+            }
+        }
+
         if (home_module == null) {
             home_module = (RecyclerView) headerView.findViewById(R.id.home_module);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(activity, 4);
             home_module.setLayoutManager(gridLayoutManager);
         }
-        homeHeaderAdapter = new HomeHeaderAdapter(activity, modules);
+        homeHeaderAdapter = new HomeHeaderAdapter(activity, modules, columnsort);
         home_module.setAdapter(homeHeaderAdapter);
     }
 
     @Override
     public void onDestroy() {
-        unbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
         super.onDestroy();
     }
 

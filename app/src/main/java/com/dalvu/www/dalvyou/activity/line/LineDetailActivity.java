@@ -42,8 +42,9 @@ import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,6 +134,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notoolbar_stateview);
+        Intent intent = getIntent();
+
         lineDetailStateview = (StateView) findViewById(R.id.line_detail_stateview);
         lineDetailStateview.addNormal(R.layout.activity_line_detail);
         unbinder = ButterKnife.bind(this, lineDetailStateview.normal);
@@ -317,8 +320,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
             };
         }
 
-        TreeMap<String, Integer> treeMap = new TreeMap<>();
-        treeMap.put("id", 4504);
+        Map<String, String> treeMap = new HashMap<>();
+        treeMap.put("id", "4504");
         //发送线路基本信息的网络请求
         NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + "/index.php/Api/index/details", treeMap, callBack);
 

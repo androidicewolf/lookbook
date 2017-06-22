@@ -1,5 +1,6 @@
 package com.dalvu.www.dalvyou;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -11,6 +12,9 @@ import com.yanzhenjie.nohttp.OkHttpNetworkExecutor;
 import com.yanzhenjie.nohttp.cache.DBCacheStore;
 import com.yanzhenjie.nohttp.rest.RequestQueue;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**一个钢镚儿
  * Created by user on 2017/5/8.
  */
@@ -18,6 +22,9 @@ import com.yanzhenjie.nohttp.rest.RequestQueue;
 public class MyApplication extends Application {
     private static RequestQueue requestQueue;
     private static MyApplication myApplication;
+    //关闭activity的方法
+    private List<Activity> mList = new LinkedList<Activity>();
+
     public static RequestQueue getRequestQueue(){
         return requestQueue;
     }
@@ -49,5 +56,16 @@ public class MyApplication extends Application {
         screenSize[0] = displayMetrics.widthPixels;
         screenSize[1] = displayMetrics.heightPixels;
         return screenSize;
+    }
+
+    // add Activity
+    public void addActivity(Activity activity) {
+        mList.add(activity);
+    }
+
+    public void closeActivity() {
+        for (Activity activity : mList) {
+            activity.finish();
+        }
     }
 }

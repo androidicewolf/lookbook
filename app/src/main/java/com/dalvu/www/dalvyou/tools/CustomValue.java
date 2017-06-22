@@ -8,25 +8,36 @@ import java.util.ArrayList;
 
 public interface CustomValue {
     /**
-     * 账号
-     **/
-    public static final String NAME = "name";
+     * 用户的ID
+     */
+    public static final String UID = "uid";
     /**
-     * 密码
-     **/
-    public static final String PASSWORD = "password";
+     * 存储的用户的token
+     */
+    public static final String TOKEN = "sign_token";
+
+    /**
+     * 用户的type类型
+     */
+    public static final String TYPE = "user_type";
     /**
      * 第一次登陆
      **/
     public static final String ISFIRST = "isFirst";
-    /**
-     * 登录用户的类型
-     **/
-    public static final String STATUSTYPE = "statusType";
+
+//    /**
+//     * 用户登录的账号
+//     */
+//    public static final String USERNAME = "userName";
+//    /**
+//     * 用户的登录密码
+//     */
+//    public static final String PASSWORD = "password";
+
     /**
      * 服务器地址
      **/
-    public static final String SERVER = "http://dalvuapi.dalvu.com";
+    public static final String SERVER = "http://dalvuapi.dalvu.com/index.php/";
     /**首页模块分类请求网络的what**/
     public static final int HOMECOLUMN = 101;
     /**首页线路列表请求网络的what**/

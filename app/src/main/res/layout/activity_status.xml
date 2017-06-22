@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:src="@mipmap/logoh" />
+        android:src="@mipmap/status_selector_logo" />
 
     <TextView
         android:id="@+id/status_tv_selector"
@@ -38,7 +38,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="选择注册身份"
+        android:text="选择登陆身份"
         android:textColor="#606060"
         android:textSize="13sp" />
 
@@ -51,7 +51,7 @@
         android:layout_marginBottom="27dp"
         android:background="@drawable/status_adviserbtn_style"
         android:gravity="center"
-        android:text="顾问注册"
+        android:text="顾问登陆"
         android:textColor="#FFF"
         android:textSize="16sp" />
 
@@ -64,7 +64,7 @@
         android:layout_marginBottom="22dp"
         android:background="@drawable/status_visitorbtn_style"
         android:gravity="center"
-        android:text="游客注册"
+        android:text="游客登陆"
         android:textColor="@color/dalvbule"
         android:textSize="16sp" />
 

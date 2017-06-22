@@ -17,10 +17,16 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.AdEnrollBean;
+import com.dalvu.www.dalvyou.bean.EnrollGetNumberBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.NumberUtils;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,14 +63,20 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
     @BindView(R.id.enroll_btn_getprovingnumber_ll)
     LinearLayout enrollBtnGetprovingnumberLl;
     private CountDownTimer countDownTimer;
+    //自定义网络回调
     private MyCallBack callBack;
     private String tel;
     private String name;
     private String city;
+    private String cityNumber = "1";
     private String provingNumber;
     private String password;
     private String confirmPassword;
     private String occupation;
+    //获取验证码的接口
+    private String urlGetNumber = "Api/login/agencyVerificationCode";
+    //顾问注册接口
+    private String urlEnroll = "Api/login/agencyRegister";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +102,7 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("其他")) {
+                    cityNumber = 1 + "";
                     enrollSelectorcityTvLl.setVisibility(View.GONE);
                     enrollSelectorcityEtLl.setVisibility(View.VISIBLE);
                     enrollSelectorcityInput.requestFocus();
@@ -125,6 +138,9 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                         }
                         countDownTimer.start();
                         break;
+                    case 20:
+                        //加载中的动画开始执行
+                        break;
                 }
             }
 
@@ -132,8 +148,23 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
             public void onSucceed(int what, String json) {
                 //解析数据
                 switch (what) {
+                    case 19:
+                        EnrollGetNumberBean enrollGetNumberBean = new Gson().fromJson(json, EnrollGetNumberBean.class);
+                        Log.e("call", "发送验证码请求成功，响应码=======" + enrollGetNumberBean.status);
+                        if (!enrollGetNumberBean.status.equals("0000")) {
+                            Toast.makeText(AdviserEnrollActivity.this, enrollGetNumberBean.msg, Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                     case 20:
-                        //
+                        //注册成功与否
+                        AdEnrollBean adEnrollBean = new Gson().fromJson(json, AdEnrollBean.class);
+                        if (adEnrollBean.status.equals("00000")) {
+                            //注册成功，跳转页面
+                            Toast.makeText(AdviserEnrollActivity.this, "注册成功，请登陆", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(AdviserEnrollActivity.this, adEnrollBean.msg, Toast.LENGTH_SHORT).show();
+                        }
                         break;
 
                 }
@@ -152,6 +183,11 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                         break;
                 }
             }
+
+            @Override
+            public void onFinish(int what) {
+                //加载中的动画隐藏
+            }
         };
     }
 
@@ -168,6 +204,7 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                             @Override
                             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                                 enrollTvSelectorcity.setText(CustomValue.CITYS.get(options1));
+                                cityNumber = options1 + 1 + "";
                             }
                         }).build();
                 pvOptions.setNPicker(CustomValue.CITYS, null, null);
@@ -182,7 +219,10 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                 } else {
                     //判断手机号是否合法
                     if (NumberUtils.isMobileNo(tel)) {
-                        NetUtils.callNet(19, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+
+                        //请求服务器发送验证码
+                        NetUtils.callNet(19, CustomValue.SERVER + urlGetNumber, callBack);
+
                         enrollBtnGetprovingnumberLl.setBackgroundResource(R.drawable.send_provingnumber_style);
                         enrollBtnGetprovingnumber.setTextColor(0xFF8F9090);
                     } else {
@@ -231,7 +271,19 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                                         if (confirmPassword.equals(password)) {
                                             occupation = enrollEdOccupation.getText().toString();
                                             Log.e("call", "--------注册条件判断全部通过");
-                                            NetUtils.callNet(20, "", callBack);
+
+                                            //添加参数
+                                            Map<String, String> map = new HashMap<>();
+                                            map.put("name", name);
+                                            map.put("province ", cityNumber);
+                                            map.put("thecity", city);
+                                            map.put("phone", tel);
+                                            map.put("vercode", provingNumber);
+                                            map.put("password", password);
+                                            map.put("vocation", occupation);
+                                            //请求服务器，传递参数
+                                            NetUtils.callNet(20, CustomValue.SERVER + urlEnroll, map, callBack);
+
                                         } else {
                                             Toast.makeText(this, "您两次输入的密码不一致", Toast.LENGTH_SHORT).show();
                                             getFocusable(enrollEdConfirmpassword);

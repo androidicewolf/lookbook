@@ -9,22 +9,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.line.LineDetailActivity;
 import com.dalvu.www.dalvyou.adapter.ViewHolder.HomeFragmentItemBox;
+import com.dalvu.www.dalvyou.bean.HomeFragmentLineDataBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**首页整体的适配器
  * Created by user on 2017/5/16.
  */
 
 public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBox>{
-    private ArrayList items;
+    private List<HomeFragmentLineDataBean.ListBean> items;
     private Context context;
     private HomeFragmentItemBox viewBox;
 
-    public HomeFragmentAdapter(Context context, ArrayList items){
+    public HomeFragmentAdapter(Context context, List<HomeFragmentLineDataBean.ListBean> items) {
         this.context = context;
         this.items = items;
     }
@@ -41,11 +43,15 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
         HomeItemOnLickListener lickListener = new HomeItemOnLickListener(position);
         holder.itemView.setOnClickListener(lickListener);
         //设置数据
+        holder.home_item_name.setText(items.get(position).name);
+        holder.home_item_gosite.setText(items.get(position).departure);
+        holder.home_item_price.setText(items.get(position).min_price);
+        Glide.with(context).load(items.get(position).cover_pic).into(holder.home_item_image);
     }
 
     @Override
     public int getItemCount() {
-        return 9;
+        return items.size();
     }
     private class HomeItemOnLickListener implements View.OnClickListener {
         private int position;
@@ -57,7 +63,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
         public void onClick(View v) {
             Log.e("call", "---------------------点击条目的索引是：" + position);
             Intent intent = new Intent(context, LineDetailActivity.class);
-            intent.putExtra("Url", "网址");
+            intent.putExtra("id", items.get(position).id);
             context.startActivity(intent);
         }
     }

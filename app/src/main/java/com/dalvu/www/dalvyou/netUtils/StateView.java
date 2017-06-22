@@ -5,14 +5,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
-
-import butterknife.BindView;
 
 /**
  * 显示网路状态的类
@@ -94,6 +90,7 @@ public class StateView extends FrameLayout {
         if(normal == null){
             Log.e("call", "StateView中的normal是null");
             if (normalViewlayout instanceof Integer) {
+                Log.e("", "");
                 normal = LayoutInflater.from(getContext()).inflate((Integer) normalViewlayout, this, false);
             } else {
                 normal = (View) normalViewlayout;

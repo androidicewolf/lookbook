@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
-        android:src="@mipmap/logoh" />
+        android:src="@mipmap/login_logo" />
 
     <TextView
         android:id="@+id/login_tv_dalv"

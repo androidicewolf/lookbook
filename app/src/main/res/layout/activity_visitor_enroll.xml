@@ -32,19 +32,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="普通注册"
+                android:text="用户登录"
                 android:textColor="#000"
                 android:textSize="18sp" />
         </RelativeLayout>
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/enroll_ed_name"
-        style="@style/EnrollEditTextStyle"
-        android:layout_marginTop="32dp"
-        android:hint="输入姓名"
-        android:maxLength="10" />
-
+    <!--<EditText-->
+    <!--android:id="@+id/enroll_ed_name"-->
+    <!--style="@style/EnrollEditTextStyle"-->
+    <!--android:layout_marginTop="32dp"-->
+    <!--android:hint="输入姓名"-->
+    <!--android:maxLength="10" />-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="62dp"
+        android:layout_marginTop="42dp"
+        android:src="@mipmap/login_logo" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,7 +110,7 @@
     <EditText
         android:id="@+id/enroll_ed_advisertel"
         style="@style/EnrollEditTextStyle"
-        android:hint="请填写服务顾问手机"
+        android:hint="请填写服务顾问手机 (可以为空)"
         android:inputType="phone"
         android:maxLength="15" />
 
@@ -116,7 +122,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="22dp"
         android:background="@drawable/login_btn_style"
-        android:text="立即注册"
+        android:text="登录"
         android:textColor="#FFF"
         android:textSize="15sp" />
 </LinearLayout>

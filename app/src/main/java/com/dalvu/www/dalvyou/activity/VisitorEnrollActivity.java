@@ -1,5 +1,6 @@
 package com.dalvu.www.dalvyou.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
@@ -7,17 +8,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.EnrollGetNumberBean;
+import com.dalvu.www.dalvyou.bean.UserLoginBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.NumberUtils;
+import com.dalvu.www.dalvyou.tools.SharedPreferencesTool;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,10 +33,6 @@ import butterknife.OnClick;
 
 public class VisitorEnrollActivity extends BaseNoTitleActivity {
 
-    @BindView(R.id.login_iv_back)
-    ImageView loginIvBack;
-    @BindView(R.id.enroll_ed_name)
-    EditText enrollEdName;
     @BindView(R.id.enroll_ed_inputtel)
     EditText enrollEdInputtel;
     @BindView(R.id.enroll_btn_getprovingnumber)
@@ -45,6 +49,12 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
     private MyCallBack callBack;
     //电话号码
     private String tel;
+    //获取验证码的接口
+    private String urlGetNumber = "TouristApi/TouristLogin/touristVerificationCode";
+    //C客户登录的接口
+    private String urlEnroll = "TouristApi/TouristLogin/touristRegister";
+    //是否绑定顾问
+    private boolean isBindAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,9 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                         }
                         countDownTimer.start();
                         break;
+                    case 20:
+                        //加载中的动图显示出来
+                        break;
                 }
             }
 
@@ -95,11 +108,39 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                     case 19:
                         //从返回的数据中取出绑定顾问的手机号，判断手机号是或否为空，不为空，就把输入
                         // 顾问手机号的输入框设置为不可输入
-                        enrollEdAdvisertel.setHint("您已经绑定了顾问，登陆后可以查看");
-//                        enrollEdOccupation.setFocusable(false);
-
-                        enrollEdAdvisertel.setEnabled(false);
+                        EnrollGetNumberBean enrollGetNumberBean = new Gson().fromJson(json, EnrollGetNumberBean.class);
+                        if (enrollGetNumberBean.status.equals("0000")) {
+                            isBindAd = enrollGetNumberBean.binding_state.equals("1");
+                            if (isBindAd) {
+                                enrollEdAdvisertel.setHint("您已经绑定了顾问，登陆后可以查看");
+                                enrollEdAdvisertel.setEnabled(false);
+                            }
+                        } else {
+                            Toast.makeText(VisitorEnrollActivity.this, enrollGetNumberBean.msg, Toast.LENGTH_SHORT).show();
+                        }
                         break;
+                    case 20:
+                        UserLoginBean userLoginBean = new Gson().fromJson(json, UserLoginBean.class);
+                        if (userLoginBean.status.equals("00000")) {
+                            //登录成功，将数据存进本地
+                            SharedPreferencesTool.saveBoolean(VisitorEnrollActivity.this, CustomValue.ISFIRST, false);
+                            SharedPreferencesTool.saveString(VisitorEnrollActivity.this, CustomValue.UID, userLoginBean.uid);
+                            SharedPreferencesTool.saveString(VisitorEnrollActivity.this, CustomValue.TYPE, userLoginBean.user_type);
+                            SharedPreferencesTool.saveString(VisitorEnrollActivity.this, CustomValue.TOKEN, userLoginBean.sign_token);
+
+                            //将用户的基本信息存进内存中
+                            AppUserDate.setUserId(Integer.valueOf(userLoginBean.uid));
+                            AppUserDate.setUserType(Integer.valueOf(userLoginBean.user_type));
+                            AppUserDate.setUserToken(userLoginBean.sign_token);
+
+                            //进入主界面，主界面的启动模式是singTask
+                            Intent intent = new Intent(VisitorEnrollActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            break;
+                        } else {
+                            Toast.makeText(VisitorEnrollActivity.this, userLoginBean.msg, Toast.LENGTH_SHORT).show();
+                        }
 
                 }
             }
@@ -117,16 +158,22 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                         break;
                 }
             }
+
+            @Override
+            public void onFinish(int what) {
+                //加载中的图片隐藏
+            }
         };
     }
 
     @OnClick({R.id.login_iv_back, R.id.enroll_btn_getprovingnumber, R.id.enroll_btn_enroll})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
             case R.id.login_iv_back:
                 finish();
-
                 break;
+
             case R.id.enroll_btn_getprovingnumber:
                 tel = enrollEdInputtel.getText().toString();
                 if (tel.isEmpty()) {
@@ -135,7 +182,9 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                 } else {
                     //判断手机号是否合法
                     if (NumberUtils.isMobileNo(tel)) {
-                        NetUtils.callNet(19, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+
+                        NetUtils.callNet(19, CustomValue.SERVER + urlGetNumber, callBack);
+
                         enrollBtnGetprovingnumberLl.setBackgroundResource(R.drawable.send_provingnumber_style);
                         enrollBtnGetprovingnumber.setTextColor(0xFF8F9090);
                     } else {
@@ -144,42 +193,59 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                     }
                 }
                 break;
+
             case R.id.enroll_btn_enroll:
                 //提交注册
-                String name = enrollEdName.getText().toString();
                 tel = enrollEdInputtel.getText().toString();
                 String provingNumber = enrollEdInputprovingnumber.getText().toString();
-                if (name.isEmpty()) {
-                    Toast.makeText(this, "姓名不能为空", Toast.LENGTH_SHORT).show();
-                    getFocusable(enrollEdName);//获取焦点
-                } else {
-                    if (tel.isEmpty()) {
-                        Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
-                        getFocusable(enrollEdInputtel);//获取焦点
-                    } else if (NumberUtils.isMobileNo(tel)) {
-                        if (provingNumber.isEmpty()) {
-                            Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
-                            getFocusable(enrollEdInputprovingnumber);//获取焦点
-                        } else {
-                            if (true) {
-                                //如果没有绑定顾问
-                                String occupationTel = enrollEdAdvisertel.getText().toString();
-                                if (!occupationTel.isEmpty()) {
-                                    if (NumberUtils.isMobileNo(occupationTel)) {
-                                        Log.e("call", "------------------全部通过，发起请求");
-                                    } else {
-                                        Toast.makeText(this, "顾问的手机号格式不正确", Toast.LENGTH_SHORT).show();
-                                        getFocusable(enrollEdAdvisertel);//获取焦点
-                                    }
+//                if (name.isEmpty()) {
+//                    Toast.makeText(this, "姓名不能为空", Toast.LENGTH_SHORT).show();
+//                    getFocusable(enrollEdName);//获取焦点
+//                } else {
+//
+//                }
+                if (tel.isEmpty()) {
+                    Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+                    getFocusable(enrollEdInputtel);//获取焦点
+                } else if (NumberUtils.isMobileNo(tel)) {
+                    if (provingNumber.isEmpty()) {
+                        Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+                        getFocusable(enrollEdInputprovingnumber);//获取焦点
+                    } else {
+                        String occupationTel = enrollEdAdvisertel.getText().toString();
+                        if (!isBindAd) {
+                            //如果没有绑定顾问
+                            if (!occupationTel.isEmpty()) {
+                                if (NumberUtils.isMobileNo(occupationTel)) {
+
+                                    Log.e("call", "------------------没绑定顾问，全部通过，发起请求");
+                                    Map<String, String> map = new HashMap<>();
+                                    map.put("phone", tel);
+                                    map.put("vercode", provingNumber);
+                                    map.put("theAgencyPhone", occupationTel);
+                                    //发起请求
+                                    NetUtils.callNet(20, CustomValue.SERVER + urlEnroll, map, callBack);
+
+                                } else {
+                                    Toast.makeText(this, "顾问的手机号格式不正确", Toast.LENGTH_SHORT).show();
+                                    getFocusable(enrollEdAdvisertel);//获取焦点
                                 }
                             }
+                        } else {
+                            Log.e("call", "------------------绑定了顾问，全部通过，发起请求");
+                            //如果已经绑定了顾问
+                            Map<String, String> map = new HashMap<>();
+                            map.put("phone", tel);
+                            map.put("vercode", provingNumber);
+                            map.put("theAgencyPhone", occupationTel);
                             //发起请求
-                            NetUtils.callNet(20, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+                            NetUtils.callNet(20, CustomValue.SERVER + urlEnroll, map, callBack);
+
                         }
-                    } else {
-                        Toast.makeText(this, "您的手机号格式不正确", Toast.LENGTH_SHORT).show();
-                        getFocusable(enrollEdInputtel);//获取焦点
                     }
+                } else {
+                    Toast.makeText(this, "您的手机号格式不正确", Toast.LENGTH_SHORT).show();
+                    getFocusable(enrollEdInputtel);//获取焦点
                 }
                 break;
         }

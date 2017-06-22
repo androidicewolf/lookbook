@@ -21,13 +21,14 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.StatusActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
@@ -54,7 +55,7 @@
         <activity android:name=".activity.personaldata.PersonalSettingActivity" />
         <activity android:name=".activity.personaldata.PersonalProposeActivity" />
         <activity android:name=".activity.line.LineGroupDateActivity" />
-        <activity android:name=".activity.personaldata.MyAdviserActivity"></activity>
+        <activity android:name=".activity.personaldata.MyAdviserActivity" />
     </application>
 
 </manifest>
