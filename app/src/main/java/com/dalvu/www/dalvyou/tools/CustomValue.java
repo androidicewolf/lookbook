@@ -45,7 +45,7 @@ public interface CustomValue {
     /**线路详情基本信息请求网络的what**/
     public static final int LINEDETAILBASE = 103;
     /**线路详情“行程安排”请求网络的what**/
-    public static final int LINEDPLAN = 104;
+    public static final int LINEPLAN = 104;
     /**线路详情“产品亮点”请求网络的what**/
     public static final int LINEDESCRIPTION = 105;
     /**线路详情“费用说明”请求网络的what**/

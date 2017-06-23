@@ -118,17 +118,6 @@
                         android:textSize="14sp"
                         android:visibility="visible" />
 
-                    <EditText
-                        android:id="@+id/linedetail_name_et"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="15dp"
-                        android:background="@drawable/linedetail_changetitle_et_style"
-                        android:hint="输入标题"
-                        android:textColor="#373737"
-                        android:textSize="14sp"
-                        android:visibility="visible" />
                 </RelativeLayout>
 
                 <View
@@ -188,7 +177,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="联系人：本尼迪克特康伯巴奇"
+                    android:text="联系人："
                     android:textColor="#9F9F9F"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -204,9 +193,10 @@
                 android:paddingStart="14dp"
                 android:paddingTop="17dp">
                 <TextView
+                    android:id="@+id/linedetail_supplier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="供应商：金旅假期"
+                    android:text="供应商："
                     android:textColor="#9F9F9F"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -230,7 +220,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="1000.00"
+                    android:text=""
                     android:textColor="#3F51B5"
                     android:textSize="17sp" />
 
@@ -240,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/edittext_style"
+                    android:background="@drawable/line_changeprice_btn_style"
                     android:paddingBottom="7dp"
                     android:paddingEnd="12dp"
                     android:paddingStart="12dp"
@@ -308,7 +298,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="北京"
+                        android:text=""
                         android:textColor="#3F3F3F" />
                 </LinearLayout>
 
@@ -335,7 +325,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="飞机"
+                        android:text=""
                         android:textColor="#3F3F3F" />
                 </LinearLayout>
             </LinearLayout>
@@ -373,7 +363,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="5天"
+                        android:text="天"
                         android:textColor="#3F3F3F" />
                 </LinearLayout>
 
@@ -502,6 +492,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/iv_go_back"
                 android:clickable="true"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="线路名称"
                 android:textColor="#373737"
                 android:textSize="18sp"

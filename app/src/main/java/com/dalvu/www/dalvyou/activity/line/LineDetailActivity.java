@@ -10,10 +10,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +36,7 @@ import com.dalvu.www.dalvyou.fragment.LinedetailPlanFragment;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.DensityUtils;
 import com.google.gson.Gson;
@@ -57,7 +58,12 @@ import butterknife.Unbinder;
 public class LineDetailActivity extends BaseNoTitleActivity {
 
     //线路详情页viewpager点击跳转的地址
-    String uri = "www.baidu.com";
+    String uri = "";
+    //线路详情页顾问请求的地址
+    String uriAdLineDetail = "Api/agency/details";
+    //线路详情页未登录请求的地址
+    String uriLineDetail = "Api/index/details";
+
     //请求网络使用的回调
     MyCallBack callBack;
     @BindView(R.id.line_consult_ll)
@@ -74,8 +80,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     View linedetailViewperCursorReddot;
     @BindView(R.id.linedetail_name_tv)
     TextView linedetailNameTv;
-    @BindView(R.id.linedetail_name_et)
-    EditText linedetailNameEt;
     @BindView(R.id.linedetail_btn_changename_iv)
     ImageView linedetailBtnChangenameIv;
     @BindView(R.id.linedetail_btn_changename_tv)
@@ -86,6 +90,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     TextView linedetailNumber;
     @BindView(R.id.line_contacts)
     TextView lineContacts;
+    @BindView(R.id.linedetail_supplier)
+    TextView linedetailSupplier;
     @BindView(R.id.line_price)
     TextView linePrice;
     @BindView(R.id.linedetail_tv_changeprice)
@@ -129,12 +135,22 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     private SparseArray<BaseFragment> fragments;
     private Handler handler;
     private LineDetailDatabean lineDetailDatabean;
+    private String lineid;
+    private int user_id;
+    private int user_type;
+    private String user_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notoolbar_stateview);
-        Intent intent = getIntent();
+        //从意图中获取线路的id
+        lineid = getIntent().getStringExtra("id");
+        Log.e("call", "线路的ID:" + lineid);
+        //从内存中获取uid，token和type
+        user_id = AppUserDate.getUserId();
+        user_type = AppUserDate.getUserType();
+        user_token = AppUserDate.getUserToken();
 
         lineDetailStateview = (StateView) findViewById(R.id.line_detail_stateview);
         lineDetailStateview.addNormal(R.layout.activity_line_detail);
@@ -142,7 +158,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
         isNameInput = false;
         initView();
         initData();
-        initTextView();
     }
 
     private void initView() {
@@ -183,7 +198,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                         ivGoBack.setImageResource(R.mipmap.return_details);
                         lineDetailTitleRl.setBackgroundColor(Color.argb(0, 255, 255, 255));
                         ValueAnimator valueAnimator = ValueAnimator.ofInt(255, 0);
-                        valueAnimator.setDuration(1000);
+                        valueAnimator.setDuration(5000);
                         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
@@ -197,62 +212,6 @@ public class LineDetailActivity extends BaseNoTitleActivity {
             }
         });
     }
-
-    private void initTextView() {
-        if (!isNameInput) {
-            changeToShow();
-        } else {
-            changeToInput();
-        }
-    }
-
-    private void changeToShow() {
-//        linedetailLlChangename.setText("更改分享标题");
-        linedetailNameTv.setVisibility(View.VISIBLE);
-        linedetailNameEt.setVisibility(View.GONE);
-    }
-
-    private void changeToInput() {
-//        linedetailLlChangename.setText("保存");
-        linedetailNameTv.setVisibility(View.GONE);
-        linedetailNameEt.setVisibility(View.VISIBLE);
-    }
-
-//    @OnClick({R.id.linedetail_ll_changename, R.id.linedetail_btn_changeprice, R.id.linedetail_btn_recommend, R.id.line_btn_consult, R.id.line_btn_destine})
-//    public void onViewClicked(View view) {
-//        switch (view.getId()) {
-//            case R.id.linedetail_ll_changename:
-//                if (isNameInput) {
-//                    String line_name = linedetailNameEt.getText().toString();
-//                    //请求网络，发送自定义标题，成功或者失败Toast提示
-//
-//                    changeToShow();
-//                    isNameInput = false;
-//                } else {
-//                    linedetailNameEt.setText("我的自定义标题");
-//                    changeToInput();
-//                    isNameInput = true;
-//                }
-//                break;
-//            case R.id.linedetail_btn_changeprice:
-
-//
-//                break;
-//            case R.id.linedetail_btn_recommend:
-//                //请求网络，发送当前线路设为推荐线路
-//
-//                break;
-//            case R.id.line_btn_consult:
-//                //发起意图打电话
-//                Intent callIntent = new Intent();
-//
-//                break;
-//            case R.id.line_btn_destine:
-//                //跳转支付页面
-//
-//                break;
-//        }
-//    }
 
     //初始化数据
     private void initData() {
@@ -287,9 +246,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
             callBack = new MyCallBack(lineDetailStateview) {
                 @Override
                 public void onStart(int what) {
-                    if (lineDetailStateview.state_Load.getVisibility() == View.GONE) {
-                        lineDetailStateview.showLoading();
-                    }
+                    lineDetailStateview.showLoading();
                 }
 
                 @Override
@@ -298,10 +255,33 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                         /**基本信息**/
                         case CustomValue.LINEDETAILBASE:
                             lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
-                            //代码创建灰色小圆点
-                            creatGuideDot(lineDetailDatabean.picArr);
-                            initViewPager(lineDetailDatabean.picArr);
-                            lineDetailStateview.showNormal();
+                            if (lineDetailDatabean.status.equals("00000")) {
+                                //设置数据
+                                lineDetailTitle.setText(lineDetailDatabean.list.name);
+                                linedetailNameTv.setText(lineDetailDatabean.list.name);
+                                linedetailNumber.setText(lineDetailDatabean.list.id);
+                                lineContacts.setText("联系人：" + lineDetailDatabean.list.contact_person);
+                                linedetailSupplier.setText("供应商：" + lineDetailDatabean.list.provider_name);
+                                linePrice.setText(lineDetailDatabean.list.min_price);
+                                lineGocity.setText(lineDetailDatabean.list.departure);
+                                lineDestination.setText(lineDetailDatabean.list.destinations);
+                                lineGovehicle.setText(lineDetailDatabean.list.traffic_go);
+                                lineGotraffic.setText(lineDetailDatabean.list.traffic_back);
+                                lineDays.setText(lineDetailDatabean.list.totalDay + "天");
+
+                                //代码创建灰色小圆点
+                                creatGuideDot(lineDetailDatabean.picArr);
+                                initViewPager(lineDetailDatabean.picArr);
+                                lineDetailStateview.showNormal();
+
+
+                            } else {
+                                Toast.makeText(LineDetailActivity.this, lineDetailDatabean.msg, Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case CustomValue.LINEPLAN:
+                            //加载线路的行程安排
+
                             break;
                     }
                 }
@@ -319,12 +299,37 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 }
             };
         }
+        requestServer();
 
-        Map<String, String> treeMap = new HashMap<>();
-        treeMap.put("id", "4504");
-        //发送线路基本信息的网络请求
-        NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + "/index.php/Api/index/details", treeMap, callBack);
+    }
 
+    private void requestServer() {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", lineid);
+        Log.e("call", "用户ID=" + user_id + "****用户type=" + user_type + "****用户token=" + user_token);
+        if (user_id == 0 || user_token.isEmpty()) {
+            //未登录，发送线路基本信息的网络请求
+            NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + uriLineDetail, map, callBack);
+        } else {
+            switch (user_type) {
+                case 4:
+                    //顾问已登录，发送线路基本信息的网络请求
+                    map.put("uid", "" + user_id);
+                    map.put("sign_token", user_token);
+                    NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + uriAdLineDetail, map, callBack);
+                    break;
+                case 5:
+                    //游客已登录，发送线路基本信息的网络请求
+                    map.put("uid", "" + user_id);
+                    map.put("sign_token", user_token);
+                    NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + uriLineDetail, map, callBack);
+                    break;
+                default:
+                    //未登录，发送线路基本信息的网络请求
+                    NetUtils.callNet(CustomValue.LINEDETAILBASE, CustomValue.SERVER + uriLineDetail, map, callBack);
+                    break;
+            }
+        }
     }
 
     //初始化Fragment的容器
@@ -430,10 +435,18 @@ public class LineDetailActivity extends BaseNoTitleActivity {
 
     }
 
-    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine, R.id.linedetail_groupdate_ll})
+    @OnClick({R.id.linedetail_tv_changeprice, R.id.line_consult_ll, R.id.line_btn_destine, R.id.linedetail_groupdate_ll,
+            R.id.linedetail_ll_changename})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
+            case R.id.linedetail_ll_changename:
+                //修改标题
+                intent = new Intent(this, LineChangeNameActivity.class);
+                //传递修改的标题
+                intent.putExtra("linename", "原来是什么样，服务器知道");
+                startActivity(intent);
+                break;
             case R.id.linedetail_tv_changeprice:
                 //跳转改价页面
                 intent = new Intent(this, LineChangepriceActivity.class);

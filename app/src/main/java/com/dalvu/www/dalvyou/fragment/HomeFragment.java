@@ -190,59 +190,61 @@ public class HomeFragment extends BaseFragment {
                             homeFragmentLineDataBean = new Gson().fromJson(json, HomeFragmentLineDataBean.class);
                             break;
                     }
-                    if ((homeFragmentModuleDataBean.status.equals("00000")) || (homeFragmentLineDataBean.status.equals("00000"))) {
-                        if (isShow) {
-                            if (homeFragmentModuleDataBean.status.equals("00000") && (homeFragmentLineDataBean.status.equals("00000"))) {
+                    if (homeFragmentModuleDataBean != null && homeFragmentLineDataBean != null) {
+                        if ((homeFragmentModuleDataBean.status.equals("00000")) || (homeFragmentLineDataBean.status.equals("00000"))) {
+                            if (true) {
+                                if (homeFragmentModuleDataBean.status.equals("00000") && (homeFragmentLineDataBean.status.equals("00000"))) {
 //                                isShow = false;
-                                if (xRecyclerView != null) {
-                                    Log.e("call", "xRecyclerView不是null");
-                                    if (homeHeaderAdapter == null || homeFragmentAdapter == null) {
-                                        if (homeHeaderAdapter == null) {
-                                            Log.e("call", "headerView是null");
-                                            initHeader();
-                                            xRecyclerView.addHeaderView(headerView);
-                                        }
-                                        if (homeFragmentAdapter == null) {
-                                            Log.e("call", "homeFragmentAdapter是null");
+                                    if (xRecyclerView != null) {
+                                        Log.e("call", "xRecyclerView不是null");
+                                        if (homeHeaderAdapter == null || homeFragmentAdapter == null) {
+                                            if (homeHeaderAdapter == null) {
+                                                Log.e("call", "headerView是null");
+                                                initHeader();
+                                                xRecyclerView.addHeaderView(headerView);
+                                            }
+                                            if (homeFragmentAdapter == null) {
+                                                Log.e("call", "homeFragmentAdapter是null");
 //                                            homeItems = homeFragmentLineDataBean.list;
-                                            if (homeFragmentLineDataBean.list != null && homeFragmentLineDataBean.list.size() != 0) {
-                                                homeFragmentAdapter = new HomeFragmentAdapter(activity, homeFragmentLineDataBean.list);
-                                                xRecyclerView.setAdapter(homeFragmentAdapter);
+                                                if (homeFragmentLineDataBean.list != null && homeFragmentLineDataBean.list.size() != 0) {
+                                                    homeFragmentAdapter = new HomeFragmentAdapter(activity, homeFragmentLineDataBean.list);
+                                                    xRecyclerView.setAdapter(homeFragmentAdapter);
+                                                }
+                                            }
+                                        } else {
+                                            //刷新适配器
+                                            switch (what) {
+                                                case CustomValue.HOMECOLUMN:
+                                                    Log.e("call", "Head适配器刷新");
+                                                    homeHeaderAdapter.notifyDataSetChanged();
+                                                    break;
+                                                case CustomValue.HOMELINE:
+                                                    Log.e("call", "Item适配器刷新");
+                                                    homeFragmentAdapter.notifyDataSetChanged();
+                                                    break;
+                                                default:
+                                                    break;
                                             }
                                         }
-                                    } else {
-                                        //刷新适配器
-                                        switch (what) {
-                                            case CustomValue.HOMECOLUMN:
-                                                Log.e("call", "Head适配器刷新");
-                                                homeHeaderAdapter.notifyDataSetChanged();
-                                                break;
-                                            case CustomValue.HOMELINE:
-                                                Log.e("call", "Item适配器刷新");
-                                                homeFragmentAdapter.notifyDataSetChanged();
-                                                break;
-                                            default:
-                                                break;
-                                        }
                                     }
-                                }
-                                home_Stateview.showNormal();
-                                isShow = false;
+                                    home_Stateview.showNormal();
+//                                    isShow = false;
 //                                if (isShow) {
 //                                    home_Stateview.showNormal();
 //                                    isShow = false;
 //                                } else {
 //                                    isShow = true;
 //                                }
+                                }
+                            } else {
+                                isShow = true;
                             }
                         } else {
-                            isShow = true;
-                        }
-                    } else {
-                        if (home_Stateview.state_Error.getVisibility() == View.GONE) {
-                            Log.e("call", "服务器响应码不是00000时，执行这个方方法，显示错误的界面，展示数据");
-                            home_Stateview.showError();
-                            Toast.makeText(activity, "服务器繁忙，请稍后再试", Toast.LENGTH_SHORT).show();
+                            if (home_Stateview.state_Error.getVisibility() == View.GONE) {
+                                Log.e("call", "服务器响应码不是00000时，执行这个方方法，显示错误的界面，展示数据");
+                                home_Stateview.showError();
+                                Toast.makeText(activity, "服务器繁忙，请稍后再试", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 }

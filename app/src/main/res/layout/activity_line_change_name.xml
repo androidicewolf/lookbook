@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/dalvbule">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="7dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp">
+
+                <ImageView
+                    android:id="@+id/iv_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/go_back" />
+
+                <TextView
+                    android:id="@+id/tv_dalv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:text="修改标题"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/line_changename_save_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/home_login_btn_style"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="5dp"
+                    android:text="保存"
+                    android:textColor="@color/dalvbule"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/line_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/linedetail_changetitle_et_style"
+            android:hint="输入标题"
+            android:paddingBottom="14dp"
+            android:paddingEnd="14dp"
+            android:paddingStart="14dp"
+            android:paddingTop="14dp"
+            android:textColor="@color/dalvtextblack"
+            android:textColorHint="#B4B4B4"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_changename_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3000"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/line_changename_loading"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/before_loading_style"
+            android:padding="14dp"
+            android:src="@drawable/before_ask_loading" />
+    </LinearLayout>
+</RelativeLayout>

@@ -21,6 +21,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,6 +57,7 @@
         <activity android:name=".activity.personaldata.PersonalProposeActivity" />
         <activity android:name=".activity.line.LineGroupDateActivity" />
         <activity android:name=".activity.personaldata.MyAdviserActivity" />
+        <activity android:name=".activity.line.LineChangeNameActivity"></activity>
     </application>
 
 </manifest>

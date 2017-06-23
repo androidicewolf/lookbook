@@ -52,7 +52,7 @@ public class LinedetailPlanFragment extends BaseFragment {
                 fragment_stateview.showNormal();
             }
         };
-        NetUtils.callNet(CustomValue.LINEDPLAN, CustomValue.SERVER + "/index.php/Api/index/details", callBack);
+        NetUtils.callNet(CustomValue.LINEPLAN, CustomValue.SERVER + "/index.php/Api/index/details", callBack);
     }
 
     @Override
