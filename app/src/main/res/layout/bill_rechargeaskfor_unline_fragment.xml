@@ -34,7 +34,7 @@
             android:id="@+id/bill_rechargeaskfor_unline_cash_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/unclickbutton" />
+            android:src="@mipmap/click_button" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,5 +140,82 @@
         android:background="#FFF"
         android:orientation="vertical"
         android:paddingEnd="15dp"
-        android:paddingStart="15dp" />
+        android:paddingStart="15dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/bill_rechargeaskfor_unline_remitter_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomandtop_edging_style"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汇款方"
+            android:textColor="#494949"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/bill_rechargeaskfor_et_inputremitter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="#FFF"
+            android:hint="输入汇款方名称"
+            android:textColor="#494949"
+            android:textColorHint="#C1C1C1"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_edging_style"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金额"
+            android:textColor="#494949"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/bill_rechargeaskfor_unline_et_inputmoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="#FFF"
+            android:hint="输入充值的金额"
+            android:textColor="#494949"
+            android:textColorHint="#C1C1C1"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bill_rechargeaskfor_unline_btn_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/login_btn_style"
+        android:text="提交申请"
+        android:textColor="#FFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>

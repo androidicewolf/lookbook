@@ -59,7 +59,6 @@ public class ChangeNumber {
                     int number = Integer.valueOf(numberStr);
                     number++;
                     changeView.setText(String.valueOf(number));
-                    Log.e("call", "changeView控件的地址" + changeView.toString());
                 }
             }
         });

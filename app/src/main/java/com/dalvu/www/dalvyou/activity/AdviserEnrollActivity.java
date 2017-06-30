@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.AdEnrollBean;
@@ -23,7 +24,6 @@ import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.NumberUtils;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -149,7 +149,7 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                 //解析数据
                 switch (what) {
                     case 19:
-                        EnrollGetNumberBean enrollGetNumberBean = new Gson().fromJson(json, EnrollGetNumberBean.class);
+                        EnrollGetNumberBean enrollGetNumberBean = MyApplication.getGson().fromJson(json, EnrollGetNumberBean.class);
                         Log.e("call", "发送验证码请求成功，响应码=======" + enrollGetNumberBean.status);
                         if (!enrollGetNumberBean.status.equals("0000")) {
                             Toast.makeText(AdviserEnrollActivity.this, enrollGetNumberBean.msg, Toast.LENGTH_SHORT).show();
@@ -157,7 +157,7 @@ public class AdviserEnrollActivity extends BaseNoTitleActivity {
                         break;
                     case 20:
                         //注册成功与否
-                        AdEnrollBean adEnrollBean = new Gson().fromJson(json, AdEnrollBean.class);
+                        AdEnrollBean adEnrollBean = MyApplication.getGson().fromJson(json, AdEnrollBean.class);
                         if (adEnrollBean.status.equals("00000")) {
                             //注册成功，跳转页面
                             Toast.makeText(AdviserEnrollActivity.this, "注册成功，请登陆", Toast.LENGTH_SHORT).show();

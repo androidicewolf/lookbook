@@ -18,6 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,39 +26,96 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.StatusActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.StatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
-        <activity android:name=".activity.line.LineDetailActivity" />
-        <activity android:name=".activity.line.LineDetailPictureActivity" />
-        <activity android:name=".activity.line.LineChangepriceActivity" />
-        <activity android:name=".activity.line.LineAssortmentActivity" />
-        <activity android:name=".activity.line.LineDestineActivity" />
-        <activity android:name=".activity.AdviserEnrollActivity" />
-        <activity android:name=".activity.VisitorEnrollActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.personaldata.SupplierQueryActivity" />
-        <activity android:name=".activity.personaldata.MyVisitorActivity" />
-        <activity android:name=".activity.personaldata.VisitorListActivity" />
-        <activity android:name=".activity.order.LineOrderDetailActivity" />
-        <activity android:name=".activity.bill.BillItemActivity" />
-        <activity android:name=".activity.bill.RechargeAskforActivity" />
-        <activity android:name=".activity.bill.GetCashAskforActivity" />
-        <activity android:name=".activity.bill.ReceiptAskforActivity" />
-        <activity android:name=".activity.bill.ContractAskforActivity" />
-        <activity android:name=".activity.line.LineListActivity" />
-        <activity android:name=".activity.personaldata.PersonalReviseDataActivity" />
-        <activity android:name=".activity.personaldata.PersonalRevisePasswordActivity" />
-        <activity android:name=".activity.personaldata.PersonalSettingActivity" />
-        <activity android:name=".activity.personaldata.PersonalProposeActivity" />
-        <activity android:name=".activity.line.LineGroupDateActivity" />
-        <activity android:name=".activity.personaldata.MyAdviserActivity" />
-        <activity android:name=".activity.line.LineChangeNameActivity"></activity>
+        <activity
+            android:name=".activity.line.LineDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineDetailPictureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineChangepriceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineAssortmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineDestineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AdviserEnrollActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VisitorEnrollActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.SupplierQueryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.MyVisitorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.VisitorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.order.LineOrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.bill.BillItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.bill.RechargeAskforActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.bill.GetCashAskforActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.bill.ReceiptAskforActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.bill.ContractAskforActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalReviseDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalRevisePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.personaldata.PersonalProposeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineGroupDateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.My"></activity>
+        <activity
+            android:name=".activity.personaldata.MyAdviserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.line.LineChangeNameActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

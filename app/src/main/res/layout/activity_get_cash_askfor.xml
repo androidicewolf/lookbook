@@ -36,8 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="569900E78"
-                android:textColor="#AAAAAA" />
+                android:textColor="#AAA" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +67,7 @@
                     android:id="@+id/bill_getcashaskfor_totalasset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2000.0"
+                    android:text="￥ 0.0"
                     android:textColor="@color/dalvred"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -102,7 +101,7 @@
                     android:id="@+id/bill_getcashaskfor_usableasset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2000.0"
+                    android:text="￥ 0.0"
                     android:textColor="@color/dalvred"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -136,7 +135,7 @@
             android:hint="请输入转出金额"
             android:inputType="number"
             android:textColor="#494949"
-            android:textColorHint="#AAAAAA"
+            android:textColorHint="#AAA"
             android:textSize="14sp" />
     </LinearLayout>
 

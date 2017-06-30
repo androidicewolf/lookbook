@@ -37,7 +37,7 @@ public interface CustomValue {
     /**
      * 服务器地址
      **/
-    public static final String SERVER = "http://dalvuapi.dalvu.com/index.php/";
+    public static final String SERVER = "http://demoapi.dalvu.com/index.php/";
     /**首页模块分类请求网络的what**/
     public static final int HOMECOLUMN = 101;
     /**首页线路列表请求网络的what**/

@@ -5,34 +5,35 @@
 
     <RelativeLayout
         android:id="@+id/state_rl"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
         <ImageView
             android:id="@+id/state_load"
-            android:visibility="gone"
-            android:src="@mipmap/netload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/before_loading_style"
+            android:padding="14dp"
+            android:visibility="gone" />
         <ImageView
             android:id="@+id/state_error"
-            android:visibility="gone"
-            android:src="@mipmap/neterror"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@mipmap/net_error"
+            android:visibility="gone" />
         <ImageView
             android:id="@+id/state_empty"
-            android:visibility="gone"
-            android:src="@mipmap/dataemtry"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:src="@mipmap/data_null"
+            android:visibility="gone" />
     </RelativeLayout>
     <TextView
         android:id="@+id/state_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/state_rl"
         android:layout_centerHorizontal="true"
         android:text="小游迷路了"
-        android:textColor="#3393A1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="#3393A1" />
 </RelativeLayout>

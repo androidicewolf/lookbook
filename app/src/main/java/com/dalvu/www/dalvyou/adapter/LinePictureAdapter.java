@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.ViewHolder.LinePictureItemBox;
+import com.dalvu.www.dalvyou.bean.LinePictureDataBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 线路图片库里recyclerview的适配器
@@ -17,11 +19,11 @@ import java.util.ArrayList;
 
 public class LinePictureAdapter extends RecyclerView.Adapter<LinePictureItemBox> {
     private Context context;
-    private ArrayList<String> arrayList;
+    private List<LinePictureDataBean.PicArrBean> items;
 
-    public LinePictureAdapter(Context context, ArrayList<String> list) {
+    public LinePictureAdapter(Context context, List<LinePictureDataBean.PicArrBean> items) {
         this.context = context;
-        this.arrayList = list;
+        this.items = items;
     }
 
     @Override
@@ -33,11 +35,12 @@ public class LinePictureAdapter extends RecyclerView.Adapter<LinePictureItemBox>
 
     @Override
     public void onBindViewHolder(LinePictureItemBox holder, int position) {
-        holder.textView.setText("我是标题");
+        Glide.with(context).load(items.get(position).img).into(holder.imageView);
+        holder.textView.setText(items.get(position).name);
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return items.size();
     }
 }

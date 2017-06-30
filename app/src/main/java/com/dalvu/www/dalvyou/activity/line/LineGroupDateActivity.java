@@ -3,17 +3,19 @@ package com.dalvu.www.dalvyou.activity.line;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LineGroupDateAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.LineDetailDatabean;
+import com.dalvu.www.dalvyou.function.CustomGridLayoutManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -27,6 +29,8 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
     TabLayout lineGroupdateTablayout;
     @BindView(R.id.line_groupdate_recyclerview)
     RecyclerView lineGroupdateRecyclerview;
+    @BindView(R.id.line_groupdate_ll)
+    LinearLayout lineGroupdateLl;
     private List<LineDetailDatabean.TourSkuDateBean> groudDates;
     private TreeSet<String> monthsSet = new TreeSet<>();
     //    private Date date;
@@ -51,6 +55,12 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
     }
 
     private void initData() {
+        lineGroupdateLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         if (groupDateMap == null) {
             groupDateMap = new HashMap<>();
             for (LineDetailDatabean.TourSkuDateBean groupDate : groudDates) {
@@ -62,7 +72,7 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
         getAdapterSet();
         String[] dates;
         int index = 0;
-        String[] months = new String[monthsSet.size()];
+        final String[] months = new String[monthsSet.size()];
         for (String month : monthsSet) {
             months[index] = month;
             TabLayout.Tab tab = lineGroupdateTablayout.newTab();
@@ -76,15 +86,21 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
             lineGroupdateTablayout.addTab(tab);
             index++;
         }
+        final ArrayList<LineGroupDateAdapter> list = new ArrayList<>();
+        for (int i = 0; i < months.length; i++) {
+            list.add(new LineGroupDateAdapter(this, months[i], groupDateMap));
+        }
         TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
+                lineGroupdateRecyclerview.setAdapter(list.get(position));
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
+
             }
 
             @Override
@@ -93,7 +109,8 @@ public class LineGroupDateActivity extends BaseNoTitleActivity {
             }
         };
         lineGroupdateTablayout.addOnTabSelectedListener(tabSelectedListener);
-        GridLayoutManager manager = new GridLayoutManager(this, 7);
+        CustomGridLayoutManager manager = new CustomGridLayoutManager(this, 7);
+        manager.setScrollEnabled(false);
         lineGroupdateRecyclerview.setAdapter(new LineGroupDateAdapter(this, months[0], groupDateMap));
         lineGroupdateRecyclerview.setLayoutManager(manager);
     }

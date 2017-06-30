@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.UserLoginBean;
@@ -19,7 +20,6 @@ import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.NumberUtils;
 import com.dalvu.www.dalvyou.tools.SharedPreferencesTool;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -107,7 +107,7 @@ public class LoginActivity extends BaseNoTitleActivity {
 
                                 @Override
                                 public void onSucceed(int what, String json) {
-                                    UserLoginBean userLoginBean = new Gson().fromJson(json, UserLoginBean.class);
+                                    UserLoginBean userLoginBean = MyApplication.getGson().fromJson(json, UserLoginBean.class);
                                     if (userLoginBean.status.equals("00000")) {
 
                                         //登录成功，将数据存进本地

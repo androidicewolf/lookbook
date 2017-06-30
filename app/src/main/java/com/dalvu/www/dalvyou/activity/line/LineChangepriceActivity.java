@@ -7,16 +7,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LineChangepriceAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.LineChangePriceDataBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,15 +43,21 @@ public class LineChangepriceActivity extends BaseNoTitleActivity {
     private StateView activity_stateview;
     private ListView line_changeprice_listview;
     private View view;
-    private String uri = CustomValue.SERVER;
     private MyCallBack callBack;
     private Unbinder unbinder;
-    private ArrayList items = new ArrayList();
+    private String url = "Api/agency/changePrice";
+    private int user_id;
+    private String user_token;
+    private String linetitleid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stateview);
+        user_id = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
+        linetitleid = getIntent().getStringExtra("linetitleid");
         initView();
         initData();
     }
@@ -74,18 +85,29 @@ public class LineChangepriceActivity extends BaseNoTitleActivity {
             callBack = new MyCallBack(activity_stateview) {
                 @Override
                 public void onSucceed(int what, String json) {
-                    Log.e("call", json);
-                    linedetailChangepricePic.setImageResource(R.drawable.icon);
-                    linedetailChangepriceName.setText("家里蹲五日游");
-                    linedetailChangepricePrice.setText("20000");
-                    linedetailChangepriceModule.setText("国内游");
-                    line_changeprice_listview.setAdapter(new LineChangepriceAdapter(LineChangepriceActivity.this, items));
-                    activity_stateview.showNormal();
+                    Log.e("call", "线路改价页面返回的服务器数据：=======" + json);
+                    LineChangePriceDataBean lineChangePriceDataBean = MyApplication.getGson().fromJson(json, LineChangePriceDataBean.class);
+                    if (lineChangePriceDataBean.status.equals("00000")) {
+                        Glide.with(LineChangepriceActivity.this).load(lineChangePriceDataBean.tour_list.cover_pic).into(linedetailChangepricePic);
+                        linedetailChangepriceName.setText(lineChangePriceDataBean.tour_list.name);
+                        linedetailChangepricePrice.setText("" + Float.valueOf(lineChangePriceDataBean.tour_list.min_price) / 100);
+                        linedetailChangepriceModule.setText(lineChangePriceDataBean.tour_list.lineTypeName);
+
+                        line_changeprice_listview.setAdapter(new LineChangepriceAdapter(LineChangepriceActivity.this, lineChangePriceDataBean.list));
+                        activity_stateview.showNormal();
+                    } else {
+                        Toast.makeText(LineChangepriceActivity.this, lineChangePriceDataBean.msg, Toast.LENGTH_SHORT).show();
+                        activity_stateview.showError();
+                    }
                 }
             };
         }
         Log.e("call", "开始请求网络");
-        NetUtils.callNet(3, uri + "/index.php/Api/index/indexMod", callBack);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("uid", "" + user_id);
+        map.put("sign_token", user_token);
+        map.put("id", linetitleid);
+        NetUtils.callNet(25, CustomValue.SERVER + url, map, callBack);
     }
 
     @Override

@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="104dp"
             android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/home_item_name"

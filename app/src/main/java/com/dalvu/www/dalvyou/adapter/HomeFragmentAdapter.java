@@ -45,7 +45,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentItemBo
         //设置数据
         holder.home_item_name.setText(items.get(position).name);
         holder.home_item_gosite.setText(items.get(position).departure);
-        holder.home_item_price.setText(items.get(position).min_price);
+        holder.home_item_price.setText(String.valueOf(Float.valueOf(items.get(position).min_price) / 100));
         Glide.with(context).load(items.get(position).cover_pic).into(holder.home_item_image);
     }
 

@@ -2,62 +2,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/line_groupdate_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#80000000"
     android:gravity="center_vertical"
     android:orientation="vertical"
     tools:context="com.dalvu.www.dalvyou.activity.line.LineGroupDateActivity">
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/line_groupdate_tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F4F4F4"
-        android:paddingTop="6dp"
-        app:tabMode="scrollable" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_edging_style"
-        android:orientation="horizontal"
-        android:paddingBottom="12dp"
-        android:paddingTop="12dp">
+        android:orientation="vertical">
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="日" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/line_groupdate_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F4F4F4"
+            android:paddingTop="6dp"
+            app:tabMode="scrollable" />
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="一" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_edging_style"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp">
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="二" />
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="日" />
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="三" />
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="一" />
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="四" />
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="二" />
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="五" />
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="三" />
 
-        <TextView
-            style="@style/GroupDateWeekStyle"
-            android:text="六" />
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="四" />
+
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="五" />
+
+            <TextView
+                style="@style/GroupDateWeekStyle"
+                android:text="六" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/line_groupdate_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:paddingBottom="8dp" />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/line_groupdate_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFF"
-        android:paddingBottom="8dp" />
 </LinearLayout>

@@ -56,7 +56,6 @@
             android:id="@+id/contractrecord_xrecycleritem_passstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="审核通过"
             android:textColor="#5FC82B"
             android:textSize="11sp" />
 
@@ -75,7 +74,8 @@
         android:paddingBottom="6dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
-        android:paddingTop="6dp">
+        android:paddingTop="6dp"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +89,6 @@
             android:id="@+id/contractrecord_xrecycleritem_failcause"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="合同文件不规范"
             android:textColor="#4C4C4C"
             android:textSize="11sp" />
     </LinearLayout>
@@ -116,7 +115,7 @@
             android:id="@+id/contractrecord_xrecycleritem_internalnumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6份"
+            android:text="0份"
             android:textColor="@color/dalvred"
             android:textSize="11sp" />
     </LinearLayout>
@@ -143,7 +142,7 @@
             android:id="@+id/contractrecord_xrecycleritem_overseasnumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4份"
+            android:text="0份"
             android:textColor="@color/dalvred"
             android:textSize="11sp" />
     </LinearLayout>
@@ -170,7 +169,7 @@
             android:id="@+id/contractrecord_xrecycleritem_entrustnumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2份"
+            android:text="0份"
             android:textColor="@color/dalvred"
             android:textSize="11sp" />
     </LinearLayout>
@@ -189,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="交易号："
-            android:textColor="#AAAAAA"
+            android:textColor="#AAA"
             android:textSize="11sp" />
 
         <TextView
@@ -197,8 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="1499999999"
-            android:textColor="#AAAAAA"
+            android:textColor="#AAA"
             android:textSize="11sp" />
     </LinearLayout>
 </LinearLayout>

@@ -6,28 +6,29 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.util.SparseArray;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseFragment;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.RechargeAskforDataBean;
 import com.dalvu.www.dalvyou.fragment.BillRechargeAskforOnlineFragment;
 import com.dalvu.www.dalvyou.fragment.BillRechargeAskforUnlineFragment;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -39,28 +40,26 @@ public class RechargeAskforActivity extends BaseNoTitleActivity {
     TabLayout billRechargeaskforTablayout;
     @BindView(R.id.bill_rechargeaskfor_framelayout)
     FrameLayout billRechargeaskforFramelayout;
-    @BindView(R.id.bill_rechargeaskfor_et_inputremitter)
-    EditText billRechargeaskforEtInputremitter;
-    @BindView(R.id.bill_rechargeaskfor_unline_remitter_ll)
-    LinearLayout billRechargeaskforUnlineRemitterLl;
-    @BindView(R.id.bill_rechargeaskfor_et_inputmoney)
-    EditText billRechargeaskforEtInputmoney;
-    @BindView(R.id.bill_rechargeaskfor_btn_comment)
-    Button billRechargeaskforBtnComment;
     private TextView tv_dalv_title;
+
+    private String url = "Api/agencyFinance/applyTopup";
     private ImageView iv_go_back;
     private Unbinder unbinder;
     private MyCallBack callBack;
     private StateView activity_stateview;
     private TabLayout.OnTabSelectedListener tabSelectedListener;
     private SparseArray<BaseFragment> fragments;
-    private ArrayList banks = new ArrayList();
+    private ArrayList<String> banks = new ArrayList<>();
     private TabLayout.Tab tab1;
+    private int userId;
+    private String user_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stateview);
+        userId = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
         initView();
         initData();
     }
@@ -78,7 +77,6 @@ public class RechargeAskforActivity extends BaseNoTitleActivity {
     }
 
     private void initData() {
-        initFragment();
         tv_dalv_title.setText("充值申请");
         iv_go_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,48 +89,71 @@ public class RechargeAskforActivity extends BaseNoTitleActivity {
                 @Override
                 public void onSucceed(int what, String json) {
                     //解析数据
-
-                    if (tabSelectedListener == null) {
-                        tabSelectedListener = new TabLayout.OnTabSelectedListener() {
-                            @Override
-                            public void onTabSelected(TabLayout.Tab tab) {
-                                int position = tab.getPosition();
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                if (fragments != null) {
-                                    Fragment fragment = fragments.get(position);
-                                    if (fragment.isAdded()) {
-                                        transaction.show(fragment);
-                                    } else {
-                                        transaction.remove(fragment).add(R.id.bill_rechargeaskfor_framelayout, fragment);
-                                    }
-                                }
-                                transaction.commit();
-                            }
-
-                            @Override
-                            public void onTabUnselected(TabLayout.Tab tab) {
-                                int position = tab.getPosition();
-                                if (fragments != null) {
+                    RechargeAskforDataBean rechargeAskforDataBean = MyApplication.getGson().fromJson(json, RechargeAskforDataBean.class);
+                    if (rechargeAskforDataBean.status.equals("00000")) {
+                        if (!rechargeAskforDataBean.operatorInfo.topupInfo.isEmpty()) {
+                            subString(rechargeAskforDataBean.operatorInfo.topupInfo);
+                            initFragment();
+                        }
+                        if (tabSelectedListener == null) {
+                            tabSelectedListener = new TabLayout.OnTabSelectedListener() {
+                                @Override
+                                public void onTabSelected(TabLayout.Tab tab) {
+                                    int position = tab.getPosition();
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                    Fragment fragment = fragments.get(position);
-                                    transaction.hide(fragment);
+                                    if (fragments != null) {
+                                        Fragment fragment = fragments.get(position);
+                                        if (fragment.isAdded()) {
+                                            transaction.show(fragment);
+                                        } else {
+                                            transaction.remove(fragment).add(R.id.bill_rechargeaskfor_framelayout, fragment);
+                                        }
+                                    }
                                     transaction.commit();
                                 }
-                            }
 
-                            @Override
-                            public void onTabReselected(TabLayout.Tab tab) {
+                                @Override
+                                public void onTabUnselected(TabLayout.Tab tab) {
+                                    int position = tab.getPosition();
+                                    if (fragments != null) {
+                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                        Fragment fragment = fragments.get(position);
+                                        transaction.hide(fragment);
+                                        transaction.commit();
+                                    }
+                                }
 
-                            }
-                        };
-                        billRechargeaskforTablayout.addOnTabSelectedListener(tabSelectedListener);
-                        tabSelectedListener.onTabSelected(tab1);
+                                @Override
+                                public void onTabReselected(TabLayout.Tab tab) {
+
+                                }
+                            };
+                            billRechargeaskforTablayout.addOnTabSelectedListener(tabSelectedListener);
+                            tabSelectedListener.onTabSelected(tab1);
+                        }
+                        activity_stateview.showNormal();
+                    } else {
+                        Toast.makeText(RechargeAskforActivity.this, rechargeAskforDataBean.msg, Toast.LENGTH_SHORT).show();
+                        activity_stateview.showError();
                     }
-
-                    activity_stateview.showNormal();
                 }
             };
-            NetUtils.callNet(10, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("uid", "" + userId);
+            map.put("sign_token", user_token);
+            NetUtils.callNet(10, CustomValue.SERVER + url, map, callBack);
+        }
+    }
+
+    private void subString(String jsonStr) {
+        banks.clear();
+        String[] jsonArray = jsonStr.split("<br />");
+        String[] strArray;
+        for (String str : jsonArray) {
+            if (!str.isEmpty()) {
+                strArray = str.split("：");
+                banks.add(strArray[1]);
+            }
         }
     }
 
@@ -142,33 +163,6 @@ public class RechargeAskforActivity extends BaseNoTitleActivity {
             fragments.put(0, new BillRechargeAskforUnlineFragment(banks));
             fragments.put(1, new BillRechargeAskforOnlineFragment());
         }
-    }
-
-    @OnClick(R.id.bill_rechargeaskfor_btn_comment)
-    public void onViewClicked() {
-
-
-//        IWXAPI api;
-//
-//        PayReq request = new PayReq();
-//
-//        request.appId = "wxd930ea5d5a258f4f";
-//
-//        request.partnerId = "1900000109";
-//
-//        request.prepayId= "1101000000140415649af9fc314aa427";
-//
-//        request.packageValue = "Sign=WXPay";
-//
-//        request.nonceStr= "1101000000140429eb40476f8896f4c9";
-//
-//        request.timeStamp= "1398746574";
-//
-//        request.sign= "7FFECB600D7157C5AA49810D2D8F28BC2811827B";
-//
-//        api.sendReq(request);
-
-
     }
 
     @Override

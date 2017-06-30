@@ -16,7 +16,7 @@
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
         android:paddingTop="4dp"
-        android:text="第一天"
+        android:text="第1天"
         android:textColor="@color/dalvbule"
         android:textSize="10sp" />
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="天津国际机场集合，乘坐国际航班飞往名古屋。天津国际机场集合，乘坐国际航班飞往名古屋。"
+        android:text=""
         android:textColor="#313131"
         android:textSize="12sp" />
 

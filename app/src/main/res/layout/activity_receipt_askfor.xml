@@ -29,7 +29,7 @@
 
             <EditText
                 android:id="@+id/bill_receiptaskfor_companyname"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#FFF"
@@ -95,11 +95,12 @@
 
             <EditText
                 android:id="@+id/bill_receiptaskfor_companynumber"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#FFF"
                 android:hint="请输入纳税人识别号"
+                android:maxLength="20"
                 android:textColorHint="#C1C1C1"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -123,12 +124,12 @@
 
             <EditText
                 android:id="@+id/bill_receiptaskfor_inputremarks"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:background="#FFF"
                 android:gravity="top"
-                android:hint="请输入公司名称"
+                android:hint="请填写备注，如代订机票，代订房费等"
                 android:lines="2"
                 android:textColorHint="#C1C1C1"
                 android:textSize="14sp" />
@@ -156,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="10000元"
+                android:text="0元"
                 android:textColor="@color/dalvred"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -182,7 +183,7 @@
 
             <EditText
                 android:id="@+id/bill_receiptaskfor_inputmoney"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="#FFF"
@@ -378,6 +379,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/bill_receiptaskfor_freight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="(支付10元快递费)"
@@ -412,7 +414,7 @@
 
                 <EditText
                     android:id="@+id/bill_receiptaskfor_inputaddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
@@ -443,7 +445,7 @@
 
                 <EditText
                     android:id="@+id/bill_receiptaskfor_inputname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
@@ -472,12 +474,41 @@
 
                 <EditText
                     android:id="@+id/bill_receiptaskfor_inputtel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
                     android:hint="请输入手机号码"
                     android:inputType="phone"
+                    android:textColorHint="#C1C1C1"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bottom_edging_style"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注："
+                    android:textColor="#494949"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/bill_receiptaskfor_linkremarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="#FFF"
+                    android:hint="请输入备注信息"
                     android:textColorHint="#C1C1C1"
                     android:textSize="14sp" />
             </LinearLayout>

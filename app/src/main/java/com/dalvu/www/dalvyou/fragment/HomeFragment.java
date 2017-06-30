@@ -29,7 +29,6 @@ import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
 import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
-import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -163,6 +162,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void update() {
+        //刷新页面执行的方法
         NetUtils.callNet(1, "", callBack);
 
     }
@@ -175,8 +175,13 @@ public class HomeFragment extends BaseFragment {
 
                 @Override
                 public void onStart(int what) {
-                    if (home_Stateview.state_Load.getVisibility() == View.GONE) {
-                        home_Stateview.showLoading();
+                    synchronized (this) {
+                        if (home_Stateview.state_Load.getVisibility() == View.GONE) {
+                            home_Stateview.showLoading();
+                        }
+                        if (home_Stateview.state_Error.getVisibility() == View.GONE) {
+                            home_Stateview.showLoading();
+                        }
                     }
                 }
 
@@ -184,10 +189,10 @@ public class HomeFragment extends BaseFragment {
                 public void onSucceed(int what, String json) {
                     switch (what) {
                         case CustomValue.HOMECOLUMN:
-                            homeFragmentModuleDataBean = new Gson().fromJson(json, HomeFragmentModuleDataBean.class);
+                            homeFragmentModuleDataBean = MyApplication.getGson().fromJson(json, HomeFragmentModuleDataBean.class);
                             break;
                         case CustomValue.HOMELINE:
-                            homeFragmentLineDataBean = new Gson().fromJson(json, HomeFragmentLineDataBean.class);
+                            homeFragmentLineDataBean = MyApplication.getGson().fromJson(json, HomeFragmentLineDataBean.class);
                             break;
                     }
                     if (homeFragmentModuleDataBean != null && homeFragmentLineDataBean != null) {

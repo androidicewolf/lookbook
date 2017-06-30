@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.bean.EnrollGetNumberBean;
@@ -22,7 +23,6 @@ import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.NumberUtils;
 import com.dalvu.www.dalvyou.tools.SharedPreferencesTool;
-import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,7 +108,7 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                     case 19:
                         //从返回的数据中取出绑定顾问的手机号，判断手机号是或否为空，不为空，就把输入
                         // 顾问手机号的输入框设置为不可输入
-                        EnrollGetNumberBean enrollGetNumberBean = new Gson().fromJson(json, EnrollGetNumberBean.class);
+                        EnrollGetNumberBean enrollGetNumberBean = MyApplication.getGson().fromJson(json, EnrollGetNumberBean.class);
                         if (enrollGetNumberBean.status.equals("0000")) {
                             isBindAd = enrollGetNumberBean.binding_state.equals("1");
                             if (isBindAd) {
@@ -120,7 +120,7 @@ public class VisitorEnrollActivity extends BaseNoTitleActivity {
                         }
                         break;
                     case 20:
-                        UserLoginBean userLoginBean = new Gson().fromJson(json, UserLoginBean.class);
+                        UserLoginBean userLoginBean = MyApplication.getGson().fromJson(json, UserLoginBean.class);
                         if (userLoginBean.status.equals("00000")) {
                             //登录成功，将数据存进本地
                             SharedPreferencesTool.saveBoolean(VisitorEnrollActivity.this, CustomValue.ISFIRST, false);

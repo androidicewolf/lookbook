@@ -62,7 +62,7 @@
                     android:id="@+id/linedetail_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FF0" />
+                    android:background="#FFF" />
                 <RelativeLayout
                     android:id="@+id/linedetail_viewpager_cursor_rl"
                     android:layout_width="match_parent"
@@ -391,7 +391,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="飞机"
+                        android:text=""
                         android:textColor="#3F3F3F" />
                 </LinearLayout>
             </LinearLayout>
@@ -420,7 +420,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="加利福尼亚"
+                    android:text=""
                     android:textColor="#3F3F3F" />
 
             </LinearLayout>

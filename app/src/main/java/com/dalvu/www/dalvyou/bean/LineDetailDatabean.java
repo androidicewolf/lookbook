@@ -1,5 +1,6 @@
 package com.dalvu.www.dalvyou.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**保存线路详情页基本信息的bean类
@@ -10,35 +11,54 @@ public class LineDetailDatabean {
 
     /**
      * status : 00000
-     * mobile : 13126997216
      * msg : 成功
-     * tourSkuDate : [{"id":"94586","price_adult_list":"1329900","start_time":"2017-06-16","price_adult_agency":"1229900"},{"id":"94585","price_adult_list":"1329900","start_time":"2017-06-02","price_adult_agency":"1229900"}]
-     * totalDay : 9
-     * list : {"id":"4302","name":"莫斯科+圣彼得堡+喀琅施塔得+新西伯利亚动物园+贝加尔湖欧亚全景9日行程","provider_name":"浪漫俄罗斯","contact_person":"吕亚勤","min_price":"1329900","destinations":"俄罗斯","traffic_go":"飞机","traffic_back":"飞机","pics":"#file1#/tour/2017/0408/01324231736.jpg|0|@@@#file1#/tour/2017/0408/00264932437.jpg|0|@@@","departure":"北京","totalDay":"9"}
-     * picArr : ["http://file1.lydlr.com/c/563/234/tour/2017/0408/01324231736.jpg","http://file1.lydlr.com/c/563/234/tour/2017/0408/00264932437.jpg"]
+     * agencyTourTitle : {"id":"30","title":"好好好"}
+     * tourSkuDate : null
+     * totalDay : null
+     * list : {"id":"4005","name":"四星芽庄4晚5天","provider_name":"一块去旅游","contact_person":"一块去旅游","min_price":"268000","destinations":"东南亚","traffic_go":"飞机","traffic_back":"飞机","pics":"#file1#/tour/2016/1230/01547765828.jpg|0|@@@","contact_phone":"18500024060","departure":"北京","totalDay":"5"}
+     * picArr : ["http://file1.lydlr.com/c/563/234/tour/2016/1230/01547765828.jpg"]
+     * sign_token : b8912bbd73a6af6e9376d178b7fc8c1a
      */
 
     public String status;
-    public String mobile;
     public String msg;
+    public AgencyTourTitleBean agencyTourTitle;
+    public List<TourSkuDateBean> tourSkuDate;
     public String totalDay;
     public ListBean list;
-    public List<TourSkuDateBean> tourSkuDate;
+    public String sign_token;
     public List<String> picArr;
+
+    /**
+     * agencyTourTitle : null
+     * tourSkuDate : [{"id":"96612","price_adult_list":"1800000","start_time":"2017-07-08","price_adult_agency":"1350000"}]
+     * totalDay : null
+     */
+
+    public static class AgencyTourTitleBean {
+        /**
+         * id : 30
+         * title : 好好好
+         */
+
+        public String id;
+        public String title;
+    }
 
     public static class ListBean {
         /**
-         * id : 4302
-         * name : 莫斯科+圣彼得堡+喀琅施塔得+新西伯利亚动物园+贝加尔湖欧亚全景9日行程
-         * provider_name : 浪漫俄罗斯
-         * contact_person : 吕亚勤
-         * min_price : 1329900
-         * destinations : 俄罗斯
+         * id : 4005
+         * name : 四星芽庄4晚5天
+         * provider_name : 一块去旅游
+         * contact_person : 一块去旅游
+         * min_price : 268000
+         * destinations : 东南亚
          * traffic_go : 飞机
          * traffic_back : 飞机
-         * pics : #file1#/tour/2017/0408/01324231736.jpg|0|@@@#file1#/tour/2017/0408/00264932437.jpg|0|@@@
+         * pics : #file1#/tour/2016/1230/01547765828.jpg|0|@@@
+         * contact_phone : 18500024060
          * departure : 北京
-         * totalDay : 9
+         * totalDay : 5
          */
 
         public String id;
@@ -50,16 +70,17 @@ public class LineDetailDatabean {
         public String traffic_go;
         public String traffic_back;
         public String pics;
+        public String contact_phone;
         public String departure;
         public String totalDay;
     }
 
-    public static class TourSkuDateBean {
+    public static class TourSkuDateBean implements Serializable {
         /**
-         * id : 94586
-         * price_adult_list : 1329900
-         * start_time : 2017-06-16
-         * price_adult_agency : 1229900
+         * id : 96612
+         * price_adult_list : 1800000
+         * start_time : 2017-07-08
+         * price_adult_agency : 1350000
          */
 
         public String id;

@@ -56,16 +56,40 @@
             android:id="@+id/getcashrecord_xrecycleritem_passstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="处理完成"
             android:textColor="#5FC82B"
             android:textSize="11sp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/getcashrecord_xrecycleritem_failcause_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="-6dp"
+        android:background="#EEE"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="6dp"
+        android:visibility="gone">
+
         <TextView
-            android:id="@+id/getcashrecord_xrecycleritem_passingstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未审核"
+            android:layout_marginEnd="4dp"
+            android:text="失败原因："
             android:textColor="@color/dalvred"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/getcashrecord_xrecycleritem_failcause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#4C4C4C"
             android:textSize="11sp" />
     </LinearLayout>
 
@@ -91,7 +115,7 @@
             android:id="@+id/getcashrecord_xrecycleritem_getcashmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥ 45890.0"
+            android:text="￥ 0.0"
             android:textColor="@color/dalvred"
             android:textSize="11sp" />
     </LinearLayout>
@@ -118,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="1499999999"
+            android:text="无"
             android:textColor="#AAAAAA"
             android:textSize="11sp" />
     </LinearLayout>

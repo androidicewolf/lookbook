@@ -7,6 +7,9 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.dalvu.www.dalvyou.tools.CustomValue;
+import com.dalvu.www.dalvyou.tools.NullStringToEmptyAdapterFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.OkHttpNetworkExecutor;
 import com.yanzhenjie.nohttp.cache.DBCacheStore;
@@ -22,8 +25,9 @@ import java.util.List;
 public class MyApplication extends Application {
     private static RequestQueue requestQueue;
     private static MyApplication myApplication;
+    private static Gson gson;
     //关闭activity的方法
-    private List<Activity> mList = new LinkedList<Activity>();
+    private List<Activity> mList = new LinkedList<>();
 
     public static RequestQueue getRequestQueue(){
         return requestQueue;
@@ -33,15 +37,22 @@ public class MyApplication extends Application {
         return myApplication;
     }
 
+    public static Gson getGson() {
+        return gson;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         myApplication = this;
         NoHttp.initialize(this, new NoHttp.Config()
         .setNetworkExecutor(new OkHttpNetworkExecutor())
-        .setConnectTimeout(15000)
-        .setReadTimeout(15000).setCacheStore(new DBCacheStore(this).setEnable(true)));
+                .setCacheStore(new DBCacheStore(this).setEnable(true)));
         requestQueue = NoHttp.newRequestQueue();
+
+        //将Gson初始化出来，变成全局对象使用
+        gson = new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
+
         CustomValue.CITYS.add("北京市");
         CustomValue.CITYS.add("天津市");
         CustomValue.CITYS.add("河北省");

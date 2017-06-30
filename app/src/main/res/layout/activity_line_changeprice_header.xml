@@ -12,7 +12,9 @@
         android:background="#FFF"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:paddingTop="9dp" />
+        android:paddingTop="9dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/homeheader_backnull" />
 
     <TextView
         android:id="@+id/linedetail_changeprice_name"
@@ -25,7 +27,7 @@
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
         android:paddingTop="10dp"
-        android:text="标题"
+        android:text=""
         android:textColor="@color/dalvtitleblack"
         android:textSize="14sp" />
 
@@ -45,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="出境游"
+            android:text=""
             android:textColor="@color/dalvbule"
             android:textSize="10sp" />
 
@@ -60,7 +62,7 @@
             android:id="@+id/linedetail_changeprice_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1699.0"
+            android:text="0.0"
             android:textColor="@color/dalvred"
             android:textSize="17sp" />
     </LinearLayout>

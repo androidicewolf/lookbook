@@ -8,13 +8,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
+import com.dalvu.www.dalvyou.adapter.LinePictureAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.LinePictureDataBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
 import com.dalvu.www.dalvyou.tools.CustomValue;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +37,9 @@ public class LineDetailPictureActivity extends BaseNoTitleActivity {
     TextView tvDalvTitle;
     @BindView(R.id.activity_stateview)
     StateView activityStateview;
-    private String uri = "";
+    //线路ID
+    private String id;
+    private String url = "Api/agency/morePics";
     private RecyclerView recyclerView;
 
     @Override
@@ -39,6 +47,7 @@ public class LineDetailPictureActivity extends BaseNoTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stateview);
         ButterKnife.bind(this);
+        id = getIntent().getStringExtra("id");
         initView();
         initData();
     }
@@ -63,13 +72,25 @@ public class LineDetailPictureActivity extends BaseNoTitleActivity {
     }
 
     private void requestNet() {
-
-        NetUtils.callNet(1, CustomValue.SERVER + uri, new MyCallBack(activityStateview) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("id", id);
+        NetUtils.callNet(1, CustomValue.SERVER + url, map, new MyCallBack(activityStateview) {
             @Override
             public void onSucceed(int what, String json) {
                 Log.e("call", "^^^^^^^^^^^^^" + json);
-//                recyclerView.setAdapter(new LinePictureAdapter(this, ));
-                activityStateview.showNormal();
+                //解析数据
+                LinePictureDataBean linePictureDataBean = MyApplication.getGson().fromJson(json, LinePictureDataBean.class);
+                if (linePictureDataBean.status.equals("00000")) {
+                    if (linePictureDataBean.picArr != null && linePictureDataBean.picArr.size() > 0) {
+                        recyclerView.setAdapter(new LinePictureAdapter(LineDetailPictureActivity.this, linePictureDataBean.picArr));
+                        activityStateview.showNormal();
+                    } else {
+                        activityStateview.showEmpty();
+                    }
+                } else {
+                    Toast.makeText(LineDetailPictureActivity.this, linePictureDataBean.msg, Toast.LENGTH_SHORT).show();
+                    activityStateview.showError();
+                }
             }
         });
     }

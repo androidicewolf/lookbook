@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.LinePagerAdapter;
@@ -39,7 +40,6 @@ import com.dalvu.www.dalvyou.netUtils.StateView;
 import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.dalvu.www.dalvyou.tools.DensityUtils;
-import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -182,7 +182,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                         lineDetailTitle.setVisibility(View.VISIBLE);
                         ivGoBack.setImageResource(R.mipmap.arrowhead_up);
                         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 255);
-                        valueAnimator.setDuration(1000);
+                        valueAnimator.setDuration(500);
                         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
@@ -198,7 +198,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                         ivGoBack.setImageResource(R.mipmap.return_details);
                         lineDetailTitleRl.setBackgroundColor(Color.argb(0, 255, 255, 255));
                         ValueAnimator valueAnimator = ValueAnimator.ofInt(255, 0);
-                        valueAnimator.setDuration(5000);
+                        valueAnimator.setDuration(500);
                         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
@@ -230,8 +230,8 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     }
 
     //根据图片的张数创建灰色小圆点
-    private void creatGuideDot(List list) {
-        for (int i = 0; i < 4; i++) {
+    private void creatGuideDot(List<String> list) {
+        for (String url : list) {
             View view = new View(this);
             view.setBackgroundResource(R.drawable.shape_guide_dot);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(DensityUtils.dip2px(this, 8), DensityUtils.dip2px(this, 8));
@@ -254,15 +254,17 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                     switch (what) {
                         /**基本信息**/
                         case CustomValue.LINEDETAILBASE:
-                            lineDetailDatabean = new Gson().fromJson(json, LineDetailDatabean.class);
+                            Log.e("call", "线路详情页的数据json：======" + json);
+                            lineDetailDatabean = MyApplication.getGson().fromJson(json, LineDetailDatabean.class);
+
                             if (lineDetailDatabean.status.equals("00000")) {
                                 //设置数据
                                 lineDetailTitle.setText(lineDetailDatabean.list.name);
                                 linedetailNameTv.setText(lineDetailDatabean.list.name);
-                                linedetailNumber.setText(lineDetailDatabean.list.id);
+                                linedetailNumber.setText("代码：" + lineDetailDatabean.list.id);
                                 lineContacts.setText("联系人：" + lineDetailDatabean.list.contact_person);
                                 linedetailSupplier.setText("供应商：" + lineDetailDatabean.list.provider_name);
-                                linePrice.setText(lineDetailDatabean.list.min_price);
+                                linePrice.setText(String.valueOf(Float.valueOf(lineDetailDatabean.list.min_price) / 100));
                                 lineGocity.setText(lineDetailDatabean.list.departure);
                                 lineDestination.setText(lineDetailDatabean.list.destinations);
                                 lineGovehicle.setText(lineDetailDatabean.list.traffic_go);
@@ -272,16 +274,13 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                                 //代码创建灰色小圆点
                                 creatGuideDot(lineDetailDatabean.picArr);
                                 initViewPager(lineDetailDatabean.picArr);
+                                Log.e("call", "从服务器获取的图片集合的大小：=====" + lineDetailDatabean.picArr.size());
                                 lineDetailStateview.showNormal();
 
 
                             } else {
                                 Toast.makeText(LineDetailActivity.this, lineDetailDatabean.msg, Toast.LENGTH_SHORT).show();
                             }
-                            break;
-                        case CustomValue.LINEPLAN:
-                            //加载线路的行程安排
-
                             break;
                     }
                 }
@@ -335,10 +334,10 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     //初始化Fragment的容器
     private void initFragments() {
         fragments = new SparseArray<>();
-        fragments.put(0, new LinedetailPlanFragment());
-        fragments.put(1, new LinedetailDescriptionFragment());
-        fragments.put(2, new LinedetailCostFragment());
-        fragments.put(3, new LinedetailNoticeFragment());
+        fragments.put(0, new LinedetailPlanFragment(lineid));
+        fragments.put(1, new LinedetailDescriptionFragment(lineid));
+        fragments.put(2, new LinedetailCostFragment(lineid));
+        fragments.put(3, new LinedetailNoticeFragment(lineid));
     }
 
     //初始化tablayout的标签选中监听
@@ -378,16 +377,28 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     }
 
     private void initViewPager(List<String> itemsList) {
-        for (int i = 0; i < 4; i++) {
+        if (itemsList.size() == 0) {
             ImageView imageView = new ImageView(this);
+            imageView.setAdjustViewBounds(true);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setImageResource(R.mipmap.linelist_null);
             imageViews.add(imageView);
+        } else {
+            for (String url : itemsList) {
+                ImageView imageView = new ImageView(this);
+                imageView.setAdjustViewBounds(true);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(this).load(url).into(imageView);
+                imageViews.add(imageView);
+            }
         }
+        Log.e("call", "线路图片集合的大小:=====" + imageViews.size());
 
 
         //适配器中传入的是一个imageview对象的集合，后期再改为在适配器中加载图片
 
         //判断是否有一个图片，如果只有一个不显示圆点，不发消息轮播
-        if (imageViews == null || imageViews.size() == 1) {
+        if (imageViews == null || imageViews.size() <= 1) {
             linedetailViewpagerCursorRl.setVisibility(View.GONE);
         } else {
             linedetailViewpagerCursorRl.setVisibility(View.VISIBLE);
@@ -409,7 +420,7 @@ public class LineDetailActivity extends BaseNoTitleActivity {
                 handler.sendEmptyMessageDelayed(0, 3000);
             }
         }
-        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews, handler));
+        linedetailViewpager.setAdapter(new LinePagerAdapter(this, imageViews, handler, lineid));
         //viewpager的切换监听
         linedetailViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -440,28 +451,46 @@ public class LineDetailActivity extends BaseNoTitleActivity {
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
+
             case R.id.linedetail_ll_changename:
                 //修改标题
                 intent = new Intent(this, LineChangeNameActivity.class);
-                //传递修改的标题
-                intent.putExtra("linename", "原来是什么样，服务器知道");
+                if (lineDetailDatabean.agencyTourTitle == null) {
+                    //传递原标题
+                    intent.putExtra("linename", lineDetailDatabean.list.name);
+                } else {
+                    if (lineDetailDatabean.agencyTourTitle.title.isEmpty()) {
+                        //传递原标题
+                        intent.putExtra("linename", lineDetailDatabean.list.name);
+                    } else {
+                        //传递修改的标题
+                        intent.putExtra("linename", lineDetailDatabean.agencyTourTitle.title);
+                    }
+                }
+                //传线路的ID
+                intent.putExtra("linetitleid", lineDetailDatabean.list.id);
                 startActivity(intent);
                 break;
+
             case R.id.linedetail_tv_changeprice:
                 //跳转改价页面
                 intent = new Intent(this, LineChangepriceActivity.class);
+                intent.putExtra("linetitleid", lineDetailDatabean.list.id);
                 startActivity(intent);
                 break;
             case R.id.line_consult_ll:
                 break;
+
             case R.id.linedetail_groupdate_ll:
                 //跳转团期页面（打开一个新的界面）
                 intent = new Intent(this, LineGroupDateActivity.class);
                 intent.putExtra("groupdate", (Serializable) lineDetailDatabean.tourSkuDate);
                 startActivity(intent);
                 break;
+
             case R.id.line_btn_destine:
                 intent = new Intent(this, LineDestineActivity.class);
+                intent.putExtra("line_id", lineDetailDatabean.list.id);
                 startActivity(intent);
                 break;
         }

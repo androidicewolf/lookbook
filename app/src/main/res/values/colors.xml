@@ -12,4 +12,5 @@
     <color name="dalvtitleblack">#373737</color>
     <color name="dalvtextblack">#3A3A3A</color>
     <color name="dalvtextthinblack">#A4A4A4</color>
+    <color name="translucent">#0000</color>
 </resources>

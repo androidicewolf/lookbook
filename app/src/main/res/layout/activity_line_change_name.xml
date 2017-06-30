@@ -81,14 +81,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#3000"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/line_changename_loading"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/before_loading_style"
-            android:padding="14dp"
-            android:src="@drawable/before_ask_loading" />
+            android:padding="14dp" />
+        <!--android:src="@drawable/before_ask_loading"-->
     </LinearLayout>
 </RelativeLayout>

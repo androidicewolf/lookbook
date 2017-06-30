@@ -34,7 +34,7 @@
             android:id="@+id/line_changeprice_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2017-08-02" />
+            android:text="" />
     </LinearLayout>
 
     <LinearLayout
@@ -160,7 +160,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
-                android:inputType="number"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
@@ -176,7 +177,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
-                android:inputType="number"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"
@@ -192,7 +194,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:hint="请输入你要修改的价格"
-                android:inputType="number"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
                 android:paddingBottom="12dp"
                 android:paddingEnd="14dp"
                 android:paddingStart="14dp"

@@ -20,11 +20,13 @@ public class LinePagerAdapter extends PagerAdapter {
     private Context context;
     private ArrayList itemsList;
     private Handler handler;
+    private String id;
 
-    public LinePagerAdapter(Context context, ArrayList itemsList, Handler handler) {
+    public LinePagerAdapter(Context context, ArrayList itemsList, Handler handler, String id) {
         this.context = context;
         this.itemsList = itemsList;
         this.handler = handler;
+        this.id = id;
     }
 
     @Override
@@ -48,14 +50,24 @@ public class LinePagerAdapter extends PagerAdapter {
         itemView.setOnClickListener(new MyViewPagerItemOnClick());
         if (itemsList != null && itemsList.size() != 1) {
             itemView.setOnTouchListener(new View.OnTouchListener() {
+
+                private int xDown;
+
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
+                            xDown = (int) event.getX();
                             //取消handler所有的延时消息
                             handler.removeCallbacksAndMessages(null);
                             break;
                         case MotionEvent.ACTION_UP:
+                            int xUp = (int) event.getX();
+                            if (xUp == xDown) {
+                                Intent intent = new Intent(context, LineDetailPictureActivity.class);
+                                intent.putExtra("id", id);
+                                context.startActivity(intent);
+                            }
                             handler.sendEmptyMessageDelayed(0, 3000);
                             break;
                         case MotionEvent.ACTION_CANCEL:

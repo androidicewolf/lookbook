@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dalvu.www.dalvyou.R;
 
 /**
@@ -16,13 +18,13 @@ import com.dalvu.www.dalvyou.R;
  */
 
 public class StateView extends FrameLayout {
-    public View state_Load;
+    public ImageView state_Load;
     public View state_Error;
     public View state_Empty;
     public TextView state_Text;
     public View normal;
     //存描述当前状态的文字
-    private String[] stateTexts = {"加载中......", "网络不给力啊", "这里没有数据了"};
+    private String[] stateTexts = {"", "网络不给力啊", "暂无数据"};
 
     public StateView(Context context) {
         this(context, null);
@@ -35,10 +37,11 @@ public class StateView extends FrameLayout {
     public StateView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View view = View.inflate(context, R.layout.stateview, null);
-        state_Load = view.findViewById(R.id.state_load);
+        state_Load = (ImageView) view.findViewById(R.id.state_load);
         state_Error = view.findViewById(R.id.state_error);
         state_Empty = view.findViewById(R.id.state_empty);
         state_Text = (TextView) view.findViewById(R.id.state_text);
+        Glide.with(context).load(R.drawable.before_ask_loading).into(state_Load);
         this.addView(view);
     }
 
@@ -58,8 +61,7 @@ public class StateView extends FrameLayout {
     public void showLoading() {
         reset();
         state_Load.setVisibility(VISIBLE);
-        state_Text.setVisibility(VISIBLE);
-        state_Text.setText(stateTexts[0]);
+        state_Text.setVisibility(GONE);
     }
 
     /**

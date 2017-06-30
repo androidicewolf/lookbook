@@ -8,17 +8,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.adapter.BillItemXRecyclerItemAdapter;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
+import com.dalvu.www.dalvyou.bean.BillRecordDataBean;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
 import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BillItemActivity extends BaseNoTitleActivity {
     //页面标题
@@ -29,7 +33,9 @@ public class BillItemActivity extends BaseNoTitleActivity {
     private MyCallBack callBack;
     private StateView activity_stateview;
     private XRecyclerView bill_item_activity_xrecyclerview;
-    private ArrayList items;
+    private String url;
+    private int userId;
+    private String user_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,30 +72,50 @@ public class BillItemActivity extends BaseNoTitleActivity {
     }
 
     private void initData() {
+        userId = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
         if (callBack == null) {
             callBack = new MyCallBack(activity_stateview) {
                 @Override
                 public void onSucceed(int what, String json) {
-                    //解析数据
-                    switch (position) {
-                        case 0:
-
-                            break;
-                        case 2:
-                            break;
-                        case 4:
-                            break;
-                        case 6:
-                            break;
-                        case 8:
-                            break;
+                    BillRecordDataBean billRecordDataBean = MyApplication.getGson().fromJson(json, BillRecordDataBean.class);
+                    if (billRecordDataBean.status.equals("00000")) {
+                        //返回数据正确，进行解析
+                        if (billRecordDataBean.list != null && billRecordDataBean.list.size() > 0) {
+                            bill_item_activity_xrecyclerview.setAdapter(new BillItemXRecyclerItemAdapter(BillItemActivity.this,
+                                    billRecordDataBean.list, position));
+                            activity_stateview.showNormal();
+                        } else {
+                            activity_stateview.showEmpty();
+                        }
+                    } else {
+                        Toast.makeText(BillItemActivity.this, billRecordDataBean.msg, Toast.LENGTH_SHORT).show();
+                        activity_stateview.showError();
                     }
-
-                    bill_item_activity_xrecyclerview.setAdapter(new BillItemXRecyclerItemAdapter(BillItemActivity.this, items, position));
-                    activity_stateview.showNormal();
                 }
             };
         }
-        NetUtils.callNet(10, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
+        switch (position) {
+            case 0:
+                url = "Api/agencyFinance/accountTransaction";
+                break;
+            case 2:
+                url = "Api/agencyFinance/topupList";
+                break;
+            case 4:
+                url = "Api/agencyFinance/withdrawList";
+                break;
+            case 6:
+                url = "Api/agencyFinance/invoiceList";
+                break;
+            case 8:
+                url = "Api/agencyFinance/contractList";
+                break;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("uid", String.valueOf(userId));
+        map.put("sign_token", user_token);
+        map.put("page", "1");//分页数据在下拉刷新时传具体参数
+        NetUtils.callNet(10, CustomValue.SERVER + url, map, callBack);
     }
 }

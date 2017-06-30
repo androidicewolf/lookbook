@@ -144,12 +144,11 @@ public class MainActivity extends BaseNoTitleActivity {
                         break;
                     case 0:
                     case 5:
-
+                        if (position == 2) {
+                            Intent intent = new Intent(MainActivity.this, StatusActivity.class);
+                            startActivityForResult(intent, 1);
+                        }
                         break;
-                }
-                if (type == 0) {
-                    Intent intent = new Intent(MainActivity.this, StatusActivity.class);
-                    startActivity(intent);
                 }
             }
         }

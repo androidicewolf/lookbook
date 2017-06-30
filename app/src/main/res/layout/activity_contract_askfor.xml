@@ -29,10 +29,11 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/bill_contractaskfor_internal_univalent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
-                android:text="每份3元"
+                android:text="每份0元"
                 android:textColor="@color/dalvred"
                 android:textSize="11sp" />
 
@@ -91,10 +92,11 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/bill_contractaskfor_overseas_univalent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
-                android:text="每份3元"
+                android:text="每份0元"
                 android:textColor="@color/dalvred"
                 android:textSize="11sp" />
 
@@ -153,10 +155,11 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/bill_contractaskfor_entrust_univalent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="13dp"
-                android:text="每份3元"
+                android:text="每份0元"
                 android:textColor="@color/dalvred"
                 android:textSize="11sp" />
 
@@ -415,7 +418,7 @@
 
                 <EditText
                     android:id="@+id/bill_contractaskfor_inputaddress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
@@ -446,11 +449,12 @@
 
                 <EditText
                     android:id="@+id/bill_contractaskfor_inputname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
                     android:hint="请输入收件人姓名"
+                    android:maxLength="8"
                     android:textColorHint="#C1C1C1"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -475,12 +479,13 @@
 
                 <EditText
                     android:id="@+id/bill_contractaskfor_inputtel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:background="#FFF"
                     android:hint="请输入手机号码"
                     android:inputType="phone"
+                    android:maxLength="12"
                     android:textColorHint="#C1C1C1"
                     android:textSize="14sp" />
             </LinearLayout>
