@@ -10,9 +10,8 @@ import android.widget.TextView;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.base.BaseNoTitleActivity;
 import com.dalvu.www.dalvyou.netUtils.MyCallBack;
-import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
-import com.dalvu.www.dalvyou.tools.CustomValue;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,14 +32,19 @@ public class MyVisitorActivity extends BaseNoTitleActivity {
     private ImageView iv_go_back;
     private Unbinder unbinder;
     private StateView activity_stateview;
+    private MyCallBack callBack;
+    private String url = "Api/agencyPersonal/index";
+    private int userId;
+    private String user_token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stateview);
-
         activity_stateview = (StateView) findViewById(R.id.activity_stateview);
         activity_stateview.addNormal(R.layout.activity_my_visitor);
+        userId = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
         unbinder = ButterKnife.bind(this, activity_stateview.normal);
         initView();
         initData();
@@ -61,17 +65,8 @@ public class MyVisitorActivity extends BaseNoTitleActivity {
                 finish();
             }
         });
-        MyCallBack callBack = new MyCallBack(activity_stateview) {
-            @Override
-            public void onSucceed(int what, String json) {
-                //
+        //请求网络，设置数据
 
-                myVisitorBrkerage.setText("100000.0");
-
-                activity_stateview.showNormal();
-            }
-        };
-        NetUtils.callNet(5, CustomValue.SERVER + "/index.php/Api/index/indexMod", callBack);
     }
 
     @OnClick({R.id.my_visitor_list, R.id.visitor_airticket_order, R.id.visitor_discuss})

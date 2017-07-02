@@ -22,7 +22,7 @@
                 android:id="@+id/my_visitor_brkerage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3488.0"
+                android:text="0.0"
                 android:textColor="#FF7725"
                 android:textSize="23sp" />
 
@@ -99,7 +99,8 @@
         android:paddingBottom="15dp"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:paddingTop="15dp">
+        android:paddingTop="15dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -131,7 +132,8 @@
         android:paddingBottom="15dp"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:paddingTop="15dp">
+        android:paddingTop="15dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"

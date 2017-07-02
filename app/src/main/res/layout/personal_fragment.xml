@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
-                    android:text="李元芳"
+                    android:text="大旅用户"
                     android:textColor="#4B4B4B"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="8dp"
-                    android:text="电话：1383838438"
+                    android:text="电话："
                     android:textColor="#6E6E6E"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -115,7 +115,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -178,7 +179,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -209,7 +211,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -240,7 +243,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bottom_edging_style"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="wrap_content"

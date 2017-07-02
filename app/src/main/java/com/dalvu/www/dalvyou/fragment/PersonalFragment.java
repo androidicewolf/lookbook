@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dalvu.www.dalvyou.MyApplication;
 import com.dalvu.www.dalvyou.R;
 import com.dalvu.www.dalvyou.activity.AdviserEnrollActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.MyAdviserActivity;
@@ -12,8 +14,15 @@ import com.dalvu.www.dalvyou.activity.personaldata.PersonalReviseDataActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.PersonalSettingActivity;
 import com.dalvu.www.dalvyou.activity.personaldata.SupplierQueryActivity;
 import com.dalvu.www.dalvyou.base.BaseFragment;
+import com.dalvu.www.dalvyou.bean.PersonalFragmentDataBean;
+import com.dalvu.www.dalvyou.netUtils.MyCallBack;
+import com.dalvu.www.dalvyou.netUtils.NetUtils;
 import com.dalvu.www.dalvyou.netUtils.StateView;
+import com.dalvu.www.dalvyou.tools.AppUserDate;
+import com.dalvu.www.dalvyou.tools.CustomValue;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +57,12 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.personal_fragment_line_inquiry)
     LinearLayout personalFragmentLineInquiry;
     Unbinder unbinder;
+    private MyCallBack callBack;
+    private String url = "Api/agencyPersonal/index";
+    private int userId;
+    private String user_token;
+    private StateView fragment_stateview;
+    private int userType;
 
     @Override
     protected int getLayoutId() {
@@ -56,15 +71,39 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        StateView fragment_stateview = (StateView) view.findViewById(R.id.fragment_stateview);
+        fragment_stateview = (StateView) view.findViewById(R.id.fragment_stateview);
         fragment_stateview.addNormal(R.layout.personal_fragment);
+        userType = AppUserDate.getUserType();
+        userId = AppUserDate.getUserId();
+        user_token = AppUserDate.getUserToken();
         unbinder = ButterKnife.bind(this, fragment_stateview.normal);
         fragment_stateview.showNormal();
     }
 
     @Override
     protected void initData() {
+        if (callBack == null) {
+            callBack = new MyCallBack(fragment_stateview) {
+                @Override
+                public void onSucceed(int what, String json) {
+                    //解析数据
+                    PersonalFragmentDataBean personalFragmentDataBean = MyApplication.getGson()
+                            .fromJson(json, PersonalFragmentDataBean.class);
+                    if (personalFragmentDataBean.status.equals("00000")) {
 
+                        fragment_stateview.showNormal();
+                    } else {
+                        Toast.makeText(activity, personalFragmentDataBean.msg, Toast.LENGTH_SHORT).show();
+                        fragment_stateview.showError();
+                    }
+                }
+
+            };
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("uid", String.valueOf(userId));
+        map.put("sign_token", user_token);
+        NetUtils.callNet(5, CustomValue.SERVER + url, map, callBack);
     }
 
     @Override
@@ -91,7 +130,7 @@ public class PersonalFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.personal_fragment_mystatus:
-                if (true) {
+                if (userType == 4) {
                     intent = new Intent(activity, MyAdviserActivity.class);
 //                    intent = new Intent(activity, MyVisitorActivity.class);
                     startActivity(intent);
